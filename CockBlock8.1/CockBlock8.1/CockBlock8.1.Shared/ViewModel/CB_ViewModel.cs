@@ -6,5 +6,9 @@ namespace CockBlock8._1
 {
     class CB_ViewModel
     {
+        public CB_ViewModel()
+        {
+
+        }
     }
 }
