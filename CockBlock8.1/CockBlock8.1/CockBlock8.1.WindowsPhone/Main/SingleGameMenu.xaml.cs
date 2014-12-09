@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CockBlock8._1.Main.Instructions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,20 +14,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace CockBlock8._1
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class SingleGameMenu : Page
     {
-        public MainPage()
+        public SingleGameMenu()
         {
             this.InitializeComponent();
-
-            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         /// <summary>
@@ -36,13 +35,12 @@ namespace CockBlock8._1
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
         }
+
+        private void Back_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(MainPage), e); }
+
+        private void Instructions_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(InstructionsSingleGame), e); }
     }
 }
