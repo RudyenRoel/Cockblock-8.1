@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Model;
+using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace CockBlock8._1
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     /// 
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : CB_Page
     {
 
         CB_ViewModel _vm;
@@ -64,24 +65,6 @@ namespace CockBlock8._1
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
-        }
-
-        public void ChangeText(string name, string text)
-        {
-            TextBox tb = (TextBox)FindName(name);
-            if (tb.GetType() == typeof(TextBox))
-            {
-                tb.Text = text;
-            }
-        }
-
-        public void SetImageSource(string name, BitmapImage image)
-        {
-            Image i = (Image)FindName(name);
-            if (i.GetType() == typeof(Image))
-            {
-                i.Source = image;
-            }
         }
     }
 }

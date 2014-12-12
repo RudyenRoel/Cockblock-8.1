@@ -13,7 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CockBlock8._1.Main.Instructions;
+<<<<<<< HEAD
 using CockBlock8._1.Game;
+=======
+using CockBlock8._1.View;
+>>>>>>> origin/master
 namespace CockBlock8._1
 
 
@@ -22,7 +26,7 @@ namespace CockBlock8._1
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MultiGameMenu : Page
+    public sealed partial class MultiGameMenu : CB_Page
     {
         public MultiGameMenu()
         {

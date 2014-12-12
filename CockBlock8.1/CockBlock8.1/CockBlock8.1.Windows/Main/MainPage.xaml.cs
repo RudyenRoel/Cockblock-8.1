@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Main;
+using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace CockBlock8._1
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : CB_Page
     {
         public MainPage()
         {
