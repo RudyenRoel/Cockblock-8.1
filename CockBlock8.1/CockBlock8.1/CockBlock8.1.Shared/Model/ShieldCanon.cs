@@ -10,15 +10,17 @@ namespace CockBlock8._1
     public class ShieldCannon
     {
         private const int INITIALENERGY = 100;
-        private int _energy;
+        private double _energy;
         private bool _isCannon;
         private bool _shielded { get; set; }
 
         private BitmapImage _shieldSprite = new BitmapImage();
+        private BitmapImage _shieldActiveSprite = new BitmapImage();
         private BitmapImage _cannonSprite = new BitmapImage();
         public ShieldCannon()
         {
             _shieldSprite.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
+            _shieldActiveSprite.UriSource = new Uri("ms-appx:Res/ShieldActive.png", UriKind.RelativeOrAbsolute);
             _cannonSprite.UriSource = new Uri("ms-appx:Res/Canon.png", UriKind.RelativeOrAbsolute);
             init();
         }
@@ -30,18 +32,14 @@ namespace CockBlock8._1
             _isCannon = false;
         }
 
-        public void DoAction()
+        public void ReplenishEnergy(double amount)
         {
-            if (_isCannon)
-            {
-                //Cock cock = new Cock(_posX, _posY); // TODO check this
-                //cock.Start();
-            }
-            else
-            {
-                _energy--; // TODO adjust for correct speed
-                _shielded = true;
-            }
+            _energy += amount;
+        }
+
+        public void UseEnergy(double amount)
+        {
+            _energy -= amount;
         }
 
         public void ChangeState()
@@ -57,8 +55,29 @@ namespace CockBlock8._1
             }
             else
             {
-                return _shieldSprite;
+                if(_shielded)
+                {
+                    return _shieldActiveSprite;
+                }
+                else
+                {
+                    return _shieldSprite;
+                }
             }
+        }
+
+        public bool IsCannon()
+        {
+            return _isCannon;
+        }
+
+        public void Activate()
+        {
+            _shielded = true;
+        }
+        public void Deactivate()
+        {
+            _shielded = false;
         }
     }
 }
