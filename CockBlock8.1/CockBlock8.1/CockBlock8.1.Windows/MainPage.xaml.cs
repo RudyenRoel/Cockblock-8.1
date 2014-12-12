@@ -26,5 +26,11 @@ namespace CockBlock8._1
         {
             this.InitializeComponent();
         }
+
+        public void ChangeText(string name, string text)
+        {
+            TextBox o = (TextBox)FindName(name);
+            o.Text = text;
+        }
     }
 }

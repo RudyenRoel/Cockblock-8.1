@@ -25,6 +25,7 @@ namespace CockBlock8._1
     /// </summary>
     public sealed partial class App : Application
     {
+
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif

@@ -20,4 +20,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\ShieldCanon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\CB_ViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Res\Canon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Shield.png" />
+  </ItemGroup>
 </Project>
