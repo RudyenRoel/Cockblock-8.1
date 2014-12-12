@@ -63,20 +63,32 @@ namespace CockBlock8._1.Game
             this._CurrentHealth2_tx.Text = ((int)percentage).ToString();
         }
         private void ShieldCannon1_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { _vm.HandleTouchInput(1, 1); }
+        { _vm.ShieldCannonPressed(0, 0); }
         private void ShieldCannon2_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { }
+        { _vm.ShieldCannonPressed(0, 1); }
         private void ShieldCannon3_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { }
+        { _vm.ShieldCannonPressed(0, 2); }
         private void ShieldCannon4_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { }
+        { _vm.ShieldCannonPressed(1, 0); }
         private void ShieldCannon5_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { }
+        { _vm.ShieldCannonPressed(1, 1); }
         private void ShieldCannon6_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { }
+        { _vm.ShieldCannonPressed(1, 2); }
+        private void ShieldCannon1_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(0, 0); }
+        private void ShieldCannon2_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(0, 1); }
+        private void ShieldCannon3_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(0, 2); }
+        private void ShieldCannon4_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(1, 0); }
+        private void ShieldCannon5_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(1, 1); }
+        private void ShieldCannon6_PointerReleased(object sender, PointerRoutedEventArgs e)
+        { _vm.ShieldCannonReleased(1, 2); }
 
         private void Next_bn_Click(object sender, RoutedEventArgs e)
-        { StartTimer(sender, e); }
+        { _vm.NextTurn(); }
         public void StartTimer(object o, RoutedEventArgs sender)
         {
             DispatcherTimer myDispatcherTimer = new DispatcherTimer();
@@ -89,5 +101,6 @@ namespace CockBlock8._1.Game
         {
             this.TestBullet.Margin = new Thickness(TestBullet.Margin.Left, TestBullet.Margin.Top - 1, TestBullet.Margin.Right, TestBullet.Margin.Bottom);
         }
+
     }
 }

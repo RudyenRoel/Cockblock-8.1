@@ -26,15 +26,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Res\bullet.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\Canon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\Shield.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)View\CB_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Res\CanonDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\CanonUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUp.png" />
   </ItemGroup>
 </Project>
