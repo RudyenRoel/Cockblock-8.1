@@ -27,6 +27,7 @@ namespace CockBlock8._1.Game
     public sealed partial class SingleGame : CB_Page
     {
         private int _totalLengthRect = 350; // TODO: magic cookie
+        private int _frameRate = 16; // TODO: magic cookie
         private Timer timer;
         public SingleGame()
         {
@@ -80,7 +81,7 @@ namespace CockBlock8._1.Game
         public void StartTimer(object o, RoutedEventArgs sender)
         {
             DispatcherTimer myDispatcherTimer = new DispatcherTimer();
-            myDispatcherTimer.Interval = new TimeSpan(16); // 100 Milliseconds 
+            myDispatcherTimer.Interval = new TimeSpan(_frameRate); // 16 Milliseconds 
             myDispatcherTimer.Tick += NextFrame;
             myDispatcherTimer.Start();
         }
@@ -88,6 +89,7 @@ namespace CockBlock8._1.Game
         private void NextFrame(object sender, object e)
         {
             this.TestBullet.Margin = new Thickness(TestBullet.Margin.Left, TestBullet.Margin.Top - 1, TestBullet.Margin.Right, TestBullet.Margin.Bottom);
+            
         }
     }
 }
