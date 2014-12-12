@@ -37,10 +37,14 @@ namespace CockBlock8._1
         {
         }
 
+        private void StartGame_bn_Click(object sender, RoutedEventArgs e)
+        {
+        }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
 
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(InstructionsSingleGame), e); }
+
     }
 }

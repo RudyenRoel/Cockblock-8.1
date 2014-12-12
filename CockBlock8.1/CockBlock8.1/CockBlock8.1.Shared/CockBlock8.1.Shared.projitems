@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Introduction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CB_Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Cock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ShieldCanon.cs" />

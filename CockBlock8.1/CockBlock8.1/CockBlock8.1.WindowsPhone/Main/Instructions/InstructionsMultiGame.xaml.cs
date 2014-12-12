@@ -25,6 +25,7 @@ namespace CockBlock8._1.Main.Instructions
     /// </summary>
     public sealed partial class InstructionsMultiGame : Page
     {
+        private Introduction _introduction;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
