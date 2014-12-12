@@ -1,6 +1,6 @@
 ﻿<src:CB_Page
-    x:Class="CockBlock8._1.MainPage"
     xmlns:src="using:CockBlock8._1.View"
+    x:Class="CockBlock8._1.MainPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,20 +12,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="150"/>
             <RowDefinition Height="150"/>
-            <RowDefinition Height="100"/>
-         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="Title_lb" Text="CockBlock 8.1"  FontSize="48"/>
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid x:Name="InstructionsQuick" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="SingleGame_bn" Content="Single Game" FontSize="24" Click="Single_Game_bn_Click"/>
         </Grid>
-        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="MultiGame_bn" Content="Multi Game" FontSize="24" Click="Multi_Game_bn_Click"/>
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">

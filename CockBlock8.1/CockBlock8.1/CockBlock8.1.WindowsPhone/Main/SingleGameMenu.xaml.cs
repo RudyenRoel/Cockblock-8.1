@@ -1,19 +1,12 @@
-<<<<<<< HEAD
-﻿using CockBlock8._1.Game;
-using CockBlock8._1.Main.Instructions;
-=======
 ﻿using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.View;
->>>>>>> origin/master
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,10 +35,11 @@ namespace CockBlock8._1
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        { }
+        {
+        }
+
         private void StartGame_bn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SingleGame), e);
         }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
