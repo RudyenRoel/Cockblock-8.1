@@ -13,11 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CockBlock8._1.Main.Instructions;
-<<<<<<< HEAD
 using CockBlock8._1.Game;
-=======
 using CockBlock8._1.View;
->>>>>>> origin/master
 namespace CockBlock8._1
 
 
