@@ -27,7 +27,8 @@ namespace CockBlock8._1.Game
     public sealed partial class SingleGame : CB_Page
     {
         private int _totalLengthRect = 350; // TODO: magic cookie
-        private Timer timer;
+        private int _frameRate = 16; // TODO: magic cookie
+        private DispatcherTimer myDispatcherTimer;
         public SingleGame()
         {
             this.InitializeComponent();
@@ -87,20 +88,23 @@ namespace CockBlock8._1.Game
         private void ShieldCannon6_PointerReleased(object sender, PointerRoutedEventArgs e)
         { _vm.ShieldCannonReleased(1, 2); }
 
-        private void Next_bn_Click(object sender, RoutedEventArgs e)
-        { _vm.NextTurn(); }
-        public void StartTimer(object o, RoutedEventArgs sender)
+        private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            DispatcherTimer myDispatcherTimer = new DispatcherTimer();
-            myDispatcherTimer.Interval = new TimeSpan(16); // 100 Milliseconds 
-            myDispatcherTimer.Tick += NextFrame;
-            myDispatcherTimer.Start();
+            if (myDispatcherTimer == null)
+            {
+                myDispatcherTimer = new DispatcherTimer();
+                myDispatcherTimer.Interval = new TimeSpan(_frameRate); // 16 Milliseconds 
+                myDispatcherTimer.Tick += NextFrame;
+                myDispatcherTimer.Start();
+            }
         }
 
         private void NextFrame(object sender, object e)
         {
-            this.TestBullet.Margin = new Thickness(TestBullet.Margin.Left, TestBullet.Margin.Top - 1, TestBullet.Margin.Right, TestBullet.Margin.Bottom);
+            SetMargin(TestBullet, 0, 2, 0, 0);
         }
+        private void SetMargin(Image obj, double left, double top, double right, double bottem)
+        { obj.Margin = new Thickness(obj.Margin.Left + left, obj.Margin.Top - top, obj.Margin.Right + right, obj.Margin.Bottom + bottem); }
 
     }
 }

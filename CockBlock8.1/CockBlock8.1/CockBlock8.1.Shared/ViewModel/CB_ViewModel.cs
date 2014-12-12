@@ -29,6 +29,8 @@ namespace CockBlock8._1
             _players[1].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
+            BitmapImage testBullet = new BitmapImage();
+            testBullet.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
         }
 
         private void SetImages(Player player, int playerNumber)

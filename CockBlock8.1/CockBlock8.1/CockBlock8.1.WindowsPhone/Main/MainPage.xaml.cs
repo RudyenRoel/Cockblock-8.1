@@ -38,7 +38,6 @@ namespace CockBlock8._1
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             Frame.GoBack();
-            //this.Frame.Navigate(typeof(SingleGameMenu), e);
             e.Handled = true;
         }
 
