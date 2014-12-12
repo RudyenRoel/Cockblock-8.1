@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
@@ -26,6 +27,7 @@ namespace CockBlock8._1.Game
     public sealed partial class SingleGame : CB_Page
     {
         private int _totalLengthRect = 350; // TODO: magic cookie
+        private Timer timer;
         public SingleGame()
         {
             this.InitializeComponent();
@@ -72,5 +74,20 @@ namespace CockBlock8._1.Game
         { }
         private void ShieldCannon6_PointerPressed(object sender, PointerRoutedEventArgs e)
         { }
+
+        private void Next_bn_Click(object sender, RoutedEventArgs e)
+        { StartTimer(sender, e); }
+        public void StartTimer(object o, RoutedEventArgs sender)
+        {
+            DispatcherTimer myDispatcherTimer = new DispatcherTimer();
+            myDispatcherTimer.Interval = new TimeSpan(16); // 100 Milliseconds 
+            myDispatcherTimer.Tick += NextFrame;
+            myDispatcherTimer.Start();
+        }
+
+        private void NextFrame(object sender, object e)
+        {
+            this.TestBullet.Margin = new Thickness(TestBullet.Margin.Left, TestBullet.Margin.Top - 1, TestBullet.Margin.Right, TestBullet.Margin.Bottom);
+        }
     }
 }

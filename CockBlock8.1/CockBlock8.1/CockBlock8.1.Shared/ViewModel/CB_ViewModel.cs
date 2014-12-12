@@ -32,6 +32,8 @@ namespace CockBlock8._1
         {
             Player player1 = new Player(AMOUNTOFCANNONS / 2);
             Player player2 = new Player(AMOUNTOFCANNONS / 2);
+            BitmapImage image = new BitmapImage();
+            image.UriSource = new Uri("ms-appx:Res/Cock.png", UriKind.RelativeOrAbsolute);
             player2.ChangeState();
             _currentPage.SetImageSource("ShieldCannon1", player1.GetShieldCannons()[0].GetSprite());
             _currentPage.SetImageSource("ShieldCannon2", player1.GetShieldCannons()[1].GetSprite());
@@ -39,6 +41,7 @@ namespace CockBlock8._1
             _currentPage.SetImageSource("ShieldCannon4", player2.GetShieldCannons()[0].GetSprite());
             _currentPage.SetImageSource("ShieldCannon5", player2.GetShieldCannons()[1].GetSprite());
             _currentPage.SetImageSource("ShieldCannon6", player2.GetShieldCannons()[2].GetSprite());
+            _currentPage.SetImageSource("TestBullet", image);
         }
         public void PressedShieldCannon(int cannon, int player)
         {

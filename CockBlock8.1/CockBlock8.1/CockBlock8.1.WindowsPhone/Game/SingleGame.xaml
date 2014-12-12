@@ -33,23 +33,25 @@
             <TextBlock x:Name="HealthCannon3" Text="100"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
+        <Grid Grid.Row="2">
+            
+            <StackPanel Grid.Row="2">
+                <StackPanel Orientation="Horizontal" Height="270">
+                    <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed"/>
+                    <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed"/>
+                    <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed"/>
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed"/>
-                <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed"/>
-                <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed"/>
+                <StackPanel Orientation="Horizontal" Height="270">
+                    <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon4_PointerPressed"/>
+                    <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon5_PointerPressed"/>
+                    <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed"/>
+                </StackPanel>
             </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon4_PointerPressed"/>
-                <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon5_PointerPressed"/>
-                <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed"/>
-            </StackPanel>
-
-        </StackPanel>
-
-
+            <Button x:Name="Next_bn" Content="Next" Click="Next_bn_Click" HorizontalAlignment="Center" />
+            <Image x:Name="TestBullet" Width="20" Height="20" Margin="0,50,0,0"/>
+        </Grid>
+        
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">

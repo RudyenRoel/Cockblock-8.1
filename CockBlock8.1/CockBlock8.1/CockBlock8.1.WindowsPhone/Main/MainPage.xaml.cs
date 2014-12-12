@@ -71,5 +71,13 @@ namespace CockBlock8._1
         {
             Application.Current.Exit();
         }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (rectangleItems.Items.Count > 0)
+            {
+                rectangleItems.Items.RemoveAt(0);
+            }
+        }
     }
 }
