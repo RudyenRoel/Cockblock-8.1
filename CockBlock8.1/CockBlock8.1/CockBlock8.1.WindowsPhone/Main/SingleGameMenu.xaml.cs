@@ -3,6 +3,7 @@ using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -40,9 +41,7 @@ namespace CockBlock8._1
         }
 
         private void StartGame_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SingleGame), e);
-        }
+        { this.Frame.Navigate(typeof(SingleGame), e); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
 

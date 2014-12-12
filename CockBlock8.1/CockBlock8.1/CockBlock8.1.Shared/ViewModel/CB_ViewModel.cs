@@ -45,7 +45,7 @@ namespace CockBlock8._1
         public void HandleTouchInput(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            if(cannon.IsCannon())
+            if (cannon.IsCannon())
             {
                 cannon.UseEnergy(0.5);
             }

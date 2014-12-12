@@ -17,6 +17,7 @@ namespace CockBlock8._1.View
         {
             _vm = new CB_ViewModel(this);
         }
+
         public void ChangeText(string name, string text)
         {
             TextBlock tb = (TextBlock)FindName(name);

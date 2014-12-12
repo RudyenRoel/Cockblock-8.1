@@ -26,6 +26,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Res\bullet.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Canon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Shield.png" />
