@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Main.Instructions;
+using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace CockBlock8._1.Main
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SingleGameMenu : Page
+    public sealed partial class SingleGameMenu : CB_Page
     {
         public SingleGameMenu()
         {
