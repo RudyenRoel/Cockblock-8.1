@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CockBlock8._1.Main.Instructions;
+using CockBlock8._1.Game;
 namespace CockBlock8._1
 
 
@@ -34,19 +35,22 @@ namespace CockBlock8._1
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-        }
-
+        { }
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
-        {
-        }
+        { }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
-        {
-        }
+        { this.Frame.Navigate(typeof(MultiGame), e); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private void Instruction_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(InstructionsMultiGame), e); }
-
+        private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
+        { this.SearchGame_tx.Text = "Search for existing game"; }
+        private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
+        { this.SearchGame_tx.Text = ""; }
+        private void CreateGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
+        { this.CreateGame_tx.Text = "Create a new game"; }
+        private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
+        { this.CreateGame_tx.Text = ""; }
     }
 }

@@ -20,10 +20,12 @@
             <TextBlock x:Name="MultiGameMenuTitle_lb" Text="Multi Game" FontSize="48" />
         </Grid>
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="SearchGame_bn" Content="Search Game" FontSize="24" Click="SearchGame_bn_Click" />
+            <Button x:Name="SearchGame_bn" Content="Search Game" FontSize="24" Click="SearchGame_bn_Click" PointerEntered="SearchGame_bn_PointerEntered" PointerExited="SearchGame_bn_PointerExited"/>
+            <TextBlock x:Name="SearchGame_tx" FontSize="12" Margin="0,60,0,0" HorizontalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="CreateGame_bn" Content="Create Game" FontSize="24" Click="CreateGame_bn_Click" />
+            <Button x:Name="CreateGame_bn" Content="Create Game" FontSize="24" Click="CreateGame_bn_Click" PointerEntered="CreateGame_bn_PointerEntered" PointerExited="CreateGame_bn_PointerExited"/>
+            <TextBlock x:Name="CreateGame_tx" FontSize="12" Margin="0,60,0,0" HorizontalAlignment="Center"/>
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="Instructions_bn" Content="Instructions" FontSize="24" Click="Instruction_bn_Click"/>

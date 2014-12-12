@@ -1,0 +1,66 @@
+﻿<Page
+    x:Class="CockBlock8._1.Game.SingleGame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CockBlock8._1.Game"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Rectangle Fill="#FFF4F4F5" Height="25" Margin="20,0,0,0" Stroke="Black"  Width="350"/>
+            <Rectangle Fill="#FFFF6060" Height="25" Margin="35,0,115,0" Stroke="Black"  Width="250"/>
+        </Grid>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter x:Name="HealthStyle1" Property="Margin" Value="50,0,50,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="HealthCanon1" Text="100"/>
+            <TextBlock x:Name="HealthCanon2" Text="100"/>
+            <TextBlock x:Name="HealthCanon3" Text="100"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            
+            <StackPanel Orientation="Horizontal" Height="270">
+                <Image x:Name="ShieldCanon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top"/>
+                <Image x:Name="ShieldCanon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top"/>
+                <Image x:Name="ShieldCanon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal" Height="270">
+                <Image x:Name="ShieldCanon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCanon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCanon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter x:Name="HealthStyle2" Property="Margin" Value="50,0,50,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="HealthShield1" Text="100"/>
+            <TextBlock x:Name="HealthShield2" Text="100"/>
+            <TextBlock x:Name="HealthShield3" Text="100"/>
+        </StackPanel>
+        <Grid Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Rectangle Fill="#FFF4F4F5" Height="25" Margin="20,0,0,0" Stroke="Black" Width="350"/>
+            <Rectangle Fill="#FFFF6060" Height="25" Margin="35,0,165,0" Stroke="Black" Width="200"/>
+        </Grid>
+    </Grid>
+</Page>

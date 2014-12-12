@@ -84,6 +84,12 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Game\MultiGame.xaml.cs">
+      <DependentUpon>MultiGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game\SingleGame.xaml.cs">
+      <DependentUpon>SingleGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Main\Instructions\InstructionsMultiGame.xaml.cs">
       <DependentUpon>InstructionsMultiGame.xaml</DependentUpon>
     </Compile>
@@ -115,6 +121,14 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Game\MultiGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game\SingleGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Main\Instructions\InstructionsMultiGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
