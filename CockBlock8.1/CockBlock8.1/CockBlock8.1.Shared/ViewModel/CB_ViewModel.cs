@@ -40,5 +40,9 @@ namespace CockBlock8._1
             _currentPage.SetImageSource("ShieldCannon5", player2.GetShieldCannons()[1].GetSprite());
             _currentPage.SetImageSource("ShieldCannon6", player2.GetShieldCannons()[2].GetSprite());
         }
+        public void PressedShieldCannon(int cannon, int player)
+        {
+
+        }
     }
 }

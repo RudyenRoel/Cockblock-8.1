@@ -17,9 +17,10 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Rectangle Fill="#FFF4F4F5" Height="25" Margin="20,0,0,0" Stroke="Black"  Width="350"/>
-            <Rectangle Fill="#FFFF6060" Height="25" Margin="35,0,115,0" Stroke="Black"  Width="250"/>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Rectangle x:Name="_TotalHealth1_rect" Fill="#FFF4F4F5" Height="25" Stroke="Black" Width="350" HorizontalAlignment="Left"/>
+            <Rectangle x:Name="_CurrentHealth1_rect" Fill="#FFFF6060" Height="25" Stroke="Black" Width="200" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="_CurrentHealth1_tx" Text="100" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFAC0000"/>
         </Grid>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
             <StackPanel.Resources>
@@ -33,21 +34,17 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            
+
             <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top">
-                    <Image.Source>
-                        <BitmapImage></BitmapImage>
-                    </Image.Source>
-                </Image>
-                <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top"/>
-                <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top"/>
+                <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed"/>
+                <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed"/>
+                <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed"/>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon4_PointerPressed"/>
+                <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon5_PointerPressed"/>
+                <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed"/>
             </StackPanel>
 
         </StackPanel>
@@ -63,9 +60,10 @@
             <TextBlock x:Name="HealthShield2" Text="100"/>
             <TextBlock x:Name="HealthShield3" Text="100"/>
         </StackPanel>
-        <Grid Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Rectangle Fill="#FFF4F4F5" Height="25" Margin="20,0,0,0" Stroke="Black" Width="350"/>
-            <Rectangle Fill="#FFFF6060" Height="25" Margin="35,0,165,0" Stroke="Black" Width="200"/>
+        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+            <Rectangle x:Name="_TotalHealth2_rect"  Fill="#FFF4F4F5" Height="25"  Stroke="Black" Width="350" HorizontalAlignment="Left"/>
+            <Rectangle x:Name="_CurrentHealth2_rect" Fill="#FFFF6060" Height="25"  Stroke="Black" Width="175" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="_CurrentHealth2_tx" Text="100" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFAC0000"/>
         </Grid>
     </Grid>
 </src:CB_Page>
