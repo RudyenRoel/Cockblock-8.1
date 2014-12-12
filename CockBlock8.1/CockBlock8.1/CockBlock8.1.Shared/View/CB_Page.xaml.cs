@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CockBlock8._1.View
         {
             _vm = new CB_ViewModel(this);
         }
-        public virtual void ChangeText(string name, string text)
+        public void ChangeText(string name, string text)
         {
             TextBlock tb = (TextBlock)FindName(name);
             if (tb != null)
@@ -25,8 +26,9 @@ namespace CockBlock8._1.View
             }
         }
 
-        public virtual void SetImageSource(string name, BitmapImage image)
+        public void SetImageSource(string name, BitmapImage image)
         {
+            Debug.WriteLine("Name: " + name);
             Image i = (Image)FindName(name);
             if (i.GetType() == typeof(Image))
             {

@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Introduction.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CB_Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Cock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ShieldCanon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\CB_ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\CB_Page.xaml.cs">

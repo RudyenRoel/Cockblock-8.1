@@ -23,12 +23,10 @@ namespace CockBlock8._1.Game
     /// </summary>
     public sealed partial class SingleGame : CB_Page
     {
-        CB_ViewModel _vm;
         public SingleGame()
         {
             this.InitializeComponent();
-
-            _vm = new CB_ViewModel(this);
+            _vm.StartSingleGame();
         }
 
         /// <summary>

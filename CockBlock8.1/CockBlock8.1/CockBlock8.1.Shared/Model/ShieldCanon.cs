@@ -1,39 +1,41 @@
 ﻿using CockBlock8._1.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace CockBlock8._1
 {
-    class ShieldCanon
+    public class ShieldCannon
     {
-        private int _posX;
-        private int _posY;
+        private const int INITIALENERGY = 100;
         private int _energy;
-        private bool _shieldCanonState;
+        private bool _isCannon;
         private bool _shielded { get; set; }
 
         private BitmapImage _shieldSprite = new BitmapImage();
-        private BitmapImage _canonSprite = new BitmapImage();
+        private BitmapImage _cannonSprite = new BitmapImage();
+        public ShieldCannon()
+        {
+            _shieldSprite.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
+            _cannonSprite.UriSource = new Uri("ms-appx:Res/Canon.png", UriKind.RelativeOrAbsolute);
+            init();
+        }
 
-        public ShieldCanon(int posX, int posY, int energy, bool shieldCanonState)
+        private void init()
         {
             _shielded = false;
-            _posX = posX;
-            _posY = posY;
-            _energy = energy;
-            _shieldCanonState = shieldCanonState; //if TRUE shieldcanon = canon
-            _shieldSprite.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
-            _canonSprite.UriSource = new Uri("ms-appx:Res/Canon.png", UriKind.RelativeOrAbsolute);
+            _energy = INITIALENERGY;
+            _isCannon = false;
         }
 
         public void DoAction()
         {
-            if(_shieldCanonState)
+            if (_isCannon)
             {
-                Cock cock = new Cock(_posX, _posY);
-                cock.Start();
+                //Cock cock = new Cock(_posX, _posY); // TODO check this
+                //cock.Start();
             }
             else
             {
@@ -44,14 +46,14 @@ namespace CockBlock8._1
 
         public void ChangeState()
         {
-            _shieldCanonState = !_shieldCanonState;
+            _isCannon = !_isCannon;
         }
 
         public BitmapImage GetSprite()
         {
-            if(_shieldCanonState)
+            if (_isCannon)
             {
-                return _canonSprite;
+                return _cannonSprite;
             }
             else
             {

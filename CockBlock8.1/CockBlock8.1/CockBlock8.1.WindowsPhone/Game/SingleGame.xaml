@@ -27,23 +27,27 @@
                     <Setter x:Name="HealthStyle1" Property="Margin" Value="50,0,50,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="HealthCanon1" Text="100"/>
-            <TextBlock x:Name="HealthCanon2" Text="100"/>
-            <TextBlock x:Name="HealthCanon3" Text="100"/>
+            <TextBlock x:Name="HealthCannon1" Text="100"/>
+            <TextBlock x:Name="HealthCannon2" Text="100"/>
+            <TextBlock x:Name="HealthCannon3" Text="100"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             
             <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCanon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top"/>
-                <Image x:Name="ShieldCanon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top"/>
-                <Image x:Name="ShieldCanon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top"/>
+                <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top">
+                    <Image.Source>
+                        <BitmapImage></BitmapImage>
+                    </Image.Source>
+                </Image>
+                <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top"/>
+                <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal" Height="270">
-                <Image x:Name="ShieldCanon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCanon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCanon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom"/>
             </StackPanel>
 
         </StackPanel>
