@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Common;
+using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,7 @@ namespace CockBlock8._1.Main.Instructions
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class InstructionsSingleGame : Page
+    public sealed partial class InstructionsSingleGame : CB_Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();

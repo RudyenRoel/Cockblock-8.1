@@ -26,17 +26,9 @@ namespace CockBlock8._1.Main.Instructions
         {
             this.InitializeComponent();
         }
-
-<<<<<<< HEAD:CockBlock8.1/CockBlock8.1/CockBlock8.1.Windows/MainPage.xaml.cs
-        public void ChangeText(string name, string text)
-        {
-            TextBox o = (TextBox)FindName(name);
-            o.Text = text;
-=======
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MultiGameMenu), e);
->>>>>>> origin/master:CockBlock8.1/CockBlock8.1/CockBlock8.1.Windows/Main/Instructions/InstructionsMultiGame.xaml.cs
         }
     }
 }

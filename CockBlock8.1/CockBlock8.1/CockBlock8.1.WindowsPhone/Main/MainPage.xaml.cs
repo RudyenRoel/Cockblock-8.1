@@ -27,12 +27,9 @@ namespace CockBlock8._1
     public sealed partial class MainPage : CB_Page
     {
 
-        CB_ViewModel _vm;
         public MainPage()
         {
             this.InitializeComponent();
-
-            _vm = new CB_ViewModel(this);
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }

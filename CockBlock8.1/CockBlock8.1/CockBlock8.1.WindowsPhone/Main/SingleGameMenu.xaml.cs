@@ -1,4 +1,5 @@
-﻿using CockBlock8._1.Main.Instructions;
+﻿using CockBlock8._1.Game;
+using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,7 @@ namespace CockBlock8._1
 
         private void StartGame_bn_Click(object sender, RoutedEventArgs e)
         {
+            this.Frame.Navigate(typeof(SingleGame), e);
         }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }

@@ -10,6 +10,12 @@ namespace CockBlock8._1.View
 {
     public partial class CB_Page : Page
     {
+        public CB_ViewModel _vm;
+
+        public CB_Page()
+        {
+            _vm = new CB_ViewModel(this);
+        }
         public virtual void ChangeText(string name, string text)
         {
             TextBlock tb = (TextBlock)FindName(name);
