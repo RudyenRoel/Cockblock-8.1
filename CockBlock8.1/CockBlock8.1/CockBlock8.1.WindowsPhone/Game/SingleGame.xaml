@@ -48,7 +48,7 @@
                     <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed"/>
                 </StackPanel>
             </StackPanel>
-            <Button x:Name="Next_bn" Content="Next" Click="Next_bn_Click" HorizontalAlignment="Center" />
+            <Button x:Name="Start_bn" Content="Start" Click="Start_bn_Click" HorizontalAlignment="Center" />
             <Image x:Name="TestBullet" Width="20" Height="20" Margin="0,50,0,0"/>
         </Grid>
         

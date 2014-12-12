@@ -31,8 +31,10 @@ namespace CockBlock8._1
 
         public void StartSingleGame()
         {
-            _players = new Player[]{new Player(AMOUNTOFCANNONS / 2), new Player(AMOUNTOFCANNONS / 2)};
-            
+            _players = new Player[] { new Player(AMOUNTOFCANNONS / 2), new Player(AMOUNTOFCANNONS / 2) };
+            BitmapImage testBullet = new BitmapImage();
+            testBullet.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
+
             _players[1].ChangeState();
             _currentPage.SetImageSource("ShieldCannon1", _players[0].GetShieldCannons()[0].GetSprite());
             _currentPage.SetImageSource("ShieldCannon2", _players[0].GetShieldCannons()[1].GetSprite());
@@ -40,6 +42,7 @@ namespace CockBlock8._1
             _currentPage.SetImageSource("ShieldCannon4", _players[1].GetShieldCannons()[0].GetSprite());
             _currentPage.SetImageSource("ShieldCannon5", _players[1].GetShieldCannons()[1].GetSprite());
             _currentPage.SetImageSource("ShieldCannon6", _players[1].GetShieldCannons()[2].GetSprite());
+            _currentPage.SetImageSource("TestBullet", testBullet);
         }
 
         public void HandleTouchInput(int playerIndex, int shieldCannonIndex)
