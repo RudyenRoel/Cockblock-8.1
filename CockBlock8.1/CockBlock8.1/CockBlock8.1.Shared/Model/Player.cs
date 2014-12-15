@@ -8,9 +8,11 @@ namespace CockBlock8._1.Model
     {
         private int _health;
         private ShieldCannon[] _shieldCannons;
-        public Player(int amountOfCanons)
+        private int _id;
+        public Player(int ID, int amountOfCanons)
         {
             _shieldCannons = new ShieldCannon[amountOfCanons];
+            _id = ID;
             init();
         }
 
@@ -19,7 +21,14 @@ namespace CockBlock8._1.Model
             _health = 100;
             for (int i = 0; i < _shieldCannons.Length; i++)
             {
-                _shieldCannons[i] = new ShieldCannon();
+                if(_id == 0)
+                {
+                    _shieldCannons[i] = new ShieldCannon(false);
+                }
+                else
+                {
+                    _shieldCannons[i] = new ShieldCannon(true);
+                }
             }
         }
 
@@ -34,6 +43,11 @@ namespace CockBlock8._1.Model
         public ShieldCannon[] GetShieldCannons()
         {
             return _shieldCannons;
+        }
+
+        public int GetId()
+        {
+            return _id;
         }
     }
 }
