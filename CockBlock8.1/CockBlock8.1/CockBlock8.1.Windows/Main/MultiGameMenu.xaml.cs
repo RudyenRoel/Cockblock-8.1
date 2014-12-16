@@ -1,4 +1,5 @@
-﻿using CockBlock8._1.Main.Instructions;
+﻿using CockBlock8._1.Game;
+using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
@@ -28,23 +29,21 @@ namespace CockBlock8._1.Main
         {
             this.InitializeComponent();
         }
-
-        private void New_bn_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Search_bn_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(InstructionsMultiGame), e);
-        }
-
+        { this.Frame.Navigate(typeof(InstructionsMultiGame), e); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MainPage), e);
-        }
+        { this.Frame.Navigate(typeof(MainPage), e); }
+        private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(MultiGame), e); }
+        private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
+        { this._SearchGame_tx.Text = "To Search for an existing game"; }
+        private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
+        { this._SearchGame_tx.Text = ""; }
+        private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(MultiGame), e); }
+        private void CreateGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
+        { this._CreateGame_tx.Text = "To Create a new game"; }
+        private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
+        { this._CreateGame_tx.Text = ""; }
     }
 }

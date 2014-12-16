@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace CockBlock8._1.Main
 {
@@ -27,10 +27,6 @@ namespace CockBlock8._1.Main
             this.InitializeComponent();
             this.About_tx.TextWrapping = TextWrapping.Wrap;
             this.About_tx.Text = Introduction.About();
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
         }
     }
 }

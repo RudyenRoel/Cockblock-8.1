@@ -17,11 +17,14 @@
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="Title_tx" Text="Instructinos" FontSize="72" />
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="Instructions" Text="Bla bla... text... nog meer text... bla bla" FontSize="32" TextWrapping="Wrap"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock x:Name="_Instructions_tx" Text="Bla bla... text... nog meer text... bla bla" FontSize="32" TextWrapping="Wrap"/>
         </Grid>
         <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Back_bn" Content="Back" FontSize="32" Click="Back_bn_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Back_bn" Content="Back" FontSize="32" Click="Back_bn_Click"/>
+                <Button x:Name="Help_bn" Content="Help" FontSize="32" Click="Help_bn_Click"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

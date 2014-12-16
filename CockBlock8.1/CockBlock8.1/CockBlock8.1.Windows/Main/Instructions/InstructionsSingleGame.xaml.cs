@@ -29,6 +29,12 @@ namespace CockBlock8._1.Main.Instructions
         }
         private void Init()
         {
+            this._Instructions_tx.TextWrapping = TextWrapping.Wrap;
+            this._Instructions_tx.Text = Introduction.SingleGame();
+        }
+        private void Help_bn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HelpSingleGame), e);
         }
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)

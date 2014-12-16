@@ -31,7 +31,7 @@ namespace CockBlock8._1
     /// 
     public sealed partial class MainPage : CB_Page
     {
-        private int _AmountOfRectangles = 4 * 19;
+        private int _AmountOfRectangles = 7 * 28;
         public MainPage()
         {
             this.InitializeComponent();
@@ -61,7 +61,7 @@ namespace CockBlock8._1
             Shape rect = new Windows.UI.Xaml.Shapes.Rectangle();
             rect.Height = 10;
             rect.Width = 10;
-            rect.Margin = new Thickness(5, 5, 5, 5);
+            rect.Margin = new Thickness(2, 2, 2, 2);
             SolidColorBrush brush = new SolidColorBrush();
             brush.Color = Color.FromArgb(a, r, g, b);
             rect.Fill = brush;

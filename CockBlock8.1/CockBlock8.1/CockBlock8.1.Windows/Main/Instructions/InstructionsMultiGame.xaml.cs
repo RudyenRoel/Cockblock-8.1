@@ -25,7 +25,18 @@ namespace CockBlock8._1.Main.Instructions
         public InstructionsMultiGame()
         {
             this.InitializeComponent();
+            Init();
         }
+        private void Init()
+        {
+            this._Instructions_tx.TextWrapping = TextWrapping.Wrap;
+            this._Instructions_tx.Text = Introduction.MultiGame();
+        }
+        private void Help_bn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(HelpMultiGame), e);
+        }
+
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MultiGameMenu), e);
