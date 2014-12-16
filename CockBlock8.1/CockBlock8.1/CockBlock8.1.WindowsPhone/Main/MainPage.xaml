@@ -16,9 +16,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -31,16 +32,16 @@
             <Button x:Name="MultiGame_bn" Content="Multi Game" FontSize="24" Click="Multi_Game_bn_Click"/>
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="About_bn" Content="About" FontSize="24" Click="About_bn_Click"/>
+        </Grid>
+        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="Exit_bn" Content="Exit" FontSize="24" Click="Exit_bn_Click"/>
         </Grid>
-
-
-
         <!-- TODO: Remove onderstanding lines -->
-        <Grid Grid.Row="4">
-            <Button Content="Remove Rectangle" Click="RemoveButton_Click" Margin="200, 0, 0, 0"/>
+        <Grid Grid.Row="5" >
+            <Button x:Name="RectangleItems_bn" Content="Remove Rectangle" FontSize="12" BorderThickness="0" Click="RemoveButton_Click" HorizontalAlignment="Center"/>
 
-            <ItemsControl Grid.Row="1" x:Name="rectangleItems">
+            <ItemsControl x:Name="RectangleItems_IC" Grid.Row="1">
                 <ItemsControl.ItemContainerTransitions>
                     <TransitionCollection>
                         <!-- Without this, there would be no animation when items 
@@ -58,15 +59,6 @@
          in the grid re-flow into position when one of the child items
          are removed. -->
                 <ItemsControl.Items>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
-                    <Rectangle Fill="Red" Width="10" Height="10" Margin="10"/>
                 </ItemsControl.Items>
             </ItemsControl>
         </Grid>

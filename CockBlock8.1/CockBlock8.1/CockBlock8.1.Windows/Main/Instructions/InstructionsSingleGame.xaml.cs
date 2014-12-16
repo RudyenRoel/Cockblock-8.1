@@ -22,10 +22,13 @@ namespace CockBlock8._1.Main.Instructions
     /// </summary>
     public sealed partial class InstructionsSingleGame : Page
     {
-        internal String Instructions = Introduction.SingleGame();
         public InstructionsSingleGame()
         {
             this.InitializeComponent();
+            Init();
+        }
+        private void Init()
+        {
         }
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)

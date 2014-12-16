@@ -31,10 +31,10 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <TextBlock x:Name="Instructions_tx" Text="Instruction to bla bla bla bla bla......" FontSize="24" TextWrapping="Wrap" />
+            <TextBlock x:Name="_Information_tx" Text="Instructions...." FontSize="24"/>
         </Grid>
         <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Back_bn" Content="Back" FontSize="24" Click="Back_bn_Click"/>
+            <Button x:Name="Help_bn" Content="Help" FontSize="24" Click="Help_bn_Click"/>
         </Grid>
     </Grid>
 </src:CB_Page>

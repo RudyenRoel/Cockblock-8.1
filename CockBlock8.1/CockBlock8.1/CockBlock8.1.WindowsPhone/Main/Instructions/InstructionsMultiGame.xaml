@@ -31,12 +31,12 @@
             <TextBlock Text="Instructions" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock Text="Multi Game" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
         </StackPanel>
-        <GridView Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <!-- DataBinding Text -->
-            <TextBlock x:Name="Instructions_tx" Text="Instructions...." FontSize="24" TextWrapping="Wrap"/> 
-        </GridView>
+            <TextBlock x:Name="_Instructions_tx" Text="Instructions..." FontSize="24"/>
+        </Grid>
         <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Back_bn" Content="Back" FontSize="24" Click="Back_bn_Click"/>
+            <Button x:Name="Help_bn" Content="Help" FontSize="24" Click="Help_bn_Click"/>
         </Grid>
     </Grid>
 </src:CB_Page>

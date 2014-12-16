@@ -1,13 +1,16 @@
-﻿using CockBlock8._1.Model;
+﻿using CockBlock8._1.Main;
+using CockBlock8._1.Model;
 using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,6 +19,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,25 +31,43 @@ namespace CockBlock8._1
     /// 
     public sealed partial class MainPage : CB_Page
     {
-
+        private int _AmountOfRectangles = 4 * 19;
         public MainPage()
         {
             this.InitializeComponent();
-
+            Init();
+        }
+        private void Init()
+        {
             this.NavigationCacheMode = NavigationCacheMode.Required;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            InitRectangles();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
             Frame.GoBack();
             e.Handled = true;
         }
+        private void InitRectangles()
+        {
+            Random random = new Random();
+            for (int i = this.RectangleItems_IC.Items.Count; i < _AmountOfRectangles; i++)
+            {
+                AddRectangle(200, (byte)random.Next(100, 255), (byte)random.Next(100, 255), (byte)random.Next(100, 255));
+            }
+        }
+        private void AddRectangle(byte a, byte r, byte g, byte b)
+        {
+            Shape rect = new Windows.UI.Xaml.Shapes.Rectangle();
+            rect.Height = 10;
+            rect.Width = 10;
+            rect.Margin = new Thickness(5, 5, 5, 5);
+            SolidColorBrush brush = new SolidColorBrush();
+            brush.Color = Color.FromArgb(a, r, g, b);
+            rect.Fill = brush;
+            RectangleItems_IC.Items.Add(rect);
+        }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: Prepare page for display here.
@@ -66,16 +88,20 @@ namespace CockBlock8._1
         {
             this.Frame.Navigate(typeof(MultiGameMenu), e);
         }
+        private void About_bn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage), e);
+        }
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();
         }
-
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (rectangleItems.Items.Count > 0)
+            if (RectangleItems_IC.Items.Count > 0)
             {
-                rectangleItems.Items.RemoveAt(0);
+                RectangleItems_IC.Items.RemoveAt(0);
+                InitRectangles();
             }
         }
     }
