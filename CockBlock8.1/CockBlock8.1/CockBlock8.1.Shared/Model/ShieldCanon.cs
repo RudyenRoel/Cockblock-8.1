@@ -11,7 +11,7 @@ namespace CockBlock8._1
     public class ShieldCannon
     {
         private const int INITIALENERGY = 100;
-        //private double _energy;
+        private double _energy;
         private bool _isCannon;
         private const int DAMAGE = 15; // TODO: Magic cookie
         private bool _shielded { get; set; }
@@ -113,7 +113,7 @@ namespace CockBlock8._1
             // TODO fire event to ViewModel
         }
 
-        public double _energy
+        public double Energy
         {
             get { return _energy; }
             set
