@@ -28,12 +28,12 @@
                     <Setter x:Name="HealthStyle1" Property="Margin" Value="50,0,50,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="HealthCannon1" Text="100"/>
-            <TextBlock x:Name="HealthCannon2" Text="100"/>
-            <TextBlock x:Name="HealthCannon3" Text="100"/>
+            <TextBlock x:Name="_p1_energy1" Text="100"/>
+            <TextBlock x:Name="_p1_energy2" Text="100"/>
+            <TextBlock x:Name="_p1_energy3" Text="100"/>
         </StackPanel>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" x:Name="GameGrid">
             
             <StackPanel Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Height="270">
@@ -58,9 +58,9 @@
                     <Setter x:Name="HealthStyle2" Property="Margin" Value="50,0,50,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="HealthShield1" Text="100"/>
-            <TextBlock x:Name="HealthShield2" Text="100"/>
-            <TextBlock x:Name="HealthShield3" Text="100"/>
+            <TextBlock x:Name="_p2_energy1" Text="100"/>
+            <TextBlock x:Name="_p2_energy2" Text="100"/>
+            <TextBlock x:Name="_p2_energy3" Text="100"/>
         </StackPanel>
         <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
             <Rectangle x:Name="_TotalHealth2_rect"  Fill="#FFF4F4F5" Height="25"  Stroke="Black" Width="350" HorizontalAlignment="Left"/>

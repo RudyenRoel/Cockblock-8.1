@@ -7,6 +7,8 @@ namespace CockBlock8._1.Model
 {
     class Cock
     {
+        private int[] XCOORDS = new int[] { 0, 0 };
+        private int[] YCOORDS = new int[] { 0, 0 };
         private int _posX;
         private int _posY;
         private BitmapImage _sprite = new BitmapImage();

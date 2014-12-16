@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -34,7 +34,6 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonUp.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />

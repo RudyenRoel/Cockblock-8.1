@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -27,8 +28,11 @@ namespace CockBlock8._1.Game
     public sealed partial class SingleGame : CB_Page
     {
         private int _totalLengthRect = 350; // TODO: magic cookie
-        private int _frameRate = 16; // TODO: magic cookie
-        private DispatcherTimer myDispatcherTimer;
+        private BitmapImage CockUp = new BitmapImage();
+        private BitmapImage CockDown = new BitmapImage();
+        private List<Image> CockList;
+        private bool _goingUp;
+        private int[] _xCoords;
         public SingleGame()
         {
             this.InitializeComponent();
@@ -37,8 +41,13 @@ namespace CockBlock8._1.Game
         }
         private void init()
         {
+            _goingUp = true;
             setHealthPlayer1(80);
             setHealthPlayer2(90);
+            _xCoords = new int[] { -250, 0, 250 };
+            CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
+            CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
+            CockList = new List<Image>();
         }
 
         /// <summary>
@@ -90,21 +99,58 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            if (myDispatcherTimer == null)
+            AddShot(1);
+        }
+
+        public void AddShot(int posX)
+        {
+            Image CockImage = new Image();
+            if(_goingUp)
             {
-                myDispatcherTimer = new DispatcherTimer();
-                myDispatcherTimer.Interval = new TimeSpan(_frameRate); // 16 Milliseconds 
-                myDispatcherTimer.Tick += NextFrame;
-                myDispatcherTimer.Start();
+                CockImage.Source = CockUp;
+            }
+            else
+            {
+                CockImage.Source = CockDown;
+            }
+            CockImage.Width = 20;
+            CockImage.Height = 20;
+            CockImage.Margin = new Thickness(_xCoords[posX], 370, 0, 0);
+            CockList.Add(CockImage);
+            GameGrid.Children.Add(CockImage);
+        }
+
+        public void NextFrame()
+        {
+            if(_goingUp)
+            {
+                foreach(Image cock in CockList)
+                {
+                    SetMargin(cock, 0, 0, 0, 5);
+                }
+            }
+            else
+            { 
+                foreach(Image cock in CockList)
+                {
+                    SetMargin(cock, 0, 5, 0, 0);
+                }
             }
         }
+        private void SetMargin(Image obj, double left, double top, double right, double bottom)
+        { obj.Margin = new Thickness(obj.Margin.Left + left, obj.Margin.Top - top, obj.Margin.Right + right, obj.Margin.Bottom + bottom); }
 
-        private void NextFrame(object sender, object e)
+
+        public void SetEnergy(int player, int cannonNumber, int energy)
         {
-            SetMargin(TestBullet, 0, 2, 0, 0);
+            Debug.WriteLine("AKA: " + _p1_energy1.Name);
+            Debug.WriteLine("Changing energy of: " + "_p" + player + "_energy" + cannonNumber + ".");
+            ((TextBlock)this.FindName("_p" + player + "_energy" + cannonNumber)).Text = "" + energy;
         }
-        private void SetMargin(Image obj, double left, double top, double right, double bottem)
-        { obj.Margin = new Thickness(obj.Margin.Left + left, obj.Margin.Top - top, obj.Margin.Right + right, obj.Margin.Bottom + bottem); }
 
+        public void SwitchGoingUp()
+        {
+            _goingUp = !_goingUp;
+        }
     }
 }

@@ -11,15 +11,17 @@ namespace CockBlock8._1
     public class ShieldCannon
     {
         private const int INITIALENERGY = 100;
+        private const int SHIELDCOSTPERSECOND = 10;
         private double _energy;
         private bool _isCannon;
         private const int DAMAGE = 15; // TODO: Magic cookie
+        private Player _player;
         private bool _shielded { get; set; }
 
         private BitmapImage _shieldSprite = new BitmapImage();
         private BitmapImage _shieldActiveSprite = new BitmapImage();
         private BitmapImage _cannonSprite = new BitmapImage();
-        public ShieldCannon(bool up)
+        public ShieldCannon(bool up, Player p)
         {
             if(up)
             {
@@ -33,6 +35,7 @@ namespace CockBlock8._1
                 _shieldActiveSprite.UriSource = new Uri("ms-appx:Res/ShieldActiveDown.png", UriKind.RelativeOrAbsolute);
                 _cannonSprite.UriSource = new Uri("ms-appx:Res/CanonDown.png", UriKind.RelativeOrAbsolute);
             }
+            _player = p;
             init();
         }
 
@@ -43,14 +46,22 @@ namespace CockBlock8._1
             _isCannon = false;
         }
 
+        public void Update()
+        {
+            if(_shielded)
+            {
+                UseEnergy((double)SHIELDCOSTPERSECOND / 60);
+            }
+        }
+
         public void ReplenishEnergy(double amount)
         {
-            _energy += amount;
+            Energy += amount;
         }
 
         public void UseEnergy(double amount)
         {
-            _energy -= amount;
+            Energy -= amount;
         }
 
         public void ChangeState()
@@ -84,8 +95,15 @@ namespace CockBlock8._1
 
         public void Activate()
         {
-            _energy--;
-            _shielded = true;
+            Energy--;
+            if(IsCannon())
+            {
+                _player.Shoot(this);
+            }
+            else
+            {
+                _shielded = true;
+            }
         }
         public void Deactivate()
         {
@@ -96,7 +114,7 @@ namespace CockBlock8._1
         {
             if(!_shielded)
             {
-                _energy -= DAMAGE;
+                Energy -= DAMAGE;
             }
         }
 
@@ -110,7 +128,7 @@ namespace CockBlock8._1
         protected void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-            // TODO fire event to ViewModel
+            _player.EnergyChanged(this, (int)_energy);
         }
 
         public double Energy

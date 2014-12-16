@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Tracing;
 using System.Text;
 
 namespace CockBlock8._1.Model
@@ -9,13 +11,22 @@ namespace CockBlock8._1.Model
         private int _health;
         private ShieldCannon[] _shieldCannons;
         private int _id;
-        public Player(int ID, int amountOfCanons)
+        private CB_ViewModel _vm;
+        public Player(CB_ViewModel vm, int ID, int amountOfCanons)
         {
+            _vm = vm;
             _shieldCannons = new ShieldCannon[amountOfCanons];
             _id = ID;
             init();
         }
 
+        public void Update()
+        {
+            foreach(ShieldCannon sc in _shieldCannons)
+            {
+                sc.Update();
+            }
+        }
         private void init()
         {
             _health = 100;
@@ -23,11 +34,11 @@ namespace CockBlock8._1.Model
             {
                 if(_id == 0)
                 {
-                    _shieldCannons[i] = new ShieldCannon(false);
+                    _shieldCannons[i] = new ShieldCannon(false, this);
                 }
                 else
                 {
-                    _shieldCannons[i] = new ShieldCannon(true);
+                    _shieldCannons[i] = new ShieldCannon(true, this);
                 }
             }
         }
@@ -48,6 +59,16 @@ namespace CockBlock8._1.Model
         public int GetId()
         {
             return _id;
+        }
+
+        public void EnergyChanged(ShieldCannon s, int energy)
+        {
+            _vm.EnergyChanged(this, Array.IndexOf(_shieldCannons, s) + 1, energy);
+        }
+
+        public void Shoot(ShieldCannon s)
+        {
+            _vm.ShootCock(this, Array.IndexOf(_shieldCannons, s) + 1);
         }
     }
 }
