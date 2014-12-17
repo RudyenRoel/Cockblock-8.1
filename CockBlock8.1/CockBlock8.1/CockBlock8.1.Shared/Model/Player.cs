@@ -22,7 +22,7 @@ namespace CockBlock8._1.Model
 
         public void Update()
         {
-            foreach(ShieldCannon sc in _shieldCannons)
+            foreach (ShieldCannon sc in _shieldCannons)
             {
                 sc.Update();
             }
@@ -32,7 +32,7 @@ namespace CockBlock8._1.Model
             _health = 100;
             for (int i = 0; i < _shieldCannons.Length; i++)
             {
-                if(_id == 0)
+                if (_id == 0)
                 {
                     _shieldCannons[i] = new ShieldCannon(false, this);
                 }

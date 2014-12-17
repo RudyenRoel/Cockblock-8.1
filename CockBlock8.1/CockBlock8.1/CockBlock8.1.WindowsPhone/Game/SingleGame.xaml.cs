@@ -105,7 +105,7 @@ namespace CockBlock8._1.Game
         public void AddShot(int posX)
         {
             Image CockImage = new Image();
-            if(_goingUp)
+            if (_goingUp)
             {
                 CockImage.Source = CockUp;
             }
@@ -122,16 +122,16 @@ namespace CockBlock8._1.Game
 
         public void NextFrame()
         {
-            if(_goingUp)
+            if (_goingUp)
             {
-                foreach(Image cock in CockList)
+                foreach (Image cock in CockList)
                 {
                     SetMargin(cock, 0, 0, 0, 5);
                 }
             }
             else
-            { 
-                foreach(Image cock in CockList)
+            {
+                foreach (Image cock in CockList)
                 {
                     SetMargin(cock, 0, 5, 0, 0);
                 }

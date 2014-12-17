@@ -34,8 +34,8 @@ namespace CockBlock8._1
                 myDispatcherTimer.Tick += Update;
                 myDispatcherTimer.Start();
             }
-            _players = new Player[]{new Player(this, 0, AMOUNTOFCANNONS / 2), new Player(this, 1, AMOUNTOFCANNONS / 2)};
-            
+            _players = new Player[] { new Player(this, 0, AMOUNTOFCANNONS / 2), new Player(this, 1, AMOUNTOFCANNONS / 2) };
+
             _players[1].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
@@ -45,7 +45,7 @@ namespace CockBlock8._1
 
         private void Update(object sender, object e)
         {
-            foreach(Player p in _players)
+            foreach (Player p in _players)
             {
                 p.Update();
             }
@@ -59,16 +59,28 @@ namespace CockBlock8._1
             _currentPage.SetImageSource(_shieldCannonNames[2 + 3 * playerNumber], player.GetShieldCannons()[2].GetSprite());
         }
 
-       
+
 
         public void ShieldCannonPressed(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            cannon.Activate();
-            _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
-            if(cannon.IsCannon())
+            if (cannon.Energy > 0)
             {
-                ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
+                cannon.Activate();
+                _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
+                if (cannon.IsCannon())
+                {
+                    ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
+                }
+                else
+                {
+                    Debug.WriteLine("Shield! " + playerIndex + ", " + shieldCannonIndex);
+                }
+            }
+            else
+            {
+                Debug.WriteLine("ShieldCannonPressed! else");
+                //TODO: Image fade
             }
         }
 
@@ -101,7 +113,7 @@ namespace CockBlock8._1
         {
             int x = Array.IndexOf(_players, p) + 1;
             int y = cannon + 1;
-            new Cock(x, y); 
+            new Cock(x, y);
         }
     }
 }

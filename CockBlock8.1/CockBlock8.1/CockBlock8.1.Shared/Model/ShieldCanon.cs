@@ -23,7 +23,7 @@ namespace CockBlock8._1
         private BitmapImage _cannonSprite = new BitmapImage();
         public ShieldCannon(bool up, Player p)
         {
-            if(up)
+            if (up)
             {
                 _shieldSprite.UriSource = new Uri("ms-appx:Res/ShieldUp.png", UriKind.RelativeOrAbsolute);
                 _shieldActiveSprite.UriSource = new Uri("ms-appx:Res/ShieldActiveUp.png", UriKind.RelativeOrAbsolute);
@@ -48,7 +48,7 @@ namespace CockBlock8._1
 
         public void Update()
         {
-            if(_shielded)
+            if (_shielded)
             {
                 UseEnergy((double)SHIELDCOSTPERSECOND / 60);
             }
@@ -77,7 +77,7 @@ namespace CockBlock8._1
             }
             else
             {
-                if(_shielded)
+                if (_shielded)
                 {
                     return _shieldActiveSprite;
                 }
@@ -96,7 +96,7 @@ namespace CockBlock8._1
         public void Activate()
         {
             Energy--;
-            if(IsCannon())
+            if (IsCannon())
             {
                 _player.Shoot(this);
             }
@@ -112,11 +112,13 @@ namespace CockBlock8._1
 
         public void Hit()
         {
-            if(!_shielded)
+            if (!_shielded)
             {
                 Energy -= DAMAGE;
             }
         }
+        public bool IsShielded()
+        { return _shielded; }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
@@ -145,5 +147,6 @@ namespace CockBlock8._1
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
     }
 }
