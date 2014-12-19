@@ -297,7 +297,7 @@ namespace CockBlock8._1.Game
         private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(2, false))
-            { _Exit_bn_p2.Foreground = _PressedButtonForeground; }
+            { _Exit_bn_p2.Foreground = _PressedButtonForeground; _Exit_bn_p2.Background = _PressedButtonBackground; }
         }
         private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
         {
@@ -307,12 +307,12 @@ namespace CockBlock8._1.Game
         private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, false))
-            { _Exit_bn_p1.Foreground = _PressedButtonForeground; }
+            { _Exit_bn_p1.Foreground = _PressedButtonForeground; _Exit_bn_p2.Background = _PressedButtonBackground; }
         }
         private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, true))
-            { _Rematch_bn_p1.Foreground = _PressedButtonForeground; }
+            { _Rematch_bn_p1.Foreground = _PressedButtonForeground; _Rematch_bn_p2.Background = _PressedButtonBackground; }
         }
         private bool ExitRematchButtonPressed(int playerIndex, bool rematch)
         {
