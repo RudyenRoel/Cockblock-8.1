@@ -88,7 +88,7 @@ namespace CockBlock8._1
         {
             if (_isCannon)
             {
-                if(_shootAllowed && Energy > 0)
+                if (_shootAllowed && Energy > 0)
                 {
                     return _cannonSprite;
                 }
@@ -99,7 +99,7 @@ namespace CockBlock8._1
             }
             else
             {
-                if(Energy > 0)
+                if (Energy > 0)
                 {
                     if (_shielded)
                     {
@@ -154,7 +154,7 @@ namespace CockBlock8._1
         public void Hit()
         {
             Debug.WriteLine("Checking if shielded");
-            if(Energy <= 0)
+            if (Energy <= 0)
             {
                 _player.Damaged();
             }
@@ -162,7 +162,7 @@ namespace CockBlock8._1
             {
                 Debug.WriteLine("NOT SHIELDED!");
                 Energy -= DAMAGE;
-                if(Energy <= 0)
+                if (Energy <= 0)
                 {
                     Energy = 0;
                 }

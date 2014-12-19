@@ -68,13 +68,13 @@ namespace CockBlock8._1
             {
                 p.Update();
             }
-            ((SingleGame)_currentPage).NextFrame(); 
-            if(_shootTimer <= 0)
+            ((SingleGame)_currentPage).NextFrame();
+            if (_shootTimer <= 0)
             {
-                foreach(ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
+                foreach (ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
                 {
                     sc.DisableShooting();
-                    _currentPage.SetImageSource(_shieldCannonNames[3*(_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
+                    _currentPage.SetImageSource(_shieldCannonNames[3 * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
                 }
                 if (_turnTimer <= 0)
                 {
@@ -156,10 +156,10 @@ namespace CockBlock8._1
         {
             // TODO Make neat, make events handle properly
             ((SingleGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, cannon, energy);
-            if(energy <= 0)
+            if (energy <= 0)
             {
                 int playerIndex = Array.IndexOf(_players, p);
-                _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + (cannon-1)], _players[playerIndex].GetShieldCannons()[cannon-1].GetSprite());
+                _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + (cannon - 1)], _players[playerIndex].GetShieldCannons()[cannon - 1].GetSprite());
             }
         }
 
@@ -179,7 +179,7 @@ namespace CockBlock8._1
 
         internal void HealthChanged(Player p, int health)
         {
-            if(Array.IndexOf(_players, p) == 0)
+            if (Array.IndexOf(_players, p) == 0)
             {
                 ((SingleGame)_currentPage).setHealthPlayer1(health);
             }

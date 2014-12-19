@@ -80,7 +80,7 @@ namespace CockBlock8._1.Model
         internal void Damaged()
         {
             _health -= 15;
-            if(_health < 0)
+            if (_health < 0)
             {
                 _health = 0;
             }
