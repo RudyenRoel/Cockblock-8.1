@@ -64,6 +64,7 @@ namespace CockBlock8._1.Game
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
         }
         public void setHealthPlayer1(double percentage)
         {
@@ -150,8 +151,6 @@ namespace CockBlock8._1.Game
 
         public void SetEnergy(int player, int cannonNumber, int energy)
         {
-            Debug.WriteLine("AKA: " + _p1_energy1.Name);
-            Debug.WriteLine("Changing energy of: " + "_p" + player + "_energy" + cannonNumber + ".");
             ((TextBlock)this.FindName("_p" + player + "_energy" + cannonNumber)).Text = "" + energy;
         }
 
@@ -182,6 +181,13 @@ namespace CockBlock8._1.Game
             int currentLength = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
             _CurrentTime_Left_rect.Height = currentLength;
             _CurrentTime_Right_rect.Height = currentLength;
+        }
+
+        internal void GameOver(int player)
+        {
+            Debug.WriteLine("Player" + player + " lost!");
+            // if player = 1, player1 lost
+            // if player = 2, player2 lost
         }
     }
 }

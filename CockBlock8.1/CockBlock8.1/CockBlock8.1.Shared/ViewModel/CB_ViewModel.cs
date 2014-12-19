@@ -17,7 +17,8 @@ namespace CockBlock8._1
         private int _currentDefender;
         private Player[] _players;
         private string[] _shieldCannonNames = new string[] { "ShieldCannon1", "ShieldCannon2", "ShieldCannon3", "ShieldCannon4", "ShieldCannon5", "ShieldCannon6" };
-        private const int AMOUNTOFCANNONS = 6; // TODO Settings file
+        private const int AMOUNTOFCANNONSPHONE = 6; // TODO Settings file
+        private const int AMOUNTOFCANNONSTABLET = 10; // TODO Settings file
         private DispatcherTimer myDispatcherTimer;
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
         private const int TIMEPERTURN = 6 * 60; // TODO magic cookie: 10 seconds * 60 frames per second
@@ -44,7 +45,7 @@ namespace CockBlock8._1
                 myDispatcherTimer.Tick += Update;
                 myDispatcherTimer.Start();
             }
-            _players = new Player[] { new Player(this, 0, AMOUNTOFCANNONS / 2), new Player(this, 1, AMOUNTOFCANNONS / 2) };
+            _players = new Player[] { new Player(this, 0, AMOUNTOFCANNONSPHONE / 2), new Player(this, 1, AMOUNTOFCANNONSPHONE / 2) };
 
             _players[0].ChangeState();
             SetImages(_players[0], 0);
@@ -73,8 +74,11 @@ namespace CockBlock8._1
             {
                 foreach (ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
                 {
-                    sc.DisableShooting();
-                    _currentPage.SetImageSource(_shieldCannonNames[3 * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
+                    if(sc.ShootingAllowed())
+                    {
+                        sc.DisableShooting();
+                        _currentPage.SetImageSource(_shieldCannonNames[3 * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
+                    } 
                 }
                 if (_turnTimer <= 0)
                 {
@@ -101,16 +105,14 @@ namespace CockBlock8._1
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
             if (cannon.Energy > 0 && !cannon.Active())
             {
-                Debug.WriteLine("ACTIVATE");
                 cannon.Activate();
-                _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
                 if (cannon.IsCannon() && cannon.ShootingAllowed())
                 {
                     ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
                 }
                 else
                 {
-                    Debug.WriteLine("Shield! " + playerIndex + ", " + shieldCannonIndex);
+                    _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
                 }
             }
             else
@@ -123,7 +125,6 @@ namespace CockBlock8._1
         public void ShieldCannonReleased(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            Debug.WriteLine("DEACTIVATE");
             cannon.Deactivate();
             if (!cannon.IsCannon())
             {
@@ -172,8 +173,10 @@ namespace CockBlock8._1
 
         public void CheckHits(int shieldCannonIndex)
         {
-            Debug.WriteLine("Checking player ");
-            _players[_currentDefender].CheckHits(shieldCannonIndex);
+            if (_players[_currentDefender].GetShieldCannons()[shieldCannonIndex].Active())
+            {
+                _players[_currentDefender].CheckHits(shieldCannonIndex);
+            }
         }
 
 
@@ -192,6 +195,11 @@ namespace CockBlock8._1
         internal bool ShieldUp(int shieldCannonIndex)
         {
             return _players[_currentDefender].GetShieldCannons()[shieldCannonIndex].Energy > 0;
+        }
+
+        internal void ILost(Player player)
+        {
+            ((SingleGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1);
         }
     }
 }

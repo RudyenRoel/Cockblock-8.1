@@ -31,6 +31,7 @@ namespace CockBlock8._1.Main
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
         }
     }
 }

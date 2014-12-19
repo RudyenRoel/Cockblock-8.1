@@ -35,6 +35,7 @@ namespace CockBlock8._1.Game
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
         }
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)

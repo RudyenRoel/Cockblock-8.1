@@ -12,6 +12,7 @@ namespace CockBlock8._1.Model
         private ShieldCannon[] _shieldCannons;
         private int _id;
         private CB_ViewModel _vm;
+        private bool _lost;
         public Player(CB_ViewModel vm, int ID, int amountOfCanons)
         {
             _vm = vm;
@@ -30,6 +31,7 @@ namespace CockBlock8._1.Model
         private void init()
         {
             _health = 100;
+            _lost = false;
             for (int i = 0; i < _shieldCannons.Length; i++)
             {
                 if (_id == 0)
@@ -73,7 +75,6 @@ namespace CockBlock8._1.Model
 
         public void CheckHits(int shieldCannonIndex)
         {
-            Debug.WriteLine("Checking shieldcannon " + shieldCannonIndex);
             _shieldCannons[shieldCannonIndex].Hit();
         }
 
@@ -83,9 +84,13 @@ namespace CockBlock8._1.Model
             if (_health < 0)
             {
                 _health = 0;
+                if(!_lost)
+                {
+                    _vm.ILost(this);
+                    _lost = true;
+                }
             }
             _vm.HealthChanged(this, _health);
-            //TODO show that health goes down
         }
     }
 }

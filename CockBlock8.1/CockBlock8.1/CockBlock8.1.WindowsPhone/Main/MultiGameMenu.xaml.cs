@@ -36,7 +36,9 @@ namespace CockBlock8._1
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        { }
+        {
+            base.OnNavigatedTo(e);
+        }
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
         { }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)

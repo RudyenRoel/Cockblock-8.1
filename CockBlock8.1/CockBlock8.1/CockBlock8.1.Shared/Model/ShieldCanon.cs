@@ -146,21 +146,18 @@ namespace CockBlock8._1
         }
         public void Deactivate()
         {
-            Debug.WriteLine("DEACTIVATING ");
             _activated = false;
             _shielded = false;
         }
 
         public void Hit()
         {
-            Debug.WriteLine("Checking if shielded");
             if (Energy <= 0)
             {
                 _player.Damaged();
             }
             if (!_shielded)
             {
-                Debug.WriteLine("NOT SHIELDED!");
                 Energy -= DAMAGE;
                 if (Energy <= 0)
                 {

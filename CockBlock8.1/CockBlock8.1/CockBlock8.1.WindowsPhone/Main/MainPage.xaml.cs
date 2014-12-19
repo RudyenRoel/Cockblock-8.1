@@ -70,6 +70,7 @@ namespace CockBlock8._1
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are

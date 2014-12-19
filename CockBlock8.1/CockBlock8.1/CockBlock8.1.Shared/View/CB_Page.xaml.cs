@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -18,6 +19,12 @@ namespace CockBlock8._1.View
             _vm = new CB_ViewModel(this);
         }
 
+        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+        } 
+
         public void ChangeText(string name, string text)
         {
             TextBlock tb = (TextBlock)FindName(name);
@@ -29,7 +36,6 @@ namespace CockBlock8._1.View
 
         public void SetImageSource(string name, BitmapImage image)
         {
-            Debug.WriteLine("Name: " + name);
             Image i = (Image)FindName(name);
             if (i.GetType() == typeof(Image))
             {

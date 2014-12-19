@@ -6,9 +6,97 @@
     xmlns:local="using:CockBlock8._1.Game"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Rectangle x:Name="_TotalHealth1_rect" Fill="#FFF4F4F5" Height="25" Stroke="Black" Width="700" HorizontalAlignment="Left"/>
+            <Rectangle x:Name="_CurrentHealth1_rect" Fill="#FFFF6060" Height="25" Stroke="Black" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="_CurrentHealth1_tx" Text="100" FontSize="24" Foreground="#FFAC0000" HorizontalAlignment="Center" Margin="70,25,0,-25">
+                <TextBlock.RenderTransform>
+                    <RotateTransform Angle="180"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <StackPanel.RenderTransform>
+                <RotateTransform Angle="180"/>
+            </StackPanel.RenderTransform>
+            <TextBlock x:Name="_p1_energy1" Text="100"/>
+            <TextBlock x:Name="_p1_energy2" Text="100"/>
+            <TextBlock x:Name="_p1_energy3" Text="100"/>
+            <TextBlock x:Name="_p1_energy4" Text="100"/>
+            <TextBlock x:Name="_p1_energy5" Text="100"/>
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter x:Name="HealthStyle1" Property="Margin" Value="60,0,60,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <StackPanel.Margin>0,0,-1375,0</StackPanel.Margin>
+        </StackPanel>
 
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Rectangle x:Name="_FullTime_Left_rect" Width="15" Height="1080" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle x:Name="_CurrentTime_Left_rect" Width="15" Height="600" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Grid>
+
+            <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
+                <StackPanel Orientation="Horizontal" Height="640">
+                    <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="45,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
+                    <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
+                    <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed" PointerEntered="ShieldCannon3_PointerPressed" PointerReleased="ShieldCannon3_PointerReleased" PointerExited="ShieldCannon3_PointerReleased"/>
+                    <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon4_PointerPressed" PointerEntered="ShieldCannon4_PointerPressed" PointerReleased="ShieldCannon4_PointerReleased" PointerExited="ShieldCannon4_PointerReleased"/>
+                    <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Height="640">
+                    <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="45,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed" PointerEntered="ShieldCannon6_PointerPressed" PointerReleased="ShieldCannon6_PointerReleased" PointerExited="ShieldCannon6_PointerReleased"/>
+                    <Image x:Name="ShieldCannon7" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon7_PointerPressed" PointerEntered="ShieldCannon7_PointerPressed" PointerReleased="ShieldCannon7_PointerReleased" PointerExited="ShieldCannon7_PointerReleased"/>
+                    <Image x:Name="ShieldCannon8" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon8_PointerPressed" PointerEntered="ShieldCannon8_PointerPressed" PointerReleased="ShieldCannon8_PointerReleased" PointerExited="ShieldCannon8_PointerReleased"/>
+                    <Image x:Name="ShieldCannon9" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon9_PointerPressed" PointerEntered="ShieldCannon9_PointerPressed" PointerReleased="ShieldCannon9_PointerReleased" PointerExited="ShieldCannon9_PointerReleased"/>
+                    <Image x:Name="ShieldCannon10" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon10_PointerPressed" PointerEntered="ShieldCannon10_PointerPressed" PointerReleased="ShieldCannon10_PointerReleased" PointerExited="ShieldCannon10_PointerReleased"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Grid Grid.Column="2">
+                <Rectangle x:Name="_FullTime_Right_rect" Width="15" Height="1080" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Rectangle x:Name="_CurrentTime_Right_rect" Width="15" Height="600" Fill="#FF00D1FF" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Button Grid.Column="1" x:Name="Start_bn" Content="Start" Click="Start_bn_Click" HorizontalAlignment="Center" />
+        </Grid>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter x:Name="HealthStyle2" Property="Margin" Value="60,0,60,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="_p2_energy1" Text="100"/>
+            <TextBlock x:Name="_p2_energy2" Text="100"/>
+            <TextBlock x:Name="_p2_energy3" Text="100"/>
+            <TextBlock x:Name="_p2_energy4" Text="100"/>
+            <TextBlock x:Name="_p2_energy5" Text="100"/>
+        </StackPanel>
+        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+            <Rectangle x:Name="_TotalHealth2_rect"  Fill="#FFF4F4F5" Height="25"  Stroke="Black" Width="700" HorizontalAlignment="Left"/>
+            <Rectangle x:Name="_CurrentHealth2_rect" Fill="#FFFF6060" Height="25"  Stroke="Black" Width="350" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="_CurrentHealth2_tx" Text="100" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFAC0000"/>
+        </Grid>
     </Grid>
 </src:CB_Page>
