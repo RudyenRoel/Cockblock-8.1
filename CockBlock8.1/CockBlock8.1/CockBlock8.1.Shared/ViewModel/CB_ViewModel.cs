@@ -19,8 +19,10 @@ namespace CockBlock8._1
         private const int AMOUNTOFCANNONS = 6; // TODO Settings file
         private DispatcherTimer myDispatcherTimer;
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
-        private const int TIMEPERTURN = 10*60; // TODO magic cookie: 10 seconds time 60 frames per second
+        private const int TIMEPERTURN = 10 * 60; // TODO magic cookie: 10 seconds time 60 frames per second
+        private const int TIMEFORSHOOTING = 7 * 60; // TODO magic cookie: 10 seconds time 60 frames per second
         private int _turnTimer;
+        private bool _shootAllowed = true;
 
         public CB_ViewModel(CB_Page page)
         {
@@ -51,16 +53,20 @@ namespace CockBlock8._1
         private void Update(object sender, object e)
         {
             _turnTimer--;
-            ((SingleGame)_currentPage).SetTime((int)(_turnTimer/TIMEPERTURN)*100);
+            ((SingleGame)_currentPage).SetTime((int)(_turnTimer/TIMEFORSHOOTING)*100);
 
             foreach (Player p in _players)
             {
                 p.Update();
             }
             ((SingleGame)_currentPage).NextFrame(); 
-            if (_turnTimer <= 0)
+            if(_turnTimer <= TIMEPERTURN - TIMEFORSHOOTING)
             {
-                NextTurn();
+                _shootAllowed = false;
+                if (_turnTimer <= 0)
+                {
+                    NextTurn();
+                }
             }
         }
 
@@ -76,12 +82,12 @@ namespace CockBlock8._1
         public void ShieldCannonPressed(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            if (cannon.Energy > 0 && !cannon.Active())
+            if (cannon.Energy > 0 && !cannon.Active() && _shootAllowed)
             {
                 Debug.WriteLine("ACTIVATE");
-                cannon.Activate();
+                cannon.Activate(_shootAllowed);
                 _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
-                if (cannon.IsCannon())
+                if (cannon.IsCannon() && _shootAllowed)
                 {
                     ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
                 }
@@ -111,6 +117,7 @@ namespace CockBlock8._1
         public void NextTurn()
         {
             _turnTimer = TIMEPERTURN;
+            _shootAllowed = true;
             _players[0].ChangeState();
             _players[1].ChangeState();
             SetImages(_players[0], 0);
@@ -144,5 +151,6 @@ namespace CockBlock8._1
             Debug.WriteLine("Checking player ");
             _currentPlayer.CheckHits(shieldCannonIndex);
         }
+
     }
 }

@@ -95,11 +95,11 @@ namespace CockBlock8._1
             return _isCannon;
         }
 
-        public void Activate()
+        public void Activate(bool shootAllowed)
         {
             _activated = true;
             Energy--;
-            if (IsCannon())
+            if (IsCannon() && shootAllowed)
             {
                 _player.Shoot(this);
             }

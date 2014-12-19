@@ -44,7 +44,7 @@ namespace CockBlock8._1.Game
             _goingUp = true;
             setHealthPlayer1(80);
             setHealthPlayer2(90);
-            _xCoords = new int[] { -250, 0, 250 };
+            _xCoords = new int[] { -240, -20, 200 };
             CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             CockList = new List<Image>();
@@ -108,12 +108,12 @@ namespace CockBlock8._1.Game
             if (_goingUp)
             {
                 CockImage.Source = CockUp;
-                CockImage.Margin = new Thickness(_xCoords[posX], 370, 0, 0);
+                CockImage.Margin = new Thickness(_xCoords[posX], -130, 0, 0);
             }
             else
             {
                 CockImage.Source = CockDown;
-                CockImage.Margin = new Thickness(_xCoords[posX], -370, 0, 0);
+                CockImage.Margin = new Thickness(_xCoords[posX], -950, 0, 0);
             }
             CockImage.Width = 20;
             CockImage.Height = 20;
@@ -127,7 +127,7 @@ namespace CockBlock8._1.Game
             {
                 for (int i = 0; i < CockList.Count; i++ )
                 {
-                    if (CockList[i].Margin.Top == -340) //TODO Most magical cookie ever invented
+                    if (CockList[i].Margin.Top == -880) //TODO Most magical cookie ever invented
                     {
                         RemoveImage(CockList[i]);
                         _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));
@@ -144,7 +144,7 @@ namespace CockBlock8._1.Game
             {
                 for (int i = 0; i < CockList.Count; i++)
                 {
-                    if (CockList[i].Margin.Top == 340) //TODO Most magical cookie ever invented
+                    if (CockList[i].Margin.Top == -200) //TODO Most magical cookie ever invented
                     {
                         RemoveImage(CockList[i]);
                         _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));

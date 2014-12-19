@@ -41,7 +41,7 @@
             <StackPanel.Margin>0,0,-700,0</StackPanel.Margin>
         </StackPanel>
 
-        <Grid Grid.Row="2" x:Name="GameGrid">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="350*"/>
@@ -53,7 +53,7 @@
                 <Rectangle x:Name="CurrentTime_Left_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Grid>
 
-            <StackPanel Grid.Row="2" Grid.Column="1">
+            <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="270">
                     <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="15,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
                     <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="10,0,10,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
