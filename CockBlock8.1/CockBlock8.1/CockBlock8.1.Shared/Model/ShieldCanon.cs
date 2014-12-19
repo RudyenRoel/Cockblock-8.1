@@ -17,6 +17,7 @@ namespace CockBlock8._1
         private const int DAMAGE = 15; // TODO: Magic cookie
         private Player _player;
         private bool _shielded { get; set; }
+        private bool _activated;
 
         private BitmapImage _shieldSprite = new BitmapImage();
         private BitmapImage _shieldActiveSprite = new BitmapImage();
@@ -41,6 +42,7 @@ namespace CockBlock8._1
 
         private void init()
         {
+            _activated = false;
             _shielded = false;
             _energy = INITIALENERGY;
             _isCannon = false;
@@ -95,6 +97,7 @@ namespace CockBlock8._1
 
         public void Activate()
         {
+            _activated = true;
             Energy--;
             if (IsCannon())
             {
@@ -107,18 +110,27 @@ namespace CockBlock8._1
         }
         public void Deactivate()
         {
+            Debug.WriteLine("DEACTIVATING ");
+            _activated = false;
             _shielded = false;
         }
 
         public void Hit()
         {
+            Debug.WriteLine("Checking if shielded");
             if (!_shielded)
             {
+                Debug.WriteLine("NOT SHIELDED!");
                 Energy -= DAMAGE;
             }
         }
         public bool IsShielded()
         { return _shielded; }
+
+        public bool Active()
+        {
+            return _activated;
+        }
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {

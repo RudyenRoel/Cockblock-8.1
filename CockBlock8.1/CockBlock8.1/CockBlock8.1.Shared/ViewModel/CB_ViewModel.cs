@@ -13,15 +13,19 @@ namespace CockBlock8._1
     public class CB_ViewModel
     {
         private CB_Page _currentPage;
+        private Player _currentPlayer;
         private Player[] _players;
         private string[] _shieldCannonNames = new string[] { "ShieldCannon1", "ShieldCannon2", "ShieldCannon3", "ShieldCannon4", "ShieldCannon5", "ShieldCannon6" };
         private const int AMOUNTOFCANNONS = 6; // TODO Settings file
         private DispatcherTimer myDispatcherTimer;
-        private const int FRAMERATE = 16; // TODO: magic cookie
+        private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
+        private const int TIMEPERTURN = 10*60; // TODO magic cookie: 10 seconds time 60 frames per second
+        private int _turnTimer;
 
         public CB_ViewModel(CB_Page page)
         {
             _currentPage = page;
+            _turnTimer = TIMEPERTURN;
             Debug.WriteLine(page.GetType().ToString());
         }
 
@@ -39,12 +43,15 @@ namespace CockBlock8._1
             _players[1].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
+            _currentPlayer = _players[0];
             BitmapImage testBullet = new BitmapImage();
             testBullet.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
         }
 
         private void Update(object sender, object e)
         {
+            _turnTimer--;
+            ((SingleGame)_currentPage).SetTime((int)(_turnTimer/TIMEPERTURN)*100);
             foreach (Player p in _players)
             {
                 p.Update();
@@ -64,8 +71,9 @@ namespace CockBlock8._1
         public void ShieldCannonPressed(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            if (cannon.Energy > 0)
+            if (cannon.Energy > 0 && !cannon.Active())
             {
+                Debug.WriteLine("ACTIVATE");
                 cannon.Activate();
                 _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
                 if (cannon.IsCannon())
@@ -87,19 +95,29 @@ namespace CockBlock8._1
         public void ShieldCannonReleased(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
+            Debug.WriteLine("DEACTIVATE");
+            cannon.Deactivate();
             if (!cannon.IsCannon())
             {
-                cannon.Deactivate();
                 _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
             }
         }
 
         public void NextTurn()
         {
+            _turnTimer = TIMEPERTURN;
             _players[0].ChangeState();
             _players[1].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
+            if(_currentPlayer == _players[0])
+            {
+                _currentPlayer = _players[1];
+            }
+            else
+            {
+                _currentPlayer = _players[0];
+            }
             ((SingleGame)_currentPage).SwitchGoingUp();
         }
 
@@ -114,6 +132,12 @@ namespace CockBlock8._1
             int x = Array.IndexOf(_players, p) + 1;
             int y = cannon + 1;
             new Cock(x, y);
+        }
+
+        public void CheckHits(int shieldCannonIndex)
+        {
+            Debug.WriteLine("Checking player ");
+            _currentPlayer.CheckHits(shieldCannonIndex);
         }
     }
 }

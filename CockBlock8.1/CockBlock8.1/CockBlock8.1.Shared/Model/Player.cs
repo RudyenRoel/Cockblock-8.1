@@ -70,5 +70,11 @@ namespace CockBlock8._1.Model
         {
             _vm.ShootCock(this, Array.IndexOf(_shieldCannons, s) + 1);
         }
+
+        public void CheckHits(int shieldCannonIndex)
+        {
+            Debug.WriteLine("Checking shieldcannon " + shieldCannonIndex);
+            _shieldCannons[shieldCannonIndex].Hit();
+        }
     }
 }

@@ -99,7 +99,7 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            AddShot(1);
+            _vm.NextTurn();
         }
 
         public void AddShot(int posX)
@@ -108,14 +108,15 @@ namespace CockBlock8._1.Game
             if (_goingUp)
             {
                 CockImage.Source = CockUp;
+                CockImage.Margin = new Thickness(_xCoords[posX], 370, 0, 0);
             }
             else
             {
                 CockImage.Source = CockDown;
+                CockImage.Margin = new Thickness(_xCoords[posX], -370, 0, 0);
             }
             CockImage.Width = 20;
             CockImage.Height = 20;
-            CockImage.Margin = new Thickness(_xCoords[posX], 370, 0, 0);
             CockList.Add(CockImage);
             GameGrid.Children.Add(CockImage);
         }
@@ -124,18 +125,43 @@ namespace CockBlock8._1.Game
         {
             if (_goingUp)
             {
-                foreach (Image cock in CockList)
+                for (int i = 0; i < CockList.Count; i++ )
                 {
-                    SetMargin(cock, 0, 0, 0, 5);
+                    if (CockList[i].Margin.Top == -340) //TODO Most magical cookie ever invented
+                    {
+                        RemoveImage(CockList[i]);
+                        _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));
+                        CockList.Remove(CockList[i]);
+                        i--;
+                    }
+                    else
+                    {
+                        SetMargin(CockList[i], 0, 5, 0, 0);
+                    }
                 }
             }
             else
             {
-                foreach (Image cock in CockList)
+                for (int i = 0; i < CockList.Count; i++)
                 {
-                    SetMargin(cock, 0, 5, 0, 0);
+                    if (CockList[i].Margin.Top == 340) //TODO Most magical cookie ever invented
+                    {
+                        RemoveImage(CockList[i]);
+                        _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));
+                        CockList.Remove(CockList[i]);
+                        i--;
+                    }
+                    else
+                    {
+                        SetMargin(CockList[i], 0, -5, 0, 0);
+                    }
                 }
             }
+        }
+
+        private void RemoveImage(Image cock)
+        {
+            GameGrid.Children.Remove(cock);
         }
         private void SetMargin(Image obj, double left, double top, double right, double bottom)
         { obj.Margin = new Thickness(obj.Margin.Left + left, obj.Margin.Top - top, obj.Margin.Right + right, obj.Margin.Bottom + bottom); }
@@ -151,6 +177,11 @@ namespace CockBlock8._1.Game
         public void SwitchGoingUp()
         {
             _goingUp = !_goingUp;
+        }
+
+        public void SetTime(int timePercentage)
+        {
+            // TODO: pas tijdbalk aan, en doe iets
         }
     }
 }
