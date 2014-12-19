@@ -51,7 +51,7 @@ namespace CockBlock8._1
         private void Update(object sender, object e)
         {
             _turnTimer--;
-            ((SingleGame)_currentPage).SetTime((int)(_turnTimer/TIMEPERTURN)*100);
+            ((SingleGame)_currentPage).SetTime((int)(((float)_turnTimer/TIMEPERTURN)*100));
 
             foreach (Player p in _players)
             {

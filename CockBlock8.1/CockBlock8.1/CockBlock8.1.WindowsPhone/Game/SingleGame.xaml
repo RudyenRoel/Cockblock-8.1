@@ -49,8 +49,8 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <Rectangle x:Name="FullTime_Left_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Rectangle x:Name="CurrentTime_Left_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Rectangle x:Name="_FullTime_Left_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle x:Name="_CurrentTime_Left_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Grid>
 
             <StackPanel Grid.Row="2" Grid.Column="1">
@@ -68,8 +68,8 @@
             </StackPanel>
 
             <Grid Grid.Column="2">
-                <Rectangle x:Name="FullTime_Right_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                <Rectangle x:Name="CurrentTime_Right_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Rectangle x:Name="_FullTime_Right_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Rectangle x:Name="_CurrentTime_Right_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </Grid>
 
             <Button Grid.Column="1" x:Name="Start_bn" Content="Start" Click="Start_bn_Click" HorizontalAlignment="Center" />
