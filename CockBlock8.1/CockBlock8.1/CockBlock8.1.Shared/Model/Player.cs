@@ -76,5 +76,16 @@ namespace CockBlock8._1.Model
             Debug.WriteLine("Checking shieldcannon " + shieldCannonIndex);
             _shieldCannons[shieldCannonIndex].Hit();
         }
+
+        internal void Damaged()
+        {
+            _health -= 15;
+            if (_health < 0)
+            {
+                _health = 0;
+            }
+            _vm.HealthChanged(this, _health);
+            //TODO show that health goes down
+        }
     }
 }

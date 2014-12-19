@@ -52,5 +52,10 @@ namespace CockBlock8._1.Game
         {
             throw new NotImplementedException();
         }
+
+        internal void setHealthPlayer1(int health)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
