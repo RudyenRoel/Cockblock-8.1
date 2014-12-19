@@ -64,6 +64,11 @@ namespace CockBlock8._1.Game
             DefaultTimerBarProparties(Colors.Blue, _CurrentTime_Left_rect, _CurrentTime_Right_rect);
             DefaultEnergyProparties(Colors.White, 10, "100", _p1_energy1, _p1_energy2, _p1_energy3, _p2_energy1, _p2_energy2, _p2_energy3);
             DefaultEnergyProparties(Colors.DarkRed, 24, "100", _CurrentHealth1_tx, _CurrentHealth2_tx);
+            FlyoutSettings();
+        }
+        private void FlyoutSettings()
+        {
+            SetFlyoutVisible(false);
         }
         private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
         { DefaultEnergyProparties(color, fontSize, "", textblocks); }
@@ -244,11 +249,43 @@ namespace CockBlock8._1.Game
             Debug.WriteLine("Player" + player + " lost!");
             // if player = 1, player1 lost
             // if player = 2, player2 lost
+            string win = "You win!";
+            string lose = "You lose!";
+            if (player == 1)
+            {
+                _GameOver_tx_p1.Text = lose;
+                _GameOver_tx_p2.Text = win;
+            }
+            else
+            {
+                _GameOver_tx_p1.Text = win;
+                _GameOver_tx_p2.Text = lose;
+            }
+            SetFlyoutVisible(true);
         }
+
         private void Restart()
         {
+            foreach(Image cock in _CockList)
+            {
+                GameGrid.Children.Remove(cock);
+            }
             init();
             _vm.StartSingleGame();
         }
+
+        private void SetFlyoutVisible(bool result)
+        {
+            Visibility vis = Windows.UI.Xaml.Visibility.Collapsed;
+            if (result)
+                vis = Windows.UI.Xaml.Visibility.Visible;
+            this._Flyout_Player_1.Visibility = vis;
+            this._Flyout_Player_2.Visibility = vis;
+        }
+
+        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e) { }
+        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e) { }
+        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e) { }
+        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e) { }
     }
 }

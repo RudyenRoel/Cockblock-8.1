@@ -22,8 +22,10 @@ namespace CockBlock8._1
         private int _amountOfCannons;
         private DispatcherTimer myDispatcherTimer;
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
-        private const int TIMEPERTURN = 3 * 60; // TODO magic cookie: 6 seconds * 60 frames per second
-        private const int TIMEFORSHOOTING = 1 * 60; // TODO magic cookie: 2 seconds * 60 frames per second
+        private const int TIMEPERTURNPHONE = 6 * 60; // TODO magic cookie: 6 seconds * 60 frames per second
+        private const int TIMEFORSHOOTINGPHONE = 2 * 60; // TODO magic cookie: 2 seconds * 60 frames per second
+        private const int TIMEPERTURNTABLET = 5 * 60; // TODO magic cookie: 3 seconds * 60 frames per second
+        private const int TIMEFORSHOOTINGTABLET = 2 * 60; // TODO magic cookie: 1 seconds * 60 frames per second
         private const int NEWROUNDENERGY = 5;
         private const int STARTINGHEALTH = 100;
         private int _turnTimer;
@@ -33,8 +35,12 @@ namespace CockBlock8._1
         {
             Debug.WriteLine(page.GetType().ToString());
             _currentPage = page;
-            _turnTimer = TIMEPERTURN;
-            _shootTimer = TIMEFORSHOOTING;
+            _turnTimer = TIMEPERTURNTABLET;
+            _shootTimer = TIMEFORSHOOTINGTABLET;
+#if WINDOWS_PHONE_APP
+            _turnTimer = TIMEPERTURNPHONE;
+            _shootTimer = TIMEFORSHOOTINGPHONE;
+#endif
         }
 
         public void StartSingleGame()
@@ -47,13 +53,10 @@ namespace CockBlock8._1
 #endif
 
 
-            if (myDispatcherTimer == null)
-            {
                 myDispatcherTimer = new DispatcherTimer();
                 myDispatcherTimer.Interval = new TimeSpan(FRAMERATE); // 16 Milliseconds 
                 myDispatcherTimer.Tick += Update;
                 myDispatcherTimer.Start();
-            }
             _players = new Player[] { new Player(this, 0, _amountOfCannons / 2), new Player(this, 1, _amountOfCannons / 2) };
 
             _players[0].ChangeState();
@@ -83,7 +86,7 @@ namespace CockBlock8._1
             {
                 foreach (ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
                 {
-                    if(sc.ShootingAllowed())
+                    if (sc.ShootingAllowed())
                     {
                         sc.DisableShooting();
                         _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons/2) * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
@@ -96,7 +99,11 @@ namespace CockBlock8._1
             }
             else
             {
-                ((SingleGame)_currentPage).SetTime((int)(((float)_shootTimer / TIMEFORSHOOTING) * 100));
+                int percentage = (int)(((float)_shootTimer / TIMEFORSHOOTINGTABLET) * 100);
+#if WINDOWS_PHONE_APP
+                percentage = (int)(((float)_shootTimer / TIMEFORSHOOTINGPHONE) * 100);
+#endif
+                ((SingleGame)_currentPage).SetTime(percentage);
             }
         }
 
@@ -144,8 +151,12 @@ namespace CockBlock8._1
 
         public void NextTurn()
         {
-            _turnTimer = TIMEPERTURN;
-            _shootTimer = TIMEFORSHOOTING;
+            _turnTimer = TIMEPERTURNTABLET;
+            _shootTimer = TIMEFORSHOOTINGTABLET;
+#if WINDOWS_PHONE_APP
+            _turnTimer = TIMEPERTURNPHONE;
+            _shootTimer = TIMEFORSHOOTINGPHONE;
+#endif
             foreach (Player p in _players)
             {
                 foreach (ShieldCannon sc in p.GetShieldCannons())
@@ -183,10 +194,7 @@ namespace CockBlock8._1
 
         public void CheckHits(int shieldCannonIndex)
         {
-            if (_players[_currentDefender].GetShieldCannons()[shieldCannonIndex].Active())
-            {
-                _players[_currentDefender].CheckHits(shieldCannonIndex);
-            }
+            _players[_currentDefender].CheckHits(shieldCannonIndex);
         }
 
 

@@ -88,7 +88,7 @@ namespace CockBlock8._1
         {
             if (_isCannon)
             {
-                if (_shootAllowed && Energy > 0)
+                if (_shootAllowed)
                 {
                     return _cannonSprite;
                 }
@@ -129,6 +129,10 @@ namespace CockBlock8._1
 
         public void Activate()
         {
+            if (Energy < 3)
+            {
+                _shootAllowed = false;
+            }
             _activated = true;
             if (IsCannon())
             {

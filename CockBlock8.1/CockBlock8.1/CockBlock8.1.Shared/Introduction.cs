@@ -14,6 +14,14 @@ namespace CockBlock8._1
         private static Tuple<string[], List<string[]>> _InformationSinglePage = null;
         private static Tuple<string[], List<string[]>> _InformationMultiPage = null;
         private static string _About = null;
+
+        // public methods
+        public static string About()
+        {
+            if (_About == null)
+            { CreateAbout(); }
+            return _About;
+        }
         public static Tuple<string[], List<string[]>> InstructionPageInformationSingleGame()
         {
             if (_InformationSinglePage == null)
@@ -26,6 +34,8 @@ namespace CockBlock8._1
             { CreateInformationMultiGame(); }
             return _InformationMultiPage;
         }
+
+        // private methods
         private static string SingleGame()
         {
             if (_SingleGameInstructions == null)
@@ -50,12 +60,8 @@ namespace CockBlock8._1
             { CreateMultiGameTopics(); }
             return _MultiGameTopics;
         }
-        public static string About()
-        {
-            if (_About == null)
-            { CreateAbout(); }
-            return _About;
-        }
+
+        // private Creating methods
         private static void CreateSingleGameInstructions()
         {
             _SingleGameInstructions = "";
@@ -70,6 +76,7 @@ namespace CockBlock8._1
         private static void CreateSingleGameTopics()
         {
             List<String[]> topics = new List<string[]>();
+            topics.Add(topic("12345678901234567890123456789012345678901234567890", "123456789012345678901234567890123456789012345678901234567890"));
             topics.Add(topic("Where can i find the 'many asked questions'?", "You found it!"));
             topics.Add(topic("Bullshit", "Bullshit, Bullshit, bla bla bla"));
             topics.Add(topic("Who did this application can to its idea?", "The idea for the application has started at school. More about this, you'll find in the 'about'-page."));
@@ -117,6 +124,8 @@ namespace CockBlock8._1
             List<string[]> item2 = new List<string[]>(MultiGameTopics());
             _InformationMultiPage = CreateInformation(item1, item2);
         }
+
+        // Help private methods
         private static Tuple<string[], List<string[]>> CreateInformation(string[] item1, List<string[]> item2)
         { return new Tuple<string[], List<string[]>>(item1, item2); }
         private static void SLine(string toAdd)
