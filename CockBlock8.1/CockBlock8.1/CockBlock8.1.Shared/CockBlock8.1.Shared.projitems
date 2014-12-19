@@ -33,12 +33,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\CanonDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\CanonUpInactive.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDown.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUpInactive.png" />
   </ItemGroup>
 </Project>

@@ -18,10 +18,13 @@ namespace CockBlock8._1
         private Player _player;
         private bool _shielded { get; set; }
         private bool _activated;
+        private bool _shootAllowed;
 
         private BitmapImage _shieldSprite = new BitmapImage();
         private BitmapImage _shieldActiveSprite = new BitmapImage();
         private BitmapImage _cannonSprite = new BitmapImage();
+        private BitmapImage _shieldInactiveSprite = new BitmapImage();
+        private BitmapImage _cannonInactiveSprite = new BitmapImage();
         public ShieldCannon(bool up, Player p)
         {
             if (up)
@@ -29,12 +32,16 @@ namespace CockBlock8._1
                 _shieldSprite.UriSource = new Uri("ms-appx:Res/ShieldUp.png", UriKind.RelativeOrAbsolute);
                 _shieldActiveSprite.UriSource = new Uri("ms-appx:Res/ShieldActiveUp.png", UriKind.RelativeOrAbsolute);
                 _cannonSprite.UriSource = new Uri("ms-appx:Res/CanonUp.png", UriKind.RelativeOrAbsolute);
+                _shieldInactiveSprite.UriSource = new Uri("ms-appx:Res/ShieldUpInactive.png", UriKind.RelativeOrAbsolute);
+                _cannonInactiveSprite.UriSource = new Uri("ms-appx:Res/CanonUpInactive.png", UriKind.RelativeOrAbsolute);
             }
             else
             {
                 _shieldSprite.UriSource = new Uri("ms-appx:Res/ShieldDown.png", UriKind.RelativeOrAbsolute);
                 _shieldActiveSprite.UriSource = new Uri("ms-appx:Res/ShieldActiveDown.png", UriKind.RelativeOrAbsolute);
                 _cannonSprite.UriSource = new Uri("ms-appx:Res/CanonDown.png", UriKind.RelativeOrAbsolute);
+                _shieldInactiveSprite.UriSource = new Uri("ms-appx:Res/ShieldDownInactive.png", UriKind.RelativeOrAbsolute);
+                _cannonInactiveSprite.UriSource = new Uri("ms-appx:Res/CanonDownInactive.png", UriKind.RelativeOrAbsolute);
             }
             _player = p;
             init();
@@ -42,6 +49,7 @@ namespace CockBlock8._1
 
         private void init()
         {
+            _shootAllowed = true;
             _activated = false;
             _shielded = false;
             _energy = INITIALENERGY;
@@ -50,7 +58,7 @@ namespace CockBlock8._1
 
         public void Update()
         {
-            if (_shielded)
+            if (_shielded && Energy > 0)
             {
                 UseEnergy((double)SHIELDCOSTPERSECOND / 60);
             }
@@ -59,6 +67,10 @@ namespace CockBlock8._1
         public void ReplenishEnergy(double amount)
         {
             Energy += amount;
+            if (Energy > 100)
+            {
+                Energy = 100;
+            }
         }
 
         public void UseEnergy(double amount)
@@ -69,23 +81,38 @@ namespace CockBlock8._1
         public void ChangeState()
         {
             _isCannon = !_isCannon;
+            _shootAllowed = true;
         }
 
         public BitmapImage GetSprite()
         {
             if (_isCannon)
             {
-                return _cannonSprite;
-            }
-            else
-            {
-                if (_shielded)
+                if(_shootAllowed && Energy > 0)
                 {
-                    return _shieldActiveSprite;
+                    return _cannonSprite;
                 }
                 else
                 {
-                    return _shieldSprite;
+                    return _cannonInactiveSprite;
+                }
+            }
+            else
+            {
+                if(Energy > 0)
+                {
+                    if (_shielded)
+                    {
+                        return _shieldActiveSprite;
+                    }
+                    else
+                    {
+                        return _shieldSprite;
+                    }
+                }
+                else
+                {
+                    return _shieldInactiveSprite;
                 }
             }
         }
@@ -95,17 +122,26 @@ namespace CockBlock8._1
             return _isCannon;
         }
 
-        public void Activate(bool shootAllowed)
+        public void DisableShooting()
+        {
+            _shootAllowed = false;
+        }
+
+        public void Activate()
         {
             _activated = true;
-            Energy--;
-            if (IsCannon() && shootAllowed)
+            if (IsCannon())
             {
-                _player.Shoot(this);
+                if (_shootAllowed)
+                {
+                    _player.Shoot(this);
+                    Energy--;
+                }
             }
             else
             {
                 _shielded = true;
+                Energy--;
             }
         }
         public void Deactivate()
@@ -118,10 +154,18 @@ namespace CockBlock8._1
         public void Hit()
         {
             Debug.WriteLine("Checking if shielded");
+            if(Energy <= 0)
+            {
+                _player.Damaged();
+            }
             if (!_shielded)
             {
                 Debug.WriteLine("NOT SHIELDED!");
                 Energy -= DAMAGE;
+                if(Energy <= 0)
+                {
+                    Energy = 0;
+                }
             }
         }
         public bool IsShielded()
@@ -160,5 +204,10 @@ namespace CockBlock8._1
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        public bool ShootingAllowed()
+        {
+            return _shootAllowed;
+        }
     }
 }

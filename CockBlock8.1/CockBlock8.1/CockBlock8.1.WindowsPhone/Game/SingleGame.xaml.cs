@@ -29,11 +29,16 @@ namespace CockBlock8._1.Game
     {
         private int _totalLengthHealthRect = 350; // TODO: magic cookie
         private int _totalLengthTimerRect = 540; // TODO: magic cookie
-        private BitmapImage CockUp = new BitmapImage();
-        private BitmapImage CockDown = new BitmapImage();
-        private List<Image> CockList;
+        private BitmapImage _CockUp = new BitmapImage();
+        private BitmapImage _CockDown = new BitmapImage();
+        private BitmapImage _Cock = new BitmapImage();
+        private List<Image> _CockList;
         private bool _goingUp;
         private int[] _xCoords;
+        private int _maxYCoord;
+        private int _startYCoord;
+        private int _marginChange;
+        private int _distanceToHealth;
         public SingleGame()
         {
             this.InitializeComponent();
@@ -42,13 +47,14 @@ namespace CockBlock8._1.Game
         }
         private void init()
         {
-            _goingUp = true;
-            setHealthPlayer1(80);
-            setHealthPlayer2(90);
+            _goingUp = false;
+            SwitchGoingUp();
+            //setHealthPlayer1(80);
+            //setHealthPlayer2(90);
             _xCoords = new int[] { -240, -20, 200 };
-            CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
-            CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
-            CockList = new List<Image>();
+            _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
+            _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
+            _CockList = new List<Image>();
         }
 
         /// <summary>
@@ -106,64 +112,38 @@ namespace CockBlock8._1.Game
         public void AddShot(int posX)
         {
             Image CockImage = new Image();
-            if (_goingUp)
-            {
-                CockImage.Source = CockUp;
-                CockImage.Margin = new Thickness(_xCoords[posX], -130, 0, 0);
-            }
-            else
-            {
-                CockImage.Source = CockDown;
-                CockImage.Margin = new Thickness(_xCoords[posX], -950, 0, 0);
-            }
+            CockImage.Source = _Cock;
+            CockImage.Margin = new Thickness(_xCoords[posX], _startYCoord, 0, 0);
             CockImage.Width = 20;
             CockImage.Height = 20;
-            CockList.Add(CockImage);
+            _CockList.Add(CockImage);
             GameGrid.Children.Add(CockImage);
         }
 
         public void NextFrame()
         {
-            if (_goingUp)
+            for (int i = 0; i < _CockList.Count; i++)
             {
-                for (int i = 0; i < CockList.Count; i++)
+                int index = Array.IndexOf(_xCoords, ((int)_CockList[i].Margin.Left));
+                if (_vm.ShieldUp(index) && _CockList[i].Margin.Top == _maxYCoord || !_vm.ShieldUp(index) && _CockList[i].Margin.Top == (_maxYCoord - _distanceToHealth))
                 {
-                    if (CockList[i].Margin.Top == -880) //TODO Most magical cookie ever invented
-                    {
-                        RemoveImage(CockList[i]);
-                        _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));
-                        CockList.Remove(CockList[i]);
-                        i--;
-                    }
-                    else
-                    {
-                        SetMargin(CockList[i], 0, 5, 0, 0);
-                    }
+                    _vm.CheckHits(index);
+                    RemoveCock(_CockList[i]);
+                    i--;
                 }
-            }
-            else
-            {
-                for (int i = 0; i < CockList.Count; i++)
+                else
                 {
-                    if (CockList[i].Margin.Top == -200) //TODO Most magical cookie ever invented
-                    {
-                        RemoveImage(CockList[i]);
-                        _vm.CheckHits(Array.IndexOf(_xCoords, ((int)CockList[i].Margin.Left)));
-                        CockList.Remove(CockList[i]);
-                        i--;
-                    }
-                    else
-                    {
-                        SetMargin(CockList[i], 0, -5, 0, 0);
-                    }
+                    SetMargin(_CockList[i], 0, _marginChange, 0, 0);
                 }
             }
         }
 
-        private void RemoveImage(Image cock)
+        private void RemoveCock(Image cock)
         {
             GameGrid.Children.Remove(cock);
+            _CockList.Remove(cock);
         }
+
         private void SetMargin(Image obj, double left, double top, double right, double bottom)
         { obj.Margin = new Thickness(obj.Margin.Left + left, obj.Margin.Top - top, obj.Margin.Right + right, obj.Margin.Bottom + bottom); }
 
@@ -177,14 +157,31 @@ namespace CockBlock8._1.Game
 
         public void SwitchGoingUp()
         {
+            // TODO Magic cookie mystery paradise
             _goingUp = !_goingUp;
+            if (_goingUp)
+            {
+                _maxYCoord = -880;
+                _marginChange = 5;
+                _startYCoord = -130;
+                _distanceToHealth = 170;
+                _Cock = _CockUp;
+            }
+            else
+            {
+                _maxYCoord = -200;
+                _marginChange = -5;
+                _startYCoord = -950;
+                _distanceToHealth = -170;
+                _Cock = _CockDown;
+            }
         }
 
         public void SetTime(int timePercentage)
         {
-            int currentLenth = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
-            _CurrentTime_Left_rect.Height = currentLenth;
-            _CurrentTime_Right_rect.Height = currentLenth;
+            int currentLength = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
+            _CurrentTime_Left_rect.Height = currentLength;
+            _CurrentTime_Right_rect.Height = currentLength;
         }
     }
 }

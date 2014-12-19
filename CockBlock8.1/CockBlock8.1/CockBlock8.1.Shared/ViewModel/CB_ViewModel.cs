@@ -13,22 +13,26 @@ namespace CockBlock8._1
     public class CB_ViewModel
     {
         private CB_Page _currentPage;
-        private Player _currentPlayer;
+        private int _currentShooter;
+        private int _currentDefender;
         private Player[] _players;
         private string[] _shieldCannonNames = new string[] { "ShieldCannon1", "ShieldCannon2", "ShieldCannon3", "ShieldCannon4", "ShieldCannon5", "ShieldCannon6" };
         private const int AMOUNTOFCANNONS = 6; // TODO Settings file
         private DispatcherTimer myDispatcherTimer;
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
-        private const int TIMEPERTURN = 10 * 60; // TODO magic cookie: 10 seconds time 60 frames per second
-        private const int TIMEFORSHOOTING = 7 * 60; // TODO magic cookie: 10 seconds time 60 frames per second
+        private const int TIMEPERTURN = 6 * 60; // TODO magic cookie: 10 seconds * 60 frames per second
+        private const int TIMEFORSHOOTING = 2 * 60; // TODO magic cookie: 7 seconds * 60 frames per second
+        private const int NEWROUNDENERGY = 5;
+        private const int STARTINGHEALTH = 100;
         private int _turnTimer;
-        private bool _shootAllowed = true;
+        private int _shootTimer;
 
         public CB_ViewModel(CB_Page page)
         {
+            Debug.WriteLine(page.GetType().ToString());
             _currentPage = page;
             _turnTimer = TIMEPERTURN;
-            Debug.WriteLine(page.GetType().ToString());
+            _shootTimer = TIMEFORSHOOTING;
         }
 
         public void StartSingleGame()
@@ -42,31 +46,44 @@ namespace CockBlock8._1
             }
             _players = new Player[] { new Player(this, 0, AMOUNTOFCANNONS / 2), new Player(this, 1, AMOUNTOFCANNONS / 2) };
 
-            _players[1].ChangeState();
+            _players[0].ChangeState();
+            SetImages(_players[0], 0);
+            _players[0].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
-            _currentPlayer = _players[0];
-            BitmapImage testBullet = new BitmapImage();
-            testBullet.UriSource = new Uri("ms-appx:Res/Shield.png", UriKind.RelativeOrAbsolute);
+            _players[1].ChangeState();
+            SetImages(_players[1], 1);
+            _currentDefender = 0;
+            _currentShooter = 1;
+            ((SingleGame)_currentPage).setHealthPlayer1(STARTINGHEALTH);
+            ((SingleGame)_currentPage).setHealthPlayer2(STARTINGHEALTH);
         }
 
         private void Update(object sender, object e)
         {
             _turnTimer--;
-            ((SingleGame)_currentPage).SetTime((int)(((float)_turnTimer/TIMEFORSHOOTING)*100));
+            _shootTimer--;
 
             foreach (Player p in _players)
             {
                 p.Update();
             }
             ((SingleGame)_currentPage).NextFrame(); 
-            if(_turnTimer <= TIMEPERTURN - TIMEFORSHOOTING)
+            if(_shootTimer <= 0)
             {
-                _shootAllowed = false;
+                foreach(ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
+                {
+                    sc.DisableShooting();
+                    _currentPage.SetImageSource(_shieldCannonNames[3*(_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
+                }
                 if (_turnTimer <= 0)
                 {
                     NextTurn();
                 }
+            }
+            else
+            {
+                ((SingleGame)_currentPage).SetTime((int)(((float)_shootTimer / TIMEFORSHOOTING) * 100));
             }
         }
 
@@ -82,12 +99,12 @@ namespace CockBlock8._1
         public void ShieldCannonPressed(int playerIndex, int shieldCannonIndex)
         {
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
-            if (cannon.Energy > 0 && !cannon.Active() && _shootAllowed)
+            if (cannon.Energy > 0 && !cannon.Active())
             {
                 Debug.WriteLine("ACTIVATE");
-                cannon.Activate(_shootAllowed);
+                cannon.Activate();
                 _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + shieldCannonIndex], cannon.GetSprite());
-                if (cannon.IsCannon() && _shootAllowed)
+                if (cannon.IsCannon() && cannon.ShootingAllowed())
                 {
                     ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
                 }
@@ -117,19 +134,21 @@ namespace CockBlock8._1
         public void NextTurn()
         {
             _turnTimer = TIMEPERTURN;
-            _shootAllowed = true;
+            _shootTimer = TIMEFORSHOOTING;
+            foreach (Player p in _players)
+            {
+                foreach (ShieldCannon sc in p.GetShieldCannons())
+                {
+                    sc.ReplenishEnergy(NEWROUNDENERGY);
+                }
+            }
             _players[0].ChangeState();
             _players[1].ChangeState();
             SetImages(_players[0], 0);
             SetImages(_players[1], 1);
-            if(_currentPlayer == _players[0])
-            {
-                _currentPlayer = _players[1];
-            }
-            else
-            {
-                _currentPlayer = _players[0];
-            }
+            int temp = _currentDefender;
+            _currentDefender = _currentShooter;
+            _currentShooter = temp;
             ((SingleGame)_currentPage).SwitchGoingUp();
         }
 
@@ -137,20 +156,42 @@ namespace CockBlock8._1
         {
             // TODO Make neat, make events handle properly
             ((SingleGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, cannon, energy);
+            if(energy <= 0)
+            {
+                int playerIndex = Array.IndexOf(_players, p);
+                _currentPage.SetImageSource(_shieldCannonNames[3 * playerIndex + (cannon-1)], _players[playerIndex].GetShieldCannons()[cannon-1].GetSprite());
+            }
         }
 
         internal void ShootCock(Player p, int cannon)
         {
             int x = Array.IndexOf(_players, p) + 1;
             int y = cannon + 1;
-            new Cock(x, y);
+            //new Cock(x, y); // TODO Remove Cock
         }
 
         public void CheckHits(int shieldCannonIndex)
         {
             Debug.WriteLine("Checking player ");
-            _currentPlayer.CheckHits(shieldCannonIndex);
+            _players[_currentDefender].CheckHits(shieldCannonIndex);
         }
 
+
+        internal void HealthChanged(Player p, int health)
+        {
+            if(Array.IndexOf(_players, p) == 0)
+            {
+                ((SingleGame)_currentPage).setHealthPlayer1(health);
+            }
+            else
+            {
+                ((SingleGame)_currentPage).setHealthPlayer2(health);
+            }
+        }
+
+        internal bool ShieldUp(int shieldCannonIndex)
+        {
+            return _players[_currentDefender].GetShieldCannons()[shieldCannonIndex].Energy > 0;
+        }
     }
 }
