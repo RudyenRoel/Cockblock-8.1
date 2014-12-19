@@ -14,10 +14,10 @@
             <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="About" FontSize="72"/>
+            <TextBlock x:Name="Title_tx" Text="[Title]" />
         </Grid>
         <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBlock x:Name="About_tx" Text="text, text more text" FontSize="18"/>
+            <TextBlock x:Name="About_tx" Text="[text]" />
         </Grid>
     </Grid>
 </Page>

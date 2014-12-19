@@ -205,5 +205,15 @@ namespace CockBlock8._1.Game
             // if player = 1, player1 lost
             // if player = 2, player2 lost
         }
+
+        internal void SetTime(int p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void setHealthPlayer1(int health)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

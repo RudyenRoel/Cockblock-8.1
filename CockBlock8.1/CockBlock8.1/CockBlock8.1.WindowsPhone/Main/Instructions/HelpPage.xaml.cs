@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CockBlock8._1.Common;
+using CockBlock8._1.View;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,17 +23,41 @@ namespace CockBlock8._1.Main.Instructions
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class HelpPageMultiGame : Page
+    public sealed partial class HelpPage : CB_Page
     {
-        public HelpPageMultiGame()
+        private int _TitleFontSize = 72;
+        private int _SubTitleFontSize = 32;
+        private int _DescriptionFontSize = 18;
+        private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        public HelpPage()
         {
             this.InitializeComponent();
+            this.navigationHelper = new NavigationHelper(this);
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
             Init();
         }
+
         private void Init()
         {
-            foreach (string[] topic in Introduction.MultiGameTopics())
-            { AddTopic(topic[0], topic[1]); }
+            DefaultTextBlockProparties(_Title_tx, _F_A_Q_tx);
+            _Title_tx.FontSize = _TitleFontSize;
+            _F_A_Q_tx.FontSize = _SubTitleFontSize;
+            _Title_tx.Text = "Help";
+            _F_A_Q_tx.Text = "Frequently Asked Questions";
+            _F_A_Q_tx.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+        }
+        private void DefaultTextBlockProparties(params TextBlock[] textblocks)
+        {
+            foreach (TextBlock tb in textblocks)
+            {
+                tb.Text = "[text]";
+                tb.FontSize = _DescriptionFontSize;
+                tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
         }
         private void AddTopic(string topic, string description)
         {
@@ -70,6 +97,14 @@ namespace CockBlock8._1.Main.Instructions
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            List<string[]> instruction = (e.Parameter as List<string[]>);
+            foreach (string[] topic in instruction)
+            { AddTopic(topic[0], topic[1]); }
         }
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        { throw new NotImplementedException(); }
+
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        { throw new NotImplementedException(); }
     }
 }

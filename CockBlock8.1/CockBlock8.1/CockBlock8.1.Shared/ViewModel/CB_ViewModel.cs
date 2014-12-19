@@ -16,7 +16,7 @@ namespace CockBlock8._1
         private int _currentShooter;
         private int _currentDefender;
         private Player[] _players;
-        private string[] _shieldCannonNames = new string[] { "ShieldCannon1", "ShieldCannon2", "ShieldCannon3", "ShieldCannon4", "ShieldCannon5", "ShieldCannon6" };
+        private string[] _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6" };
         private const int AMOUNTOFCANNONSPHONE = 6; // TODO Settings file
         private const int AMOUNTOFCANNONSTABLET = 10; // TODO Settings file
         private DispatcherTimer myDispatcherTimer;

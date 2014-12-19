@@ -18,9 +18,9 @@
         <Grid Grid.Row="0">
             <Button x:Name="Back" Content="Back (Icon)" FontSize="14" Click="Back_bn_Click" VerticalAlignment="Top"/>
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ShieldCanon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCanon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom"/>
-                <Image x:Name="ShieldCanon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom"/>
+                <Image x:Name="_ShieldCannon1" Margin="25,0,0,0"/>
+                <Image x:Name="_ShieldCannon2" Margin="25,0,25,0"/>
+                <Image x:Name="_ShieldCannon3" Margin="0,0,25,0"/>
             </StackPanel>
         </Grid>
 
@@ -30,13 +30,13 @@
                     <Setter x:Name="HealthStyle2" Property="Margin" Value="50,0,50,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="HealthShield1" Text="100"/>
-            <TextBlock x:Name="HealthShield2" Text="100"/>
-            <TextBlock x:Name="HealthShield3" Text="100"/>
+            <TextBlock x:Name="_HealthShieldCannon1"/>
+            <TextBlock x:Name="_HealthShieldCannon2"/>
+            <TextBlock x:Name="_HealthShieldCannon3"/>
         </StackPanel>
-        <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Rectangle Fill="#FFF4F4F5" Height="25" Margin="25,0,0,0" Width="350"/>
-            <Rectangle Fill="#FFFF6060" Height="25" Margin="37.5,0,165,0" Width="250"/>
+        <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0">
+            <Rectangle x:Name="_totalHealthBar"/>
+            <Rectangle x:Name="_currentHealthBar"/>
         </Grid>
     </Grid>
 </src:CB_Page>

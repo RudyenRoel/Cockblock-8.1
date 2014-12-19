@@ -46,7 +46,7 @@ namespace CockBlock8._1
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private void Instruction_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(InstructionsMultiGame), e); }
+        { this.Frame.Navigate(typeof(Instructions), Introduction.InstructionPageInformationMultiGame()); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
         { this.SearchGame_tx.Text = "Search for existing game"; }
         private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
