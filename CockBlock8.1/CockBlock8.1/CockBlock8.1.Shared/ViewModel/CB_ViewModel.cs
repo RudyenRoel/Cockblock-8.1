@@ -47,16 +47,16 @@ namespace CockBlock8._1
         {
             _amountOfCannons = AMOUNTOFCANNONSTABLET;
             _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6", "_ShieldCannon7", "_ShieldCannon8", "_ShieldCannon9", "_ShieldCannon10" };
-#if WINDOWS_PHONE_APP 
-            _amountOfCannons = AMOUNTOFCANNONSPHONE; 
-            _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6"};
+#if WINDOWS_PHONE_APP
+            _amountOfCannons = AMOUNTOFCANNONSPHONE;
+            _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6" };
 #endif
 
-
-                myDispatcherTimer = new DispatcherTimer();
-                myDispatcherTimer.Interval = new TimeSpan(FRAMERATE); // 16 Milliseconds 
-                myDispatcherTimer.Tick += Update;
-                myDispatcherTimer.Start();
+            StopTimer();
+            myDispatcherTimer = new DispatcherTimer();
+            myDispatcherTimer.Interval = new TimeSpan(FRAMERATE); // 16 Milliseconds 
+            myDispatcherTimer.Tick += Update;
+            myDispatcherTimer.Start();
             _players = new Player[] { new Player(this, 0, _amountOfCannons / 2), new Player(this, 1, _amountOfCannons / 2) };
 
             _players[0].ChangeState();
@@ -89,8 +89,8 @@ namespace CockBlock8._1
                     if (sc.ShootingAllowed())
                     {
                         sc.DisableShooting();
-                        _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons/2) * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
-                    } 
+                        _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
+                    }
                 }
                 if (_turnTimer <= 0)
                 {
@@ -111,7 +111,7 @@ namespace CockBlock8._1
         {
             for (int i = 0; i < (_amountOfCannons / 2); i++)
             {
-                _currentPage.SetImageSource(_shieldCannonNames[i + ((_amountOfCannons/2) * playerNumber)], player.GetShieldCannons()[i].GetSprite());
+                _currentPage.SetImageSource(_shieldCannonNames[i + ((_amountOfCannons / 2) * playerNumber)], player.GetShieldCannons()[i].GetSprite());
             }
         }
 
@@ -129,7 +129,7 @@ namespace CockBlock8._1
                 }
                 else
                 {
-                    _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons/2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
+                    _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
                 }
             }
             else
@@ -145,7 +145,7 @@ namespace CockBlock8._1
             cannon.Deactivate();
             if (!cannon.IsCannon())
             {
-                _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons/2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
+                _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
             }
         }
 
@@ -181,7 +181,7 @@ namespace CockBlock8._1
             if (energy <= 0)
             {
                 int playerIndex = Array.IndexOf(_players, p);
-                _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons/2) * playerIndex + (cannon - 1)], _players[playerIndex].GetShieldCannons()[cannon - 1].GetSprite());
+                _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + (cannon - 1)], _players[playerIndex].GetShieldCannons()[cannon - 1].GetSprite());
             }
         }
 
@@ -218,7 +218,15 @@ namespace CockBlock8._1
         internal void ILost(Player player)
         {
             ((SingleGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1);
-            myDispatcherTimer.Stop();
+            StopTimer();
+        }
+
+        public void StopTimer()
+        {
+            if (myDispatcherTimer != null)
+            {
+                myDispatcherTimer.Stop();
+            }
         }
     }
 }
