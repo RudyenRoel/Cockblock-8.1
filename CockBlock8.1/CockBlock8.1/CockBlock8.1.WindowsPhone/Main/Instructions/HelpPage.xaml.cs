@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,9 +26,10 @@ namespace CockBlock8._1.Main.Instructions
     /// </summary>
     public sealed partial class HelpPage : CB_Page
     {
-        private int _TitleFontSize = 72;
-        private int _SubTitleFontSize = 32;
-        private int _DescriptionFontSize = 18;
+        private int _TitleFontSize = 72; // TODO: magic cookie
+        private int _SubTitleFontSize = 32; // TODO: magic cookie
+        private int _TopicFontSize = 24; // TODO: magic cookie
+        private int _DescriptionFontSize = 18; // TODO: magic cookie
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         public HelpPage()
@@ -61,12 +63,11 @@ namespace CockBlock8._1.Main.Instructions
         }
         private void AddTopic(string topic, string description)
         {
-            int topicFontSize = 24;
-            int descriptionFontSize = 18;
-            int topicLength = 35;
-            int rowLength = 50;
-            int topicFontSizef = (int)(topicFontSize * 1.5);
-            int descriptionFontSizef = (int)(descriptionFontSize * 1.5);
+            int topicLength = 32;
+            int rowLength = 39;
+            double factor = 1.3;
+            int topicFontSizef = (int)(_TopicFontSize * factor);
+            int descriptionFontSizef = (int)(_DescriptionFontSize * factor);
             int topicLines = (topic.Length / topicLength);
             int descriptionLines = (description.Length / rowLength);
 
@@ -74,20 +75,28 @@ namespace CockBlock8._1.Main.Instructions
 
             // Calculation of the total stackpanel size
             sp.Height = topicFontSizef + (topicFontSizef * topicLines) + descriptionFontSizef + (descriptionFontSizef * descriptionLines);
-            //sp.Background = new SolidColorBrush(Colors.DarkGray);
-            //sp.Margin = new Thickness(0, 10, 0, 10);
+            sp.Background = new SolidColorBrush(Colors.DarkRed);
+            sp.Margin = new Thickness(0, 5, 0, 5);
+
 
             TextBlock topic_tx = new TextBlock();
-            topic_tx.FontSize = topicFontSize;
+            topic_tx.FontSize = _TopicFontSize;
             topic_tx.TextWrapping = TextWrapping.Wrap;
             topic_tx.Text = topic;
+
             TextBlock description_tx = new TextBlock();
-            description_tx.FontSize = descriptionFontSize;
+            description_tx.FontSize = _DescriptionFontSize;
             description_tx.TextWrapping = TextWrapping.Wrap;
             description_tx.Text = description;
             sp.Children.Add(topic_tx);
             sp.Children.Add(description_tx);
-            this.Help_panel.Children.Add(sp);
+
+            StackPanel sp2 = new StackPanel();
+            sp2.Background = new SolidColorBrush(Colors.DarkSalmon);
+            sp2.Margin = new Thickness(0, 10, 0, 0);
+            sp2.Children.Add(sp);
+
+            this.Help_panel.Children.Add(sp2);
         }
 
         /// <summary>
