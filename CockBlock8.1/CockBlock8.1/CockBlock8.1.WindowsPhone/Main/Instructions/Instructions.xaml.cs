@@ -2,6 +2,7 @@
 using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,24 +25,24 @@ namespace CockBlock8._1.Main.Instructions
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class InstructionsSingleGame : CB_Page
+    public sealed partial class Instructions : CB_Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private List<string[]> _HelpPageInformation = null;
 
-        public InstructionsSingleGame()
+        public Instructions()
         {
             this.InitializeComponent();
 
             this.navigationHelper = new NavigationHelper(this);
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-            Init();
         }
         private void Init()
         {
             this._Information_tx.TextWrapping = TextWrapping.Wrap;
-            this._Information_tx.Text = Introduction.SingleGame();
         }
 
         public NavigationHelper NavigationHelper
@@ -53,7 +54,6 @@ namespace CockBlock8._1.Main.Instructions
         {
             get { return this.defaultViewModel; }
         }
-
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
         }
@@ -67,6 +67,13 @@ namespace CockBlock8._1.Main.Instructions
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+            Tuple<string[], List<string[]>> information = (e.Parameter as Tuple<string[], List<string[]>>);
+            string[] instructions = information.Item1;
+            this._SubTitle.Text = instructions[0];
+            this._Title.Text = instructions[1];
+            this._Information_tx.Text = instructions[2];
+            this._HelpPageInformation = information.Item2;
+            Init();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -77,7 +84,7 @@ namespace CockBlock8._1.Main.Instructions
         #endregion
         private void Help_bn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(HelpPageSingleGame), e);
+            this.Frame.Navigate(typeof(HelpPage), _HelpPageInformation);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -29,6 +31,8 @@ namespace CockBlock8._1.Game
     {
         private int _totalLengthHealthRect = 350; // TODO: magic cookie
         private int _totalLengthTimerRect = 540; // TODO: magic cookie
+        private string _timerColor;
+        private string _healthColor;
         private BitmapImage CockUp = new BitmapImage();
         private BitmapImage CockDown = new BitmapImage();
         private List<Image> CockList;
@@ -49,6 +53,60 @@ namespace CockBlock8._1.Game
             CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             CockList = new List<Image>();
+            DefaultShieldCannonImageProparties(_ShieldCannon1, _ShieldCannon2, _ShieldCannon3, _ShieldCannon4, _ShieldCannon5, _ShieldCannon6);
+            DefaultHealthBarProparties(Colors.White, _TotalHealth1_rect, _TotalHealth2_rect);
+            DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
+            DefaultTimerBarProparties(Colors.White, _totalLengthTimerRect, _FullTime_Left_rect, _FullTime_Right_rect);
+            DefaultTimerBarProparties(Colors.Blue, _CurrentTime_Left_rect, _CurrentTime_Right_rect);
+            DefaultEnergyProparties(Colors.White, 10, _p1_energy1, _p1_energy2, _p1_energy3, _p2_energy1, _p2_energy2, _p2_energy3);
+            DefaultEnergyProparties(Colors.DarkRed, 24, "100", _CurrentHealth1_tx, _CurrentHealth2_tx);
+        }
+        private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
+        { DefaultEnergyProparties(color, fontSize, "", textblocks); }
+        private void DefaultEnergyProparties(Color color, int fontSize, string text, params TextBlock[] textblocks)
+        {
+            foreach (TextBlock tb in textblocks)
+            {
+                tb.Text = text;
+                tb.FontSize = fontSize;
+                SetTextboxColor(color, tb);
+            }
+        }
+        private void DefaultHealthBarProparties(Color color, params Rectangle[] rects)
+        {
+            foreach (Rectangle rect in rects)
+            {
+                SetRectangleColor(color, rect);
+                rect.Height = 25;
+                rect.Stroke = new SolidColorBrush(Colors.Black);
+                rect.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+            }
+        }
+        private void DefaultTimerBarProparties(Color color, params Rectangle[] rects)
+        { this.DefaultTimerBarProparties(color, -1, rects); }
+        private void DefaultTimerBarProparties(Color color, int height, params Rectangle[] rects)
+        {
+            foreach (Rectangle rect in rects)
+            {
+                SetRectangleColor(color, rect);
+                rect.Width = 15;
+                if (height != -1)
+                    rect.Height = height;
+            }
+        }
+        private void SetRectangleColor(Color color, Rectangle rect) { rect.Fill = new SolidColorBrush(color); }
+        private void SetTextboxColor(Color color, TextBlock tb) { tb.Foreground = new SolidColorBrush(color); }
+        private void DefaultShieldCannonImageProparties(params Image[] images)
+        {
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].Width = 100;
+                images[i].Height = 100;
+                if (i < images.Length / 2)
+                    images[i].VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
+                else
+                    images[i].VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Bottom;
+            }
         }
 
         /// <summary>

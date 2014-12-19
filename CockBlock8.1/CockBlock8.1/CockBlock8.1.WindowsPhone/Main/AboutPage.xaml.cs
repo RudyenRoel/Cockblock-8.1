@@ -22,11 +22,25 @@ namespace CockBlock8._1.Main
     /// </summary>
     public sealed partial class AboutPage : Page
     {
+        private int TitleFontSize = 72;
+        private int AboutFontSize = 18;
         public AboutPage()
         {
             this.InitializeComponent();
-            this.About_tx.TextWrapping = TextWrapping.Wrap;
+            DefaultTextBlockProparties(this.Title_tx, this.About_tx);
+            this.Title_tx.FontSize = TitleFontSize;
+            this.Title_tx.Text = "About";
             this.About_tx.Text = Introduction.About();
+        }
+        private void DefaultTextBlockProparties(params TextBlock[] textblocks)
+        {
+            foreach (TextBlock tb in textblocks)
+            {
+                tb.TextWrapping = TextWrapping.Wrap;
+                tb.FontSize = AboutFontSize;
+                tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

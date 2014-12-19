@@ -46,7 +46,7 @@ namespace CockBlock8._1
         { this.Frame.Navigate(typeof(MainPage), e); }
 
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(InstructionsSingleGame), e); }
+        { this.Frame.Navigate(typeof(Instructions), Introduction.InstructionPageInformationSingleGame()); }
 
     }
 }

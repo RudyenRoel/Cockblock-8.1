@@ -6,30 +6,45 @@ namespace CockBlock8._1
 {
     public class Introduction
     {
+        private static string _Instructions = "Instructions";
         private static string _SingleGameInstructions = null;
         private static string _MultiGameInstructions = null;
         private static List<string[]> _SingleGameTopics = null;
         private static List<string[]> _MultiGameTopics = null;
+        private static Tuple<string[], List<string[]>> _InformationSinglePage = null;
+        private static Tuple<string[], List<string[]>> _InformationMultiPage = null;
         private static string _About = null;
-        public static string SingleGame()
+        public static Tuple<string[], List<string[]>> InstructionPageInformationSingleGame()
+        {
+            if (_InformationSinglePage == null)
+            { CreateInformationSingleGame(); }
+            return _InformationSinglePage;
+        }
+        public static Tuple<string[], List<string[]>> InstructionPageInformationMultiGame()
+        {
+            if (_InformationMultiPage == null)
+            { CreateInformationMultiGame(); }
+            return _InformationMultiPage;
+        }
+        private static string SingleGame()
         {
             if (_SingleGameInstructions == null)
             { CreateSingleGameInstructions(); }
             return _SingleGameInstructions;
         }
-        public static string MultiGame()
+        private static string MultiGame()
         {
             if (_MultiGameInstructions == null)
             { CreateMultiGameInstructions(); }
             return _MultiGameInstructions;
         }
-        public static List<string[]> SingleGameTopics()
+        private static List<string[]> SingleGameTopics()
         {
             if (_SingleGameTopics == null)
             { CreateSingleGameTopics(); }
             return _SingleGameTopics;
         }
-        public static List<string[]> MultiGameTopics()
+        private static List<string[]> MultiGameTopics()
         {
             if (_MultiGameTopics == null)
             { CreateMultiGameTopics(); }
@@ -90,6 +105,20 @@ namespace CockBlock8._1
             ALine(" - ");
             ALine("We are greatfull to give you te oppartunity to play our game.");
         }
+        private static void CreateInformationSingleGame()
+        {
+            string[] item1 = new string[] { _Instructions, "Single Game", SingleGame() };
+            List<string[]> item2 = new List<string[]>(SingleGameTopics());
+            _InformationSinglePage = CreateInformation(item1, item2);
+        }
+        private static void CreateInformationMultiGame()
+        {
+            string[] item1 = new string[] { _Instructions, "Multi Game", MultiGame() };
+            List<string[]> item2 = new List<string[]>(MultiGameTopics());
+            _InformationMultiPage = CreateInformation(item1, item2);
+        }
+        private static Tuple<string[], List<string[]>> CreateInformation(string[] item1, List<string[]> item2)
+        { return new Tuple<string[], List<string[]>>(item1, item2); }
         private static void SLine(string toAdd)
         { _SingleGameInstructions += toAdd + "\n"; }
         private static void MLine(string toAdd)

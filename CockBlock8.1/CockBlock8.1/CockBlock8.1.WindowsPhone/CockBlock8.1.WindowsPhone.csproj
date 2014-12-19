@@ -93,17 +93,11 @@
     <Compile Include="Main\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\Instructions\HelpPageMultiGame.xaml.cs">
-      <DependentUpon>HelpPageMultiGame.xaml</DependentUpon>
+    <Compile Include="Main\Instructions\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\Instructions\HelpPageSingleGame.xaml.cs">
-      <DependentUpon>HelpPageSingleGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Main\Instructions\InstructionsMultiGame.xaml.cs">
-      <DependentUpon>InstructionsMultiGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Main\Instructions\InstructionsSingleGame.xaml.cs">
-      <DependentUpon>InstructionsSingleGame.xaml</DependentUpon>
+    <Compile Include="Main\Instructions\Instructions.xaml.cs">
+      <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -142,19 +136,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Main\Instructions\HelpPageMultiGame.xaml">
+    <Page Include="Main\Instructions\HelpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Main\Instructions\HelpPageSingleGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main\Instructions\InstructionsMultiGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main\Instructions\InstructionsSingleGame.xaml">
+    <Page Include="Main\Instructions\Instructions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

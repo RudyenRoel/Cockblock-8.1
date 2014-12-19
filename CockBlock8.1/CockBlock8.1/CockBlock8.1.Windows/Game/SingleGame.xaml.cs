@@ -47,5 +47,10 @@ namespace CockBlock8._1.Game
         {
             throw new NotImplementedException();
         }
+
+        internal void SetTime(int p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

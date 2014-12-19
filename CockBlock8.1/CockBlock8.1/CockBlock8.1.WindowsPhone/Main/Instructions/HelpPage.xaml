@@ -1,5 +1,6 @@
-﻿<Page
-    x:Class="CockBlock8._1.Main.Instructions.HelpPageSingleGame"
+﻿<src:CB_Page
+    xmlns:src="using:CockBlock8._1.View"
+    x:Class="CockBlock8._1.Main.Instructions.HelpPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CockBlock8._1.Main.Instructions"
@@ -14,18 +15,18 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="Title_tx" Text="Help" FontSize="72"/>
+        <Grid Grid.Row="0">
+            <TextBlock x:Name="_Title_tx" Text="[Title]"/>
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBlock x:Name="Help_tx" Text="Much ask" FontSize="32"/>
+        <Grid Grid.Row="1">
+            <TextBlock x:Name="_F_A_Q_tx" Text="[text]"/>
         </Grid>
-        <Grid Grid.Row="2" >
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="Help_panel" ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,0">
+            <ScrollViewer Width="400" Height="450" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="Help_panel">
 
-            </StackPanel>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
     </Grid>
-</Page>
+</src:CB_Page>
