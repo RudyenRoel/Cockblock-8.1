@@ -251,6 +251,18 @@ namespace CockBlock8._1.Game
             Debug.WriteLine("Player" + player + " lost!");
             // if player = 1, player1 lost
             // if player = 2, player2 lost
+            string win = "You win!";
+            string lose = "You lose!";
+            if (player == 1)
+            {
+                _GameOver_tx_p1.Text = lose;
+                _GameOver_tx_p2.Text = win;
+            }
+            else
+            {
+                _GameOver_tx_p1.Text = win;
+                _GameOver_tx_p2.Text = lose;
+            }
             SetFlyoutVisible(true);
         }
         private void SetFlyoutVisible(bool result)
@@ -262,24 +274,9 @@ namespace CockBlock8._1.Game
             this._Flyout_Player_2.Visibility = vis;
         }
 
-        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e) { }
+        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e) { }
+        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e) { }
+        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e) { }
     }
 }
