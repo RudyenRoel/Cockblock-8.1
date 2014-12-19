@@ -31,6 +31,9 @@ namespace CockBlock8._1
     /// 
     public sealed partial class MainPage : CB_Page
     {
+        private string _ApplicationName = "CockBlock 8.1";
+        private int _TitleFontSize = 48;
+        private int _ButtonFontSize = 20;
         private int _AmountOfRectangles = 7 * 28;
         public MainPage()
         {
@@ -41,15 +44,29 @@ namespace CockBlock8._1
         {
             this.NavigationCacheMode = NavigationCacheMode.Required;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            this.Title_tx.Text = _ApplicationName;
+            this.Title_tx.FontSize = _TitleFontSize;
+            this.Title_tx.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+            this.Title_tx.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            DefaultButtonProperties(About_bn, SingleGame_bn, MultiGame_bn, Exit_bn);
             InitRectangles();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            if(Frame.CanGoBack)
+            if (Frame.CanGoBack)
             {
                 Frame.GoBack();
             }
             e.Handled = true;
+        }
+        private void DefaultButtonProperties(params Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                button.FontSize = _ButtonFontSize;
+                button.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                button.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
         }
         private void InitRectangles()
         {
@@ -74,7 +91,7 @@ namespace CockBlock8._1
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Frame.BackStack.Clear() ;
+            Frame.BackStack.Clear();
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are

@@ -22,24 +22,23 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="Title_lb" Text="CockBlock 8.1"  FontSize="48"/>
+        <Grid Grid.Row="0">
+            <TextBlock x:Name="Title_tx" Text="[Title]"/>
         </Grid>
-        <Grid x:Name="InstructionsQuick" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="SingleGame_bn" Content="Single Game" FontSize="24" Click="Single_Game_bn_Click"/>
+        <Grid Grid.Row="1">
+            <Button x:Name="SingleGame_bn" Content="Single Game" Click="Single_Game_bn_Click"/>
         </Grid>
-        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="MultiGame_bn" Content="Multi Game" FontSize="24" Click="Multi_Game_bn_Click"/>
+        <Grid Grid.Row="2">
+            <Button x:Name="MultiGame_bn" Content="Multi Game" Click="Multi_Game_bn_Click"/>
         </Grid>
-        <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="About_bn" Content="About" FontSize="24" Click="About_bn_Click"/>
+        <Grid Grid.Row="3">
+            <Button x:Name="About_bn" Content="About" Click="About_bn_Click"/>
         </Grid>
-        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Exit_bn" Content="Exit" FontSize="24" Click="Exit_bn_Click"/>
+        <Grid Grid.Row="4">
+            <Button x:Name="Exit_bn" Content="Exit" Click="Exit_bn_Click"/>
         </Grid>
         <!-- TODO: Remove onderstanding lines -->
         <Grid Grid.Row="5" >
-            <Button x:Name="RectangleItems_bn" Content="Remove Rectangle" FontSize="12" BorderThickness="0" Click="RemoveButton_Click" HorizontalAlignment="Center"/>
 
             <ItemsControl x:Name="RectangleItems_IC" Grid.Row="1">
                 <ItemsControl.ItemContainerTransitions>
@@ -61,6 +60,7 @@
                 <ItemsControl.Items>
                 </ItemsControl.Items>
             </ItemsControl>
+            <Button x:Name="RectangleItems_bn" Content="Remove Rectangle" FontSize="12" BorderThickness="0" Click="RemoveButton_Click" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </src:CB_Page>
