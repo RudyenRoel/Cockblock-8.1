@@ -29,6 +29,9 @@ namespace CockBlock8._1.Game
     /// </summary>
     public sealed partial class SingleGame : CB_Page
     {
+        private int _playerWantToReplay = 0; // if 1 : 1 player wants to restart, if 2: 2 players want to restart, if 1+5 bove player have chosen but no replay, if 2+5 = replay
+        private bool _onePlayerChoos = false;
+        private int _playerIndexFirstChoice = 0; // if 1: player 1, if 2: player 2
         private int _totalLengthHealthRect = 350; // TODO: magic cookie
         private int _totalLengthTimerRect = 540; // TODO: magic cookie
         private BitmapImage _CockUp = new BitmapImage();
@@ -283,9 +286,41 @@ namespace CockBlock8._1.Game
             this._Flyout_Player_2.Visibility = vis;
         }
 
-        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e) { }
-        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e) { }
-        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e) { }
-        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e) { }
+        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(2, false); }
+        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(2, true); }
+        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(1, false); }
+        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(1, true); }
+        private void ExitRematchButtonPressed(int playerIndex, bool rematch)
+        {
+            if (playerIndex != _playerIndexFirstChoice)
+            {
+                if (_playerWantToReplay == 0)
+                {
+                    if (rematch)
+                    {
+                        _playerWantToReplay = 1;
+                    }
+                    else
+                    {
+                        Exit();
+                    }
+                }
+                else if (_playerWantToReplay == 1)
+                {
+                    if (rematch)
+                    {
+                        Rematch();
+                    }
+                    else
+                    {
+                        Exit();
+                    }
+                }
+            }
+        }
+        private void Rematch()
+        { init(); _vm.StartSingleGame(); }
+        private void Exit()
+        { this.Frame.Navigate(typeof(MainPage)); }
     }
 }
