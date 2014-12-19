@@ -52,11 +52,16 @@ namespace CockBlock8._1
         {
             _turnTimer--;
             ((SingleGame)_currentPage).SetTime((int)(_turnTimer/TIMEPERTURN)*100);
+
             foreach (Player p in _players)
             {
                 p.Update();
             }
-            ((SingleGame)_currentPage).NextFrame();
+            ((SingleGame)_currentPage).NextFrame(); 
+            if (_turnTimer <= 0)
+            {
+                NextTurn();
+            }
         }
 
         private void SetImages(Player player, int playerNumber)
