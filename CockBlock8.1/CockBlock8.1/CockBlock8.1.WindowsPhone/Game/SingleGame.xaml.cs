@@ -27,7 +27,8 @@ namespace CockBlock8._1.Game
     /// </summary>
     public sealed partial class SingleGame : CB_Page
     {
-        private int _totalLengthRect = 350; // TODO: magic cookie
+        private int _totalLengthHealthRect = 350; // TODO: magic cookie
+        private int _totalLengthTimerRect = 540; // TODO: magic cookie
         private BitmapImage CockUp = new BitmapImage();
         private BitmapImage CockDown = new BitmapImage();
         private List<Image> CockList;
@@ -60,15 +61,15 @@ namespace CockBlock8._1.Game
         }
         public void setHealthPlayer1(double percentage)
         {
-            double currentLengthRect = ((double)_totalLengthRect / 100 * percentage);
-            this._TotalHealth1_rect.Width = _totalLengthRect;
+            double currentLengthRect = ((double)_totalLengthHealthRect / 100 * percentage);
+            this._TotalHealth1_rect.Width = _totalLengthHealthRect;
             this._CurrentHealth1_rect.Width = currentLengthRect;
             this._CurrentHealth1_tx.Text = ((int)percentage).ToString();
         }
         public void setHealthPlayer2(double percentage)
         {
-            double currentLengthRect = ((double)_totalLengthRect / 100 * percentage);
-            this._TotalHealth2_rect.Width = _totalLengthRect;
+            double currentLengthRect = ((double)_totalLengthHealthRect / 100 * percentage);
+            this._TotalHealth2_rect.Width = _totalLengthHealthRect;
             this._CurrentHealth2_rect.Width = currentLengthRect;
             this._CurrentHealth2_tx.Text = ((int)percentage).ToString();
         }
@@ -125,7 +126,7 @@ namespace CockBlock8._1.Game
         {
             if (_goingUp)
             {
-                for (int i = 0; i < CockList.Count; i++ )
+                for (int i = 0; i < CockList.Count; i++)
                 {
                     if (CockList[i].Margin.Top == -880) //TODO Most magical cookie ever invented
                     {
@@ -181,7 +182,9 @@ namespace CockBlock8._1.Game
 
         public void SetTime(int timePercentage)
         {
-            // TODO: pas tijdbalk aan, en doe iets
+            int currentLenth = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
+            _CurrentTime_Left_rect.Height = currentLenth;
+            _CurrentTime_Right_rect.Height = currentLenth;
         }
     }
 }
