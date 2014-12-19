@@ -74,11 +74,11 @@ namespace CockBlock8._1
             {
                 foreach (ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
                 {
-                    if(sc.ShootingAllowed())
+                    if (sc.ShootingAllowed())
                     {
                         sc.DisableShooting();
                         _currentPage.SetImageSource(_shieldCannonNames[3 * (_currentShooter) + (Array.IndexOf(_players[_currentShooter].GetShieldCannons(), sc))], sc.GetSprite());
-                    } 
+                    }
                 }
                 if (_turnTimer <= 0)
                 {
@@ -173,10 +173,7 @@ namespace CockBlock8._1
 
         public void CheckHits(int shieldCannonIndex)
         {
-            if (_players[_currentDefender].GetShieldCannons()[shieldCannonIndex].Active())
-            {
-                _players[_currentDefender].CheckHits(shieldCannonIndex);
-            }
+            _players[_currentDefender].CheckHits(shieldCannonIndex);
         }
 
 

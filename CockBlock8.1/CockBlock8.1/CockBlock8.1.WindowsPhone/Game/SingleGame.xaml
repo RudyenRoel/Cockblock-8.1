@@ -55,12 +55,30 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="270">
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Button x:Name="_Exit_bn_p1" Content="Exit" Click="_Exit_bn_p1_Click"/>
+                                <Button x:Name="_Rematch_bn_p1" Content="Rematch" Click="_Rematch_bn_p1_Click"/>
+                            </StackPanel>
+                            <TextBlock x:Name="_GameOver_tx_p1" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="32"/>
+                        </Grid>
+                    </FlyoutPresenter>
                     <Image x:Name="_ShieldCannon1" Margin="15,0,0,0" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
                     <Image x:Name="_ShieldCannon2" Margin="10,0,10,0" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
                     <Image x:Name="_ShieldCannon3" Margin="0,0,15,0" PointerPressed="ShieldCannon3_PointerPressed" PointerEntered="ShieldCannon3_PointerPressed" PointerReleased="ShieldCannon3_PointerReleased" PointerExited="ShieldCannon3_PointerReleased"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Height="270">
+                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370">
+                        <Grid>
+                            <TextBlock x:Name="_GameOver_tx_p2" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Button x:Name="_Exit_bn_p2" Content="Exit" Click="_Exit_bn_p2_Click"/>
+                                <Button x:Name="_Rematch_bn_p2" Content="Rematch" Click="_Rematch_bn_p2_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </FlyoutPresenter>
                     <Image x:Name="_ShieldCannon4" Margin="15,0,0,0" PointerPressed="ShieldCannon4_PointerPressed" PointerEntered="ShieldCannon4_PointerPressed" PointerReleased="ShieldCannon4_PointerReleased" PointerExited="ShieldCannon4_PointerReleased"/>
                     <Image x:Name="_ShieldCannon5" Margin="10,0,10,0" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
                     <Image x:Name="_ShieldCannon6" Margin="0,0,15,0" PointerPressed="ShieldCannon6_PointerPressed" PointerEntered="ShieldCannon6_PointerPressed" PointerReleased="ShieldCannon6_PointerReleased" PointerExited="ShieldCannon6_PointerReleased"/>
