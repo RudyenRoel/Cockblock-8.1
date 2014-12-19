@@ -45,7 +45,10 @@ namespace CockBlock8._1
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
-            Frame.GoBack();
+            if(Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
             e.Handled = true;
         }
         private void InitRectangles()
@@ -71,6 +74,7 @@ namespace CockBlock8._1
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            Frame.BackStack.Clear() ;
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are
