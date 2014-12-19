@@ -269,7 +269,7 @@ namespace CockBlock8._1.Game
 
         private void Restart()
         {
-            foreach(Image cock in _CockList)
+            foreach (Image cock in _CockList)
             {
                 GameGrid.Children.Remove(cock);
             }
@@ -286,40 +286,49 @@ namespace CockBlock8._1.Game
             this._Flyout_Player_2.Visibility = vis;
         }
 
-        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(2, false); }
-        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(2, true); }
-        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(1, false); }
-        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e) { ExitRematchButtonPressed(1, true); }
-        private void ExitRematchButtonPressed(int playerIndex, bool rematch)
+        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(2, false))
+            { _Exit_bn_p2.Foreground = new SolidColorBrush(Colors.Blue); }
+        }
+        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(2, true))
+            { _Rematch_bn_p2.Foreground = new SolidColorBrush(Colors.Blue); }
+        }
+        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(1, false))
+            { _Exit_bn_p1.Foreground = new SolidColorBrush(Colors.Blue); }
+        }
+        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(1, true))
+            { _Rematch_bn_p1.Foreground = new SolidColorBrush(Colors.Blue); }
+        }
+        private bool ExitRematchButtonPressed(int playerIndex, bool rematch)
         {
             if (playerIndex != _playerIndexFirstChoice)
             {
                 if (_playerWantToReplay == 0)
                 {
                     if (rematch)
-                    {
-                        _playerWantToReplay = 1;
-                    }
+                    { _playerWantToReplay = 1; }
                     else
-                    {
-                        Exit();
-                    }
+                    { Exit(); }
+                    _playerIndexFirstChoice = playerIndex;
+                    return true;
                 }
                 else if (_playerWantToReplay == 1)
                 {
                     if (rematch)
-                    {
-                        Rematch();
-                    }
+                    { Restart(); }
                     else
-                    {
-                        Exit();
-                    }
+                    { Exit(); }
                 }
             }
+            return false;
         }
-        private void Rematch()
-        { init(); _vm.StartSingleGame(); }
         private void Exit()
         { this.Frame.Navigate(typeof(MainPage)); }
     }
