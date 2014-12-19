@@ -135,7 +135,7 @@ namespace CockBlock8._1
                 if (_shootAllowed)
                 {
                     _player.Shoot(this);
-                    Energy--;
+                    Energy-=3;
                 }
             }
             else

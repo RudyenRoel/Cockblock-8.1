@@ -106,6 +106,10 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Game\MultiGame.xaml.cs">
       <DependentUpon>MultiGame.xaml</DependentUpon>
     </Compile>
@@ -115,17 +119,11 @@
     <Compile Include="Main\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\Instructions\HelpMultiGame.xaml.cs">
-      <DependentUpon>HelpMultiGame.xaml</DependentUpon>
+    <Compile Include="Main\Instructions\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\Instructions\HelpSingleGame.xaml.cs">
-      <DependentUpon>HelpSingleGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Main\Instructions\InstructionsMultiGame.xaml.cs">
-      <DependentUpon>InstructionsMultiGame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Main\Instructions\InstructionsSingleGame.xaml.cs">
-      <DependentUpon>InstructionsSingleGame.xaml</DependentUpon>
+    <Compile Include="Main\Instructions\Instructions.xaml.cs">
+      <DependentUpon>Instructions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -162,21 +160,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Main\Instructions\HelpMultiGame.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Main\Instructions\HelpPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Main\Instructions\HelpSingleGame.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Main\Instructions\Instructions.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main\Instructions\InstructionsMultiGame.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Main\Instructions\InstructionsSingleGame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Main\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>

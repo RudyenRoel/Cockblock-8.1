@@ -31,8 +31,6 @@ namespace CockBlock8._1.Game
     {
         private int _totalLengthHealthRect = 350; // TODO: magic cookie
         private int _totalLengthTimerRect = 540; // TODO: magic cookie
-        private string _timerColor;
-        private string _healthColor;
         private BitmapImage _CockUp = new BitmapImage();
         private BitmapImage _CockDown = new BitmapImage();
         private BitmapImage _Cock = new BitmapImage();
@@ -165,7 +163,7 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            _vm.NextTurn();
+            Restart();
         }
 
         public void AddShot(int posX)
@@ -246,6 +244,11 @@ namespace CockBlock8._1.Game
             Debug.WriteLine("Player" + player + " lost!");
             // if player = 1, player1 lost
             // if player = 2, player2 lost
+        }
+        private void Restart()
+        {
+            init();
+            _vm.StartSingleGame();
         }
     }
 }

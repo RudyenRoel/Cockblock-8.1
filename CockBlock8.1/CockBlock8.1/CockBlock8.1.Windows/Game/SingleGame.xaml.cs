@@ -50,7 +50,7 @@ namespace CockBlock8._1.Game
             SwitchGoingUp();
             //setHealthPlayer1(80);
             //setHealthPlayer2(90);
-            _xCoords = new int[] { -240, -20, 200 };
+            _xCoords = new int[] { -560, -290, -20, 250, 520 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             _CockList = new List<Image>();
@@ -166,8 +166,6 @@ namespace CockBlock8._1.Game
 
         public void SetEnergy(int player, int cannonNumber, int energy)
         {
-            Debug.WriteLine("AKA: " + _p1_energy1.Name);
-            Debug.WriteLine("Changing energy of: " + "_p" + player + "_energy" + cannonNumber + ".");
             ((TextBlock)this.FindName("_p" + player + "_energy" + cannonNumber)).Text = "" + energy;
         }
 
@@ -177,8 +175,8 @@ namespace CockBlock8._1.Game
             _goingUp = !_goingUp;
             if (_goingUp)
             {
-                _maxYCoord = -880;
-                _marginChange = 5;
+                _maxYCoord = -2210;
+                _marginChange = 20;
                 _startYCoord = -130;
                 _distanceToHealth = 170;
                 _Cock = _CockUp;
@@ -186,8 +184,8 @@ namespace CockBlock8._1.Game
             else
             {
                 _maxYCoord = -200;
-                _marginChange = -5;
-                _startYCoord = -950;
+                _marginChange = -20;
+                _startYCoord = -2160;
                 _distanceToHealth = -170;
                 _Cock = _CockDown;
             }
@@ -204,16 +202,6 @@ namespace CockBlock8._1.Game
         {
             // if player = 1, player1 lost
             // if player = 2, player2 lost
-        }
-
-        internal void SetTime(int p)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void setHealthPlayer1(int health)
-        {
-            throw new NotImplementedException();
         }
     }
 }
