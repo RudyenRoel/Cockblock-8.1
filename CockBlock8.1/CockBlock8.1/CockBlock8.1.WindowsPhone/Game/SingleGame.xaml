@@ -20,38 +20,61 @@
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Rectangle x:Name="_TotalHealth1_rect" Fill="#FFF4F4F5" Height="25" Stroke="Black" Width="350" HorizontalAlignment="Left"/>
             <Rectangle x:Name="_CurrentHealth1_rect" Fill="#FFFF6060" Height="25" Stroke="Black" Width="200" HorizontalAlignment="Left"/>
-            <TextBlock x:Name="_CurrentHealth1_tx" Text="100" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFAC0000"/>
+            <TextBlock x:Name="_CurrentHealth1_tx" Text="100" FontSize="24" Foreground="#FFAC0000" HorizontalAlignment="Center" Margin="70,25,0,-25">
+                <TextBlock.RenderTransform>
+                    <RotateTransform Angle="180"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
         </Grid>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <StackPanel.RenderTransform>
+                <RotateTransform Angle="180"/>
+            </StackPanel.RenderTransform>
+            <TextBlock x:Name="_p1_energy1" Text="100"/>
+            <TextBlock x:Name="_p1_energy2" Text="100"/>
+            <TextBlock x:Name="_p1_energy3" Text="100"/>
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">
                     <Setter x:Name="HealthStyle1" Property="Margin" Value="50,0,50,0"/>
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="_p1_energy1" Text="100"/>
-            <TextBlock x:Name="_p1_energy2" Text="100"/>
-            <TextBlock x:Name="_p1_energy3" Text="100"/>
+            <StackPanel.Margin>0,0,-700,0</StackPanel.Margin>
         </StackPanel>
 
         <Grid Grid.Row="2" x:Name="GameGrid">
-            
-            <StackPanel Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="15"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Rectangle x:Name="FullTime_Left_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle x:Name="CurrentTime_Left_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Grid>
+
+            <StackPanel Grid.Row="2" Grid.Column="1">
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
-                    <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
-                    <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed" PointerEntered="ShieldCannon3_PointerPressed" PointerReleased="ShieldCannon3_PointerReleased" PointerExited="ShieldCannon3_PointerReleased"/>
+                    <Image x:Name="ShieldCannon1" Width="100" Height="100" Margin="15,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
+                    <Image x:Name="ShieldCannon2" Width="100" Height="100" Margin="10,0,10,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
+                    <Image x:Name="ShieldCannon3" Width="100" Height="100" Margin="0,0,15,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed" PointerEntered="ShieldCannon3_PointerPressed" PointerReleased="ShieldCannon3_PointerReleased" PointerExited="ShieldCannon3_PointerReleased"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="25,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon4_PointerPressed" PointerEntered="ShieldCannon4_PointerPressed" PointerReleased="ShieldCannon4_PointerReleased" PointerExited="ShieldCannon4_PointerReleased"/>
-                    <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="25,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
-                    <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,25,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed" PointerEntered="ShieldCannon6_PointerPressed" PointerReleased="ShieldCannon6_PointerReleased" PointerExited="ShieldCannon6_PointerReleased"/>
+                    <Image x:Name="ShieldCannon4" Width="100" Height="100" Margin="15,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon4_PointerPressed" PointerEntered="ShieldCannon4_PointerPressed" PointerReleased="ShieldCannon4_PointerReleased" PointerExited="ShieldCannon4_PointerReleased"/>
+                    <Image x:Name="ShieldCannon5" Width="100" Height="100" Margin="10,0,10,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
+                    <Image x:Name="ShieldCannon6" Width="100" Height="100" Margin="0,0,15,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed" PointerEntered="ShieldCannon6_PointerPressed" PointerReleased="ShieldCannon6_PointerReleased" PointerExited="ShieldCannon6_PointerReleased"/>
                 </StackPanel>
             </StackPanel>
-            <Button x:Name="Start_bn" Content="Start" Click="Start_bn_Click" HorizontalAlignment="Center" />
-            <Image x:Name="TestBullet" Width="20" Height="20" Margin="0,50,0,0"/>
+
+            <Grid Grid.Column="2">
+                <Rectangle x:Name="FullTime_Right_rect" Width="15" Height="540" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Rectangle x:Name="CurrentTime_Right_rect" Width="15" Height="300" Fill="#FF00D1FF" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Button Grid.Column="1" x:Name="Start_bn" Content="Start" Click="Start_bn_Click" HorizontalAlignment="Center" />
         </Grid>
-        
+
         <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">
