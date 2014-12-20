@@ -18,19 +18,19 @@
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock x:Name="SingleGameMenuTitle_lb" Text="Single Game" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock x:Name="Title_tx" Text="[Title]"/>
         </Grid>
-        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="StartGame_bn" Content="Start Game" FontSize="24" Click="StartGame_bn_Click"/>
+        <Grid Grid.Row="1">
+            <Button x:Name="StartGame_bn" Content="[Button1]" Click="StartGame_bn_Click"/>
         </Grid>
         <Grid Grid.Row="2">
 
         </Grid>
-        <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Instructions_bn" Content="Instructions" FontSize="24" Click="Instructions_bn_Click"/>
+        <Grid Grid.Row="3">
+            <Button x:Name="Instructions_bn" Content="[Button2]" Click="Instructions_bn_Click"/>
         </Grid>
-        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Back_bn" Content="Back" FontSize="24" Click="Back_bn_Click"/>
+        <Grid Grid.Row="4">
+            <Button x:Name="Back_bn" Content="[Button3]" Click="Back_bn_Click"/>
         </Grid>
     </Grid>
 </src:CB_Page>

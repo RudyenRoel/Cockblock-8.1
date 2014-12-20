@@ -29,9 +29,6 @@ namespace CockBlock8._1.Game
     /// </summary>
     public sealed partial class SingleGame : CB_Page
     {
-        private SolidColorBrush _DefaultButtonForeground = new SolidColorBrush(Colors.White);
-        private SolidColorBrush _PressedButtonForeground = new SolidColorBrush(Colors.Yellow);
-        private SolidColorBrush _PressedButtonBackground = new SolidColorBrush(Colors.LightBlue);
         private int _playerWantToReplay; // if 1 : 1 player wants to restart
         private int _playerIndexFirstChoice; // if 1: player 1, if 2: player 2
         private int _totalLengthHealthRect = 350; // TODO: magic cookie
@@ -75,10 +72,16 @@ namespace CockBlock8._1.Game
         }
         private void FlyoutSettings()
         {
-            _Rematch_bn_p1.Foreground = _DefaultButtonForeground;
-            _Exit_bn_p1.Foreground = _DefaultButtonForeground;
-            _Rematch_bn_p2.Foreground = _DefaultButtonForeground;
-            _Exit_bn_p2.Foreground = _DefaultButtonForeground;
+            SolidColorBrush foreground = Settings._DefaultButtonForeground;
+            SolidColorBrush background = Settings._DefaultButtonBackground;
+            _Rematch_bn_p1.Foreground = foreground;
+            _Rematch_bn_p1.Background = background;
+            _Exit_bn_p1.Foreground = foreground;
+            _Exit_bn_p1.Background = background;
+            _Rematch_bn_p2.Foreground = foreground;
+            _Rematch_bn_p2.Background = background;
+            _Exit_bn_p2.Foreground = foreground;
+            _Exit_bn_p2.Background = background;
             SetFlyoutVisible(false);
         }
         private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
@@ -297,22 +300,22 @@ namespace CockBlock8._1.Game
         private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(2, false))
-            { _Exit_bn_p2.Foreground = _PressedButtonForeground; _Exit_bn_p2.Background = _PressedButtonBackground; }
+            { _Exit_bn_p2.Foreground = Settings._PressedButtonForeground; _Exit_bn_p2.Background = Settings._PressedButtonBackground; }
         }
         private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(2, true))
-            { _Rematch_bn_p2.Foreground = _PressedButtonForeground; _Rematch_bn_p2.Background = _PressedButtonBackground; }
+            { _Rematch_bn_p2.Foreground =Settings._PressedButtonForeground; _Rematch_bn_p2.Background = Settings._PressedButtonBackground; }
         }
         private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, false))
-            { _Exit_bn_p1.Foreground = _PressedButtonForeground; _Exit_bn_p2.Background = _PressedButtonBackground; }
+            { _Exit_bn_p1.Foreground = Settings._PressedButtonForeground; _Exit_bn_p1.Background = Settings._PressedButtonBackground; }
         }
         private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, true))
-            { _Rematch_bn_p1.Foreground = _PressedButtonForeground; _Rematch_bn_p2.Background = _PressedButtonBackground; }
+            { _Rematch_bn_p1.Foreground = Settings._PressedButtonForeground; _Rematch_bn_p1.Background = Settings._PressedButtonBackground; }
         }
         private bool ExitRematchButtonPressed(int playerIndex, bool rematch)
         {

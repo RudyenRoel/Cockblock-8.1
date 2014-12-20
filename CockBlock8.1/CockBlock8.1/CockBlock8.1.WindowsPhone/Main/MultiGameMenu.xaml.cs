@@ -28,8 +28,20 @@ namespace CockBlock8._1
         public MultiGameMenu()
         {
             this.InitializeComponent();
+            Init();
         }
 
+        private void Init()
+        {
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn, this.Back_bn);
+            Settings.DefaultTextBlockProperties(Settings._DefaultSmallFontSize, this.Title_tx, this.SearchGame_tx, this.CreateGame_tx);
+            this.Title_tx.Text = "Multi Game";
+            this.Title_tx.FontSize = Settings._DefaultHeaderFontSize;
+            this.SearchGame_bn.Content = "Search Game";
+            this.CreateGame_bn.Content = "Create Game";
+            this.Instructions_bn.Content = "Instructions";
+            this.Back_bn.Content = "Back";
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -46,7 +58,7 @@ namespace CockBlock8._1
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private void Instruction_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions), Introduction.InstructionPageInformationMultiGame()); }
+        { this.Frame.Navigate(typeof(Instructions), Settings.InstructionPageInformationMultiGame()); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
         { this.SearchGame_tx.Text = "Search for existing game"; }
         private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)

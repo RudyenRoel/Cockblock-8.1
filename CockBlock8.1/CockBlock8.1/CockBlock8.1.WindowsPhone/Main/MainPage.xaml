@@ -26,16 +26,16 @@
             <TextBlock x:Name="Title_tx" Text="[Title]"/>
         </Grid>
         <Grid Grid.Row="1">
-            <Button x:Name="SingleGame_bn" Content="Single Game" Click="Single_Game_bn_Click"/>
+            <Button x:Name="SingleGame_bn" Content="Button1" Click="Single_Game_bn_Click"/>
         </Grid>
         <Grid Grid.Row="2">
-            <Button x:Name="MultiGame_bn" Content="Multi Game" Click="Multi_Game_bn_Click"/>
+            <Button x:Name="MultiGame_bn" Content="Button2" Click="Multi_Game_bn_Click"/>
         </Grid>
         <Grid Grid.Row="3">
-            <Button x:Name="About_bn" Content="About" Click="About_bn_Click"/>
+            <Button x:Name="About_bn" Content="Button3" Click="About_bn_Click"/>
         </Grid>
         <Grid Grid.Row="4">
-            <Button x:Name="Exit_bn" Content="Exit" Click="Exit_bn_Click"/>
+            <Button x:Name="Exit_bn" Content="Button4" Click="Exit_bn_Click"/>
         </Grid>
         <!-- TODO: Remove onderstanding lines -->
         <Grid Grid.Row="5" >

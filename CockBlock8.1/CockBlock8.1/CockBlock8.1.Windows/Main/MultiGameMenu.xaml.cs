@@ -30,7 +30,7 @@ namespace CockBlock8._1.Main
             this.InitializeComponent();
         }
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions.Instructions), Introduction.InstructionPageInformationMultiGame()); }
+        { this.Frame.Navigate(typeof(Instructions.Instructions), Settings.InstructionPageInformationMultiGame()); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)

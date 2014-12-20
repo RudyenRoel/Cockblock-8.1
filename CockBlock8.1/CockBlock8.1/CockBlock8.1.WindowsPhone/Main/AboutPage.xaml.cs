@@ -27,20 +27,11 @@ namespace CockBlock8._1.Main
         public AboutPage()
         {
             this.InitializeComponent();
-            DefaultTextBlockProparties(this.Title_tx, this.About_tx);
+            Settings.DefaultTextBlockProperties(this.Title_tx, this.About_tx);
             this.Title_tx.FontSize = TitleFontSize;
             this.Title_tx.Text = "About";
-            this.About_tx.Text = Introduction.About();
-        }
-        private void DefaultTextBlockProparties(params TextBlock[] textblocks)
-        {
-            foreach (TextBlock tb in textblocks)
-            {
-                tb.TextWrapping = TextWrapping.Wrap;
-                tb.FontSize = AboutFontSize;
-                tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            }
+            this.About_tx.Text = Settings.About();
+            this.About_tx.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

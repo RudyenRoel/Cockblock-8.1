@@ -29,8 +29,17 @@ namespace CockBlock8._1
         public SingleGameMenu()
         {
             this.InitializeComponent();
+            this.Init();
         }
-
+        private void Init()
+        {
+            Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.StartGame_bn, this.Instructions_bn, this.Back_bn);
+            this.Title_tx.Text = "Single Game";
+            this.StartGame_bn.Content = "Start Game";
+            this.Instructions_bn.Content = Settings._Instructions;
+            this.Back_bn.Content = "Back";
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -47,7 +56,7 @@ namespace CockBlock8._1
         { this.Frame.Navigate(typeof(MainPage), e); }
 
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions), Introduction.InstructionPageInformationSingleGame()); }
+        { this.Frame.Navigate(typeof(Instructions), Settings.InstructionPageInformationSingleGame()); }
 
     }
 }

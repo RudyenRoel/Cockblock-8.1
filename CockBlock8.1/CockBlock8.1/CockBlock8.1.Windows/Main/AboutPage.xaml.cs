@@ -26,7 +26,7 @@ namespace CockBlock8._1.Main
         {
             this.InitializeComponent();
             this.About_tx.TextWrapping = TextWrapping.Wrap;
-            this.About_tx.Text = Introduction.About();
+            this.About_tx.Text = Settings.About();
         }
     }
 }

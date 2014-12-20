@@ -33,7 +33,6 @@ namespace CockBlock8._1
     {
         private string _ApplicationName = "CockBlock 8.1";
         private int _TitleFontSize = 48;
-        private int _ButtonFontSize = 20;
         private int _AmountOfRectangles = 7 * 28;
         public MainPage()
         {
@@ -44,11 +43,13 @@ namespace CockBlock8._1
         {
             this.NavigationCacheMode = NavigationCacheMode.Required;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
             this.Title_tx.Text = _ApplicationName;
-            this.Title_tx.FontSize = _TitleFontSize;
-            this.Title_tx.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-            this.Title_tx.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            DefaultButtonProperties(About_bn, SingleGame_bn, MultiGame_bn, Exit_bn);
+            Settings.DefaultButtonProperties(About_bn, SingleGame_bn, MultiGame_bn, Exit_bn);
+            this.SingleGame_bn.Content = "Single Game";
+            this.MultiGame_bn.Content = "Multi Game";
+            this.About_bn.Content = "About";
+            this.Exit_bn.Content = "Exit";
             InitRectangles();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -58,15 +59,6 @@ namespace CockBlock8._1
                 Frame.GoBack();
             }
             e.Handled = true;
-        }
-        private void DefaultButtonProperties(params Button[] buttons)
-        {
-            foreach (Button button in buttons)
-            {
-                button.FontSize = _ButtonFontSize;
-                button.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                button.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            }
         }
         private void InitRectangles()
         {
@@ -102,22 +94,13 @@ namespace CockBlock8._1
         }
 
         private void Single_Game_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(SingleGameMenu), e);
-        }
-
+        { this.Frame.Navigate(typeof(SingleGameMenu), e); }
         private void Multi_Game_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MultiGameMenu), e);
-        }
+        { this.Frame.Navigate(typeof(MultiGameMenu), e); }
         private void About_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(AboutPage), e);
-        }
+        { this.Frame.Navigate(typeof(AboutPage), e); }
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Exit();
-        }
+        { Application.Current.Exit(); }
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             if (RectangleItems_IC.Items.Count > 0)

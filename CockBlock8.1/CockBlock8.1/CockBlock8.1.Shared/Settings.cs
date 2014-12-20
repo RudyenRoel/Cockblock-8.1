@@ -1,26 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.UI;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace CockBlock8._1
 {
-    public class Introduction
+    public class Settings
     {
-        private static string _Instructions = "Instructions";
+        public readonly static SolidColorBrush _DefaultButtonForeground = new SolidColorBrush(Colors.Gray);
+        public readonly static SolidColorBrush _DefaultButtonBackground = new SolidColorBrush(Colors.Black);
+        public readonly static SolidColorBrush _PressedButtonForeground = new SolidColorBrush(Colors.Yellow);
+        public readonly static SolidColorBrush _PressedButtonBackground = new SolidColorBrush(Colors.LightBlue);
+        public readonly static int _DefaultSmallFontSize = 12;
+        public readonly static int _DefaultTextBlockFontSize = 18;
+        public readonly static int _DefaultSubHeaderFontSize = 32;
+        public readonly static int _DefaultHeaderFontSize = 48;
+        public readonly static int _DefaultButtonFontSize = 20;
+        public readonly static string _Instructions = "Instructions";
         private static string _SingleGameInstructions = null;
         private static string _MultiGameInstructions = null;
+        private static string _AboutText = null;
         private static List<string[]> _SingleGameTopics = null;
         private static List<string[]> _MultiGameTopics = null;
         private static Tuple<string[], List<string[]>> _InformationSinglePage = null;
         private static Tuple<string[], List<string[]>> _InformationMultiPage = null;
-        private static string _About = null;
 
         // public methods
         public static string About()
         {
-            if (_About == null)
+            if (_AboutText == null)
             { CreateAbout(); }
-            return _About;
+            return _AboutText;
         }
         public static Tuple<string[], List<string[]>> InstructionPageInformationSingleGame()
         {
@@ -133,10 +145,46 @@ namespace CockBlock8._1
         private static void MLine(string toAdd)
         { _MultiGameInstructions += toAdd + "\n"; }
         private static void ALine(string toAdd)
-        { _About += toAdd + "\n"; }
+        { _AboutText += toAdd + "\n"; }
         private static string[] topic(string topicName)
         { return topic(topicName, "Unknown"); }
         private static string[] topic(string topicName, string text)
         { return new string[] { topicName, text }; }
+
+        // Default setting methods
+        public static void DefaultTextBlockProperties(params TextBlock[] textblocks)
+        { DefaultTextBlockProperties("", textblocks); }
+        public static void DefaultTextBlockProperties(int fontSize, params TextBlock[] textblocks)
+        { DefaultTextBlockProperties("", fontSize, textblocks); }
+        public static void DefaultTextBlockProperties(string text, params TextBlock[] textblocks)
+        { DefaultTextBlockProperties(text, _DefaultTextBlockFontSize, textblocks); }
+        public static void DefaultTextBlockProperties(string text, int fontSize, params TextBlock[] textblocks)
+        {
+            foreach (TextBlock tb in textblocks)
+            {
+                tb.FontSize = fontSize;
+                tb.Text = text;
+                tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
+        }
+        public static void DefaultButtonProperties(params Button[] buttons)
+        { DefaultButtonProperties("", buttons); }
+        public static void DefaultButtonProperties(int fontSize, params Button[] buttons)
+        { DefaultButtonProperties("", fontSize, buttons); }
+        public static void DefaultButtonProperties(string text, params Button[] buttons)
+        { DefaultButtonProperties(text, _DefaultButtonFontSize, buttons); }
+        public static void DefaultButtonProperties(string text, int fontSize, params Button[] buttons)
+        {
+            foreach (Button button in buttons)
+            {
+                button.FontSize = fontSize;
+                button.Content = text;
+                button.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                button.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                button.Foreground = Settings._DefaultButtonForeground;
+                button.Background = Settings._DefaultButtonBackground;
+            }
+        }
     }
 }
