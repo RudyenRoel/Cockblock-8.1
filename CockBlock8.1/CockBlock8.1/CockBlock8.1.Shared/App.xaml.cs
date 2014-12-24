@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -74,6 +76,13 @@ namespace CockBlock8._1
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Settings._ButtonBackgroundColorKey))
+                    Settings._DefaultButtonBackground = ConvertToColorBrush((int[])ApplicationData.Current.LocalSettings.Values[Settings._ButtonBackgroundColorKey]);
+                if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Settings._ButtonForegroundColorKey))
+                    Settings._DefaultButtonForeground = ConvertToColorBrush((int[])ApplicationData.Current.LocalSettings.Values[Settings._ButtonForegroundColorKey]);
+                if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Settings._TextBlockForegroundColorKey))
+                    Settings._DefaultTextForeground = ConvertToColorBrush((int[])ApplicationData.Current.LocalSettings.Values[Settings._TextBlockForegroundColorKey]);
             }
 
             if (rootFrame.Content == null)
@@ -105,6 +114,11 @@ namespace CockBlock8._1
             // Ensure the current window is active
             Window.Current.Activate();
         }
+        private SolidColorBrush ConvertToColorBrush(int[] array)
+        {
+            return new SolidColorBrush(Color.FromArgb((byte)array[0], (byte)array[1], (byte)array[2], (byte)array[3]));
+        }
+
 
 #if WINDOWS_PHONE_APP
         /// <summary>
@@ -134,5 +148,6 @@ namespace CockBlock8._1
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
     }
 }

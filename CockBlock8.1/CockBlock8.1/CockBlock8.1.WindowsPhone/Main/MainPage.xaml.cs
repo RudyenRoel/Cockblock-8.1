@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Main;
+using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.Model;
 using CockBlock8._1.View;
 using System;
@@ -32,6 +33,7 @@ namespace CockBlock8._1
     public sealed partial class MainPage : CB_Page
     {
         private string _ApplicationName = "CockBlock 8.1";
+        private BitmapImage _SettingsImage = new BitmapImage();
         private int _TitleFontSize = 48;
         private int _AmountOfRectangles = 7 * 28;
         public MainPage()
@@ -45,7 +47,13 @@ namespace CockBlock8._1
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
             this.Title_tx.Text = _ApplicationName;
+            _SettingsImage.UriSource = new Uri("ms-appx:Res/" + Settings._SettingsImage, UriKind.RelativeOrAbsolute);
+            this.Settings_img.Margin = new Thickness(200, 0, 0, 0);
+            this.Settings_img.Source = _SettingsImage;
+            this.Settings_img.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+            this.Settings_img.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
             Settings.DefaultButtonProperties(About_bn, SingleGame_bn, MultiGame_bn, Exit_bn);
+            this.About_bn.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
             this.SingleGame_bn.Content = "Single Game";
             this.MultiGame_bn.Content = "Multi Game";
             this.About_bn.Content = "About";
@@ -109,5 +117,11 @@ namespace CockBlock8._1
                 InitRectangles();
             }
         }
+        private void Settings_img_PointerPressed(object sender, PointerRoutedEventArgs e)
+        { this.Frame.Navigate(typeof(SettingsPage), e); }
+        internal override Button[] GetButtons()
+        { return new Button[] { this.SingleGame_bn, this.MultiGame_bn, this.About_bn, this.Exit_bn }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { this.Title_tx }; }
     }
 }

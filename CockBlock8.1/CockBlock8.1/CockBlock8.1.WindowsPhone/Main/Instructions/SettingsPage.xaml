@@ -1,9 +1,9 @@
 ﻿<src:CB_Page
     xmlns:src="using:CockBlock8._1.View"
-    x:Class="CockBlock8._1.Main.AboutPage"
+    x:Class="CockBlock8._1.Main.Instructions.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CockBlock8._1.Main"
+    xmlns:local="using:CockBlock8._1.Main.Instructions"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -15,10 +15,17 @@
             <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock x:Name="Title_tx" Text="[Title]" />
+            <TextBlock x:Name="_Title_tx" Text="[Title]"/>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBlock x:Name="About_tx" Text="[text]" />
+            <StackPanel x:Name="_Settings_panel">
+
+            </StackPanel>
+            <FlyoutPresenter x:Name="ButtonColorPicker" Visibility="Collapsed" Margin="10,10,10,10">
+            </FlyoutPresenter>
+            <FlyoutPresenter x:Name="TextBlockColorPicker" Visibility="Collapsed" Margin="10,10,10,10">
+
+            </FlyoutPresenter>
         </Grid>
     </Grid>
 </src:CB_Page>

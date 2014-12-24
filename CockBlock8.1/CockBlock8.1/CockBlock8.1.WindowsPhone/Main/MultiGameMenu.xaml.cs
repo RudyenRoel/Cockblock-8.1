@@ -67,5 +67,9 @@ namespace CockBlock8._1
         { this.CreateGame_tx.Text = "Create a new game"; }
         private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
         { this.CreateGame_tx.Text = ""; }
+        internal override Button[] GetButtons()
+        { return new Button[] { this.Back_bn, this.SearchGame_bn, this.CreateGame_bn }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx}; }
     }
 }

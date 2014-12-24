@@ -57,6 +57,9 @@ namespace CockBlock8._1
 
         private void Instructions_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(Instructions), Settings.InstructionPageInformationSingleGame()); }
-
+        internal override Button[] GetButtons()
+        { return new Button[] { this.StartGame_bn, this.Back_bn}; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { this.Title_tx}; }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace CockBlock8._1
 {
@@ -228,5 +229,6 @@ namespace CockBlock8._1
                 myDispatcherTimer.Stop();
             }
         }
+        internal virtual Button[] GetAllButtons() { return null; }
     }
 }

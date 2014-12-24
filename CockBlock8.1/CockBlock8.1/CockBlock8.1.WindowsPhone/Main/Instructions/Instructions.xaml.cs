@@ -42,7 +42,11 @@ namespace CockBlock8._1.Main.Instructions
         }
         private void Init()
         {
-            this._Information_tx.TextWrapping = TextWrapping.Wrap;
+            Settings.DefaultTextBlockProperties(this._Title, this._SubTitle, this._Information_tx);
+            Settings.DefaultButtonProperties(this._Help_bn);
+            this._Help_bn.Content = "Help";
+            this._Title.FontSize = Settings._DefaultHeaderFontSize;
+            this._SubTitle.FontSize = Settings._DefaultSubHeaderFontSize;
         }
 
         public NavigationHelper NavigationHelper
@@ -66,7 +70,7 @@ namespace CockBlock8._1.Main.Instructions
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.navigationHelper.OnNavigatedTo(e);
+            base.OnNavigatedTo(e);
             Tuple<string[], List<string[]>> information = (e.Parameter as Tuple<string[], List<string[]>>);
             string[] instructions = information.Item1;
             this._SubTitle.Text = instructions[0];
@@ -76,15 +80,12 @@ namespace CockBlock8._1.Main.Instructions
             Init();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
         #endregion
         private void Help_bn_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(HelpPage), _HelpPageInformation);
-        }
+        { this.Frame.Navigate(typeof(HelpPage), _HelpPageInformation); }
+        internal override Button[] GetButtons()
+        { return new Button[] { this._Help_bn }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { this._Title, this._SubTitle, this._Information_tx }; }
     }
 }

@@ -22,8 +22,9 @@ namespace CockBlock8._1.View
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            ColorChange();
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-        } 
+        }
 
         public void ChangeText(string name, string text)
         {
@@ -42,5 +43,19 @@ namespace CockBlock8._1.View
                 i.Source = image;
             }
         }
+        protected void ColorChange()
+        {
+            if (GetButtons() != null)
+                foreach (Button button in GetButtons())
+                {
+                    button.Background = Settings._DefaultButtonBackground;
+                    button.Foreground = Settings._DefaultButtonForeground;
+                }
+            if(GetTextBlocks() != null)
+                foreach (TextBlock tb in GetTextBlocks())
+                { tb.Foreground = Settings._DefaultTextForeground; }
+        }
+        internal virtual Button[] GetButtons() { return null; }
+        internal virtual TextBlock[] GetTextBlocks() { return null; }
     }
 }

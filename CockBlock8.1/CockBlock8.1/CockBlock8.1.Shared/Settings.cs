@@ -9,8 +9,9 @@ namespace CockBlock8._1
 {
     public class Settings
     {
-        public readonly static SolidColorBrush _DefaultButtonForeground = new SolidColorBrush(Colors.Gray);
-        public readonly static SolidColorBrush _DefaultButtonBackground = new SolidColorBrush(Colors.Black);
+        public static SolidColorBrush _DefaultButtonForeground = new SolidColorBrush(Colors.Gray);
+        public static SolidColorBrush _DefaultButtonBackground = new SolidColorBrush(Colors.Black);
+        public static SolidColorBrush _DefaultTextForeground = new SolidColorBrush(Colors.Gray);
         public readonly static SolidColorBrush _PressedButtonForeground = new SolidColorBrush(Colors.Yellow);
         public readonly static SolidColorBrush _PressedButtonBackground = new SolidColorBrush(Colors.LightBlue);
         public readonly static int _DefaultSmallFontSize = 12;
@@ -18,7 +19,13 @@ namespace CockBlock8._1
         public readonly static int _DefaultSubHeaderFontSize = 32;
         public readonly static int _DefaultHeaderFontSize = 48;
         public readonly static int _DefaultButtonFontSize = 20;
+        public readonly static int _DefaultRadioButtonFontSize = 18;
+        public readonly static string _ButtonBackgroundColorKey = "_ButtonBackground";
+        public readonly static string _ButtonForegroundColorKey = "_ButtonForeground";
+        public readonly static string _TextBlockForegroundColorKey = "_TextBlockForeground";
         public readonly static string _Instructions = "Instructions";
+        public readonly static string _SettingsImage = "Settings.png";
+
         private static string _SingleGameInstructions = null;
         private static string _MultiGameInstructions = null;
         private static string _AboutText = null;
@@ -164,6 +171,7 @@ namespace CockBlock8._1
             {
                 tb.FontSize = fontSize;
                 tb.Text = text;
+                tb.TextWrapping = Windows.UI.Xaml.TextWrapping.Wrap;
                 tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                 tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
             }
@@ -177,6 +185,24 @@ namespace CockBlock8._1
         public static void DefaultButtonProperties(string text, int fontSize, params Button[] buttons)
         {
             foreach (Button button in buttons)
+            {
+                button.FontSize = fontSize;
+                button.Content = text;
+                button.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                button.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+                button.Foreground = Settings._DefaultButtonForeground;
+                button.Background = Settings._DefaultButtonBackground;
+            }
+        }
+        public static void DefaultRadioButtonProperties(params RadioButton[] buttons)
+        { DefaultRadioButtonProperties("", buttons); }
+        public static void DefaultRadioButtonProperties(int fontSize, params RadioButton[] buttons)
+        { DefaultRadioButtonProperties("", fontSize, buttons); }
+        public static void DefaultRadioButtonProperties(string text, params RadioButton[] buttons)
+        { DefaultRadioButtonProperties(text, _DefaultRadioButtonFontSize, buttons); }
+        public static void DefaultRadioButtonProperties(string text, int fontSize, params RadioButton[] buttons)
+        {
+            foreach (RadioButton button in buttons)
             {
                 button.FontSize = fontSize;
                 button.Content = text;

@@ -66,7 +66,7 @@ namespace CockBlock8._1.Game
             DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
             DefaultTimerBarProparties(Colors.White, _totalLengthTimerRect, _FullTime_Left_rect, _FullTime_Right_rect);
             DefaultTimerBarProparties(Colors.Blue, _CurrentTime_Left_rect, _CurrentTime_Right_rect);
-            DefaultEnergyProparties(Colors.White, 10, "100", _p1_energy1, _p1_energy2, _p1_energy3, _p2_energy1, _p2_energy2, _p2_energy3);
+            DefaultEnergyProparties(Colors.White, 10, "100", _p1_energy1_tx, _p1_energy2_tx, _p1_energy3_tx, _p2_energy1_tx, _p2_energy2_tx, _p2_energy3_tx);
             DefaultEnergyProparties(Colors.DarkRed, 24, "100", _CurrentHealth1_tx, _CurrentHealth2_tx);
             FlyoutSettings();
         }
@@ -74,14 +74,14 @@ namespace CockBlock8._1.Game
         {
             SolidColorBrush foreground = Settings._DefaultButtonForeground;
             SolidColorBrush background = Settings._DefaultButtonBackground;
-            _Rematch_bn_p1.Foreground = foreground;
-            _Rematch_bn_p1.Background = background;
-            _Exit_bn_p1.Foreground = foreground;
-            _Exit_bn_p1.Background = background;
-            _Rematch_bn_p2.Foreground = foreground;
-            _Rematch_bn_p2.Background = background;
-            _Exit_bn_p2.Foreground = foreground;
-            _Exit_bn_p2.Background = background;
+            _Rematch_p1_bn.Foreground = foreground;
+            _Rematch_p1_bn.Background = background;
+            _Exit_p1_bn.Foreground = foreground;
+            _Exit_p1_bn.Background = background;
+            _Rematch_p2_bn.Foreground = foreground;
+            _Rematch_p2_bn.Background = background;
+            _Exit_p2_bn.Foreground = foreground;
+            _Exit_p2_bn.Background = background;
             SetFlyoutVisible(false);
         }
         private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
@@ -267,13 +267,13 @@ namespace CockBlock8._1.Game
             string lose = "You lose!";
             if (player == 1)
             {
-                _GameOver_tx_p1.Text = lose;
-                _GameOver_tx_p2.Text = win;
+                _GameOver_p1_tx.Text = lose;
+                _GameOver_p2_tx.Text = win;
             }
             else
             {
-                _GameOver_tx_p1.Text = win;
-                _GameOver_tx_p2.Text = lose;
+                _GameOver_p1_tx.Text = win;
+                _GameOver_p2_tx.Text = lose;
             }
             SetFlyoutVisible(true);
         }
@@ -300,22 +300,22 @@ namespace CockBlock8._1.Game
         private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(2, false))
-            { _Exit_bn_p2.Foreground = Settings._PressedButtonForeground; _Exit_bn_p2.Background = Settings._PressedButtonBackground; }
+            { _Exit_p2_bn.Foreground = Settings._PressedButtonForeground; _Exit_p2_bn.Background = Settings._PressedButtonBackground; }
         }
         private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(2, true))
-            { _Rematch_bn_p2.Foreground =Settings._PressedButtonForeground; _Rematch_bn_p2.Background = Settings._PressedButtonBackground; }
+            { _Rematch_p2_bn.Foreground = Settings._PressedButtonForeground; _Rematch_p2_bn.Background = Settings._PressedButtonBackground; }
         }
         private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, false))
-            { _Exit_bn_p1.Foreground = Settings._PressedButtonForeground; _Exit_bn_p1.Background = Settings._PressedButtonBackground; }
+            { _Exit_p1_bn.Foreground = Settings._PressedButtonForeground; _Exit_p1_bn.Background = Settings._PressedButtonBackground; }
         }
         private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
         {
             if (ExitRematchButtonPressed(1, true))
-            { _Rematch_bn_p1.Foreground = Settings._PressedButtonForeground; _Rematch_bn_p1.Background = Settings._PressedButtonBackground; }
+            { _Rematch_p1_bn.Foreground = Settings._PressedButtonForeground; _Rematch_p1_bn.Background = Settings._PressedButtonBackground; }
         }
         private bool ExitRematchButtonPressed(int playerIndex, bool rematch)
         {
@@ -342,5 +342,9 @@ namespace CockBlock8._1.Game
         }
         private void Exit()
         { this.Frame.Navigate(typeof(MainPage)); }
+        internal override Button[] GetButtons()
+        { return new Button[] { _Exit_p1_bn, _Exit_p2_bn, _Rematch_p1_bn, _Rematch_p2_bn, Start_bn }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { _CurrentHealth1_tx, _CurrentHealth2_tx, _GameOver_p1_tx, _GameOver_p2_tx, _p1_energy1_tx, _p1_energy2_tx, _p1_energy3_tx, _p2_energy1_tx, _p2_energy2_tx, _p2_energy3_tx }; }
     }
 }

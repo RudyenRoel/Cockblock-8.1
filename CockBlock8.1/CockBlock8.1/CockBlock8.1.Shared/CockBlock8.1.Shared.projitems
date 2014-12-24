@@ -36,8 +36,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CanonUpInactive.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Settings.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDown.png" />

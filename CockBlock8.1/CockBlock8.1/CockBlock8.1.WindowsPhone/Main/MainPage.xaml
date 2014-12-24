@@ -33,6 +33,7 @@
         </Grid>
         <Grid Grid.Row="3">
             <Button x:Name="About_bn" Content="Button3" Click="About_bn_Click"/>
+            <Image x:Name="Settings_img" Width="50" Height="50" Margin="50,0,0,0" Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" PointerPressed="Settings_img_PointerPressed"/>
         </Grid>
         <Grid Grid.Row="4">
             <Button x:Name="Exit_bn" Content="Button4" Click="Exit_bn_Click"/>

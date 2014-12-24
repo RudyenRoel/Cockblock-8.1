@@ -30,6 +30,7 @@ namespace CockBlock8._1.Main.Instructions
         private int _SubTitleFontSize = 32; // TODO: magic cookie
         private int _TopicFontSize = 24; // TODO: magic cookie
         private int _DescriptionFontSize = 18; // TODO: magic cookie
+        private List<string[]> _Instruction = new List<string[]>();
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         public HelpPage()
@@ -44,22 +45,12 @@ namespace CockBlock8._1.Main.Instructions
 
         private void Init()
         {
-            DefaultTextBlockProparties(_Title_tx, _F_A_Q_tx);
+            Settings.DefaultTextBlockProperties(_Title_tx, _F_A_Q_tx);
             _Title_tx.FontSize = _TitleFontSize;
             _F_A_Q_tx.FontSize = _SubTitleFontSize;
             _Title_tx.Text = "Help";
             _F_A_Q_tx.Text = "Frequently Asked Questions";
             _F_A_Q_tx.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
-        }
-        private void DefaultTextBlockProparties(params TextBlock[] textblocks)
-        {
-            foreach (TextBlock tb in textblocks)
-            {
-                tb.Text = "[text]";
-                tb.FontSize = _DescriptionFontSize;
-                tb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                tb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
-            }
         }
         private void AddTopic(string topic, string description)
         {
@@ -106,8 +97,8 @@ namespace CockBlock8._1.Main.Instructions
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            List<string[]> instruction = (e.Parameter as List<string[]>);
-            foreach (string[] topic in instruction)
+            this._Instruction = (e.Parameter as List<string[]>);
+            foreach (string[] topic in _Instruction)
             { AddTopic(topic[0], topic[1]); }
         }
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -115,5 +106,6 @@ namespace CockBlock8._1.Main.Instructions
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         { throw new NotImplementedException(); }
+
     }
 }
