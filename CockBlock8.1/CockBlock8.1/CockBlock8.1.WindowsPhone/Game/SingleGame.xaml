@@ -17,6 +17,7 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
+        <Image Grid.Row="2" x:Name="_Flag_Image" Stretch="Fill"/>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Rectangle x:Name="_TotalHealth1_rect"/>
             <Rectangle x:Name="_CurrentHealth1_rect" />
@@ -55,7 +56,7 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370">
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370" Visibility="Collapsed">
                         <Grid>
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="180"/>
@@ -74,7 +75,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370">
+                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370" Visibility="Collapsed">
                         <Grid>
                             <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">

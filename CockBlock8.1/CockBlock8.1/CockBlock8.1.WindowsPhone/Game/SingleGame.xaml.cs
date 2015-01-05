@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
@@ -51,6 +53,7 @@ namespace CockBlock8._1.Game
         }
         private void init()
         {
+            SetCorrospondingFlag(0, 0);
             _playerIndexFirstChoice = 0;
             _playerWantToReplay = 0;
             _goingUp = false;
@@ -182,6 +185,7 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
+            LoadCurrentLocationAsync();
             Restart();
         }
 
@@ -226,7 +230,7 @@ namespace CockBlock8._1.Game
 
         public void SetEnergy(int player, int cannonNumber, int energy)
         {
-            ((TextBlock)this.FindName("_p" + player + "_energy" + cannonNumber)).Text = "" + energy;
+            ((TextBlock)this.FindName("_p" + player + "_energy" + cannonNumber + "_tx")).Text = "" + energy;
         }
 
         public void SwitchGoingUp()
@@ -286,6 +290,7 @@ namespace CockBlock8._1.Game
             }
             init();
             _vm.StartSingleGame();
+            // Reset Timer + timer Bars
         }
 
         private void SetFlyoutVisible(bool result)
@@ -342,6 +347,28 @@ namespace CockBlock8._1.Game
         }
         private void Exit()
         { this.Frame.Navigate(typeof(MainPage)); }
+        private void SetCorrospondingFlag(double lattitude, double longitude)
+        { SetBackgroundFlag(Flags.Get.GetFlag(lattitude, longitude)); }
+        private void SetBackgroundFlag(BitmapImage img)
+        { this._Flag_Image.Source = img; }
+        private async Task LoadCurrentLocationAsync()
+        {
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
+            var locator = new Geolocator();
+            locator.DesiredAccuracy = PositionAccuracy.Default;
+            locator.DesiredAccuracyInMeters = 30;
+
+            var position = await locator.GetGeopositionAsync(new TimeSpan(10000), new TimeSpan(0, 0, 5));
+
+            watch.Stop();
+            Debug.WriteLine(watch.Elapsed + ", " + watch.ElapsedMilliseconds + ", " + watch.ElapsedTicks);
+            Debug.WriteLine("Geo Location Stopwatch: " + watch.ToString());
+
+            var latitude = position.Coordinate.Point.Position.Latitude;
+            var longitude = position.Coordinate.Point.Position.Longitude;
+            SetCorrospondingFlag(latitude, longitude);
+        }
         internal override Button[] GetButtons()
         { return new Button[] { _Exit_p1_bn, _Exit_p2_bn, _Rematch_p1_bn, _Rematch_p2_bn, Start_bn }; }
         internal override TextBlock[] GetTextBlocks()
