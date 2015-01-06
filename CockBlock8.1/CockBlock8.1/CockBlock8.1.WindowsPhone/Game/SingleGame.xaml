@@ -31,9 +31,9 @@
             <StackPanel.RenderTransform>
                 <RotateTransform Angle="180"/>
             </StackPanel.RenderTransform>
-            <TextBlock x:Name="_p1_energy1_tx" Text="100"/>
-            <TextBlock x:Name="_p1_energy2_tx" Text="100"/>
             <TextBlock x:Name="_p1_energy3_tx" Text="100"/>
+            <TextBlock x:Name="_p1_energy2_tx" Text="100"/>
+            <TextBlock x:Name="_p1_energy1_tx" Text="100"/>
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">
                     <Setter x:Name="_HealthStyle1" Property="Margin" Value="50,0,50,0"/>

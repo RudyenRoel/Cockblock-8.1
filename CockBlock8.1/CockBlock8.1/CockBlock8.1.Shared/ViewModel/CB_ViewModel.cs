@@ -41,14 +41,18 @@ namespace CockBlock8._1
 #if WINDOWS_PHONE_APP
             _turnTimer = TIMEPERTURNPHONE;
             _shootTimer = TIMEFORSHOOTINGPHONE;
-#endif
+#endif 
         }
 
         public void StartSingleGame()
         {
+            _turnTimer = TIMEPERTURNTABLET;
+            _shootTimer = TIMEFORSHOOTINGTABLET;
             _amountOfCannons = AMOUNTOFCANNONSTABLET;
             _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6", "_ShieldCannon7", "_ShieldCannon8", "_ShieldCannon9", "_ShieldCannon10" };
 #if WINDOWS_PHONE_APP
+            _turnTimer = TIMEPERTURNPHONE;
+            _shootTimer = TIMEFORSHOOTINGPHONE;
             _amountOfCannons = AMOUNTOFCANNONSPHONE;
             _shieldCannonNames = new string[] { "_ShieldCannon1", "_ShieldCannon2", "_ShieldCannon3", "_ShieldCannon4", "_ShieldCannon5", "_ShieldCannon6" };
 #endif
