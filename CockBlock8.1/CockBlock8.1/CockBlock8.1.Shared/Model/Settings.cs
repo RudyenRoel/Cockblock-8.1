@@ -217,10 +217,15 @@ namespace CockBlock8._1
         {
             public static string Unknown = "Loading";
             public static string Nederland = "Netherlands";
-            public static string Duitsland = "Germany";
-            public static string Amerika = "USA";
             public static string Belgie = "Belgium";
             public static string Luxemburg = "Luxembourg";
+            public static string Frankrijk = "France";
+            public static string Spanje = "Spain";
+            public static string Portugal = "Portugal";
+            public static string Italie = "Italy";
+            public static string Engeland = "United Kingdom";
+            public static string Duitsland = "Germany";
+            public static string Amerika = "USA";
         }
     }
 }

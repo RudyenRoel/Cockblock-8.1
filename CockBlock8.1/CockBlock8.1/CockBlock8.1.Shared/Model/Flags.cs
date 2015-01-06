@@ -24,6 +24,8 @@ namespace CockBlock8._1
             _Flag_Names = new List<string>();
             AddFlagNames(Settings.Countries.Unknown);
             AddFlagNames(Settings.Countries.Nederland, Settings.Countries.Belgie, Settings.Countries.Luxemburg);
+            AddFlagNames(Settings.Countries.Frankrijk, Settings.Countries.Spanje, Settings.Countries.Portugal);
+            AddFlagNames(Settings.Countries.Italie, Settings.Countries.Engeland);
             AddFlagNames(Settings.Countries.Duitsland, Settings.Countries.Amerika);
             _FlagImages = new Dictionary<string, BitmapImage>();
             LoadAllFlags();
@@ -53,7 +55,7 @@ namespace CockBlock8._1
             return img;
         }
         public override string ToString()
-        {            return "Amount of Flags (" + _FlagImages.Count + ")";        }
+        { return "Amount of Flags (" + _FlagImages.Count + ")"; }
         public BitmapImage FindFlag(string country)
         {
             Debug.WriteLine("Find Flag: " + (country == null ? "Null" : country));
