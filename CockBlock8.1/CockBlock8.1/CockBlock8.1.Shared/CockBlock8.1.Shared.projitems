@@ -15,8 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Flags.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Flags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CB_Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Cock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Player.cs" />
@@ -40,6 +40,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Earth.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Belgium.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Germany.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Loading.png" />

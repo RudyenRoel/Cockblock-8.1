@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
-using Windows.Services.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
@@ -54,10 +53,7 @@ namespace CockBlock8._1
             return img;
         }
         public override string ToString()
-        {
-            return "Amount of Flags (" + _FlagImages.Count + ")";
-        }
-
+        {            return "Amount of Flags (" + _FlagImages.Count + ")";        }
         public BitmapImage FindFlag(string country)
         {
             Debug.WriteLine("Find Flag: " + (country == null ? "Null" : country));

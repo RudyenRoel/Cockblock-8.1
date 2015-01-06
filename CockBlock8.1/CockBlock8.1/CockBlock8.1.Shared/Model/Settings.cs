@@ -25,6 +25,7 @@ namespace CockBlock8._1
         public readonly static string _TextBlockForegroundColorKey = "_TextBlockForeground";
         public readonly static string _Instructions = "Instructions";
         public readonly static string _SettingsImage = "Settings.png";
+        public readonly static string _MapImage = "Earth.png";
 
         private static string _SingleGameInstructions = null;
         private static string _MultiGameInstructions = null;

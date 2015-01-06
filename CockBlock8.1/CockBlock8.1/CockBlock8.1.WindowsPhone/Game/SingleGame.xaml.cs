@@ -1,4 +1,5 @@
-﻿using CockBlock8._1.View;
+﻿using CockBlock8._1.Model;
+using CockBlock8._1.View;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -192,7 +193,7 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            LoadCurrentLocationAsync();
+            BackgroundCheck();
             Restart();
         }
 
@@ -356,47 +357,13 @@ namespace CockBlock8._1.Game
         { this.Frame.Navigate(typeof(MainPage)); }
         private void SetBackgroundFlag(BitmapImage img)
         { this._Flag_Image.Source = img; }
-        private async Task LoadCurrentLocationAsync()
+        private async Task BackgroundCheck()
         {
-            if (!_searchingLocation)
-            {
-                _searchingLocation = true;
-                var locator = new Geolocator();
-                locator.DesiredAccuracy = PositionAccuracy.Default;
-                locator.DesiredAccuracyInMeters = 30;
-
-                Stopwatch watch = new Stopwatch();
-                watch.Start();
-                var position = await locator.GetGeopositionAsync();
-                watch.Stop();
-                Debug.WriteLine("Time: " + watch.Elapsed);
-                string country = await GetCurrentCountry(position);
-                SetBackgroundFlag(Flags.Get.FindFlag(country));
-            }
-        }
-        public async Task<string> GetCurrentCountry(Geoposition position)
-        {
-            string country = Settings.Countries.Unknown;
-            if (position != null)
-            {
-                Geopoint point = GeopositionToPoint(position);
-                Debug.WriteLine("Searching for country");
-                country = await FindCorrospondingCountry(point);
-                Debug.WriteLine("Country found: " + country);
-            }
-            else
-            { Debug.WriteLine("GetFlag: Position == null"); }
-            _searchingLocation = false;
-            return country;
-        }
-        private Geopoint GeopositionToPoint(Geoposition position)
-        { return new Geopoint(new BasicGeoposition { Longitude = position.Coordinate.Longitude, Latitude = position.Coordinate.Latitude }); }
-        public async Task<string> FindCorrospondingCountry(Geopoint geopoint)
-        {
-            var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
-            string country = result.Locations[0].Address.Country;
-            Debug.WriteLine("Country: " + country);
-            return country;
+            GPSModel model = new GPSModel();
+            Geoposition position = await model.GetCurrentLocation();
+            Geopoint point = model.GeopositionToPoint(position);
+            string country = await model.GetCurrentCountry(point);
+            SetBackgroundFlag(Flags.Get.FindFlag(country));
         }
         internal override Button[] GetButtons()
         { return new Button[] { _Exit_p1_bn, _Exit_p2_bn, _Rematch_p1_bn, _Rematch_p2_bn, Start_bn }; }

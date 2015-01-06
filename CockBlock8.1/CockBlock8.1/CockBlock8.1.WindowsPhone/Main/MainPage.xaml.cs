@@ -34,6 +34,7 @@ namespace CockBlock8._1
     {
         private string _ApplicationName = "CockBlock 8.1";
         private BitmapImage _SettingsImage = new BitmapImage();
+        private BitmapImage _MapImage = new BitmapImage();
         private int _TitleFontSize = 48;
         private int _AmountOfRectangles = 7 * 28;
         public MainPage()
@@ -48,10 +49,15 @@ namespace CockBlock8._1
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
             this.Title_tx.Text = _ApplicationName;
             _SettingsImage.UriSource = new Uri("ms-appx:Res/" + Settings._SettingsImage, UriKind.RelativeOrAbsolute);
+            _MapImage.UriSource = new Uri("ms-appx:Res/" + Settings._MapImage, UriKind.RelativeOrAbsolute);
             this.Settings_img.Margin = new Thickness(200, 0, 0, 0);
             this.Settings_img.Source = _SettingsImage;
             this.Settings_img.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
             this.Settings_img.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            this.Location_img.Margin = new Thickness(0, 0, 200, 0);
+            this.Location_img.Source = _MapImage;
+            this.Location_img.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+            this.Location_img.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
             Settings.DefaultButtonProperties(About_bn, SingleGame_bn, MultiGame_bn, Exit_bn);
             this.About_bn.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
             this.SingleGame_bn.Content = "Single Game";
@@ -119,6 +125,8 @@ namespace CockBlock8._1
         }
         private void Settings_img_PointerPressed(object sender, PointerRoutedEventArgs e)
         { this.Frame.Navigate(typeof(SettingsPage), e); }
+        private void Location_img_PointerPressed(object sender, PointerRoutedEventArgs e)
+        { this.Frame.Navigate(typeof(MapPage), e); }
         internal override Button[] GetButtons()
         { return new Button[] { this.SingleGame_bn, this.MultiGame_bn, this.About_bn, this.Exit_bn }; }
         internal override TextBlock[] GetTextBlocks()
