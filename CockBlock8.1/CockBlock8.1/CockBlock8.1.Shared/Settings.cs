@@ -212,5 +212,14 @@ namespace CockBlock8._1
                 button.Background = Settings._DefaultButtonBackground;
             }
         }
+        public class Countries
+        {
+            public static string Unknown = "Loading";
+            public static string Nederland = "Netherlands";
+            public static string Duitsland = "Germany";
+            public static string Amerika = "USA";
+            public static string Belgie = "Belgium";
+            public static string Luxemburg = "Luxembourg";
+        }
     }
 }

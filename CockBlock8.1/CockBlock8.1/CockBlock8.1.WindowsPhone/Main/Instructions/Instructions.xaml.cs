@@ -77,6 +77,7 @@ namespace CockBlock8._1.Main.Instructions
             this._Title.Text = instructions[1];
             this._Information_tx.Text = instructions[2];
             this._HelpPageInformation = information.Item2;
+            Debug.WriteLine("Instructions: " + instructions[2]);
             Init();
         }
 

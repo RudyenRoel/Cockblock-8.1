@@ -40,8 +40,11 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\Cock.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\CockUp.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Holland.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Belgium.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Germany.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Loading.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Luxembourg.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Netherlands.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Settings.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveUp.png" />

@@ -11,6 +11,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
+using Windows.Services.Maps;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,7 +40,7 @@ namespace CockBlock8._1.Game
         private BitmapImage _CockDown = new BitmapImage();
         private BitmapImage _Cock = new BitmapImage();
         private List<Image> _CockList;
-        private bool _goingUp;
+        private bool _goingUp, _searchingLocation = false;
         private int[] _xCoords;
         private int _maxYCoord;
         private int _startYCoord;
@@ -49,11 +50,17 @@ namespace CockBlock8._1.Game
         {
             this.InitializeComponent();
             _vm.StartSingleGame();
+            Flags.Get.ToString();
+            InitBackground();
             init();
+        }
+        private async Task InitBackground()
+        {
+            Debug.WriteLine("InitBackground");
+            SetBackgroundFlag(Flags.Get.FindFlag(null));
         }
         private void init()
         {
-            SetCorrospondingFlag(0, 0);
             _playerIndexFirstChoice = 0;
             _playerWantToReplay = 0;
             _goingUp = false;
@@ -347,27 +354,49 @@ namespace CockBlock8._1.Game
         }
         private void Exit()
         { this.Frame.Navigate(typeof(MainPage)); }
-        private void SetCorrospondingFlag(double lattitude, double longitude)
-        { SetBackgroundFlag(Flags.Get.GetFlag(lattitude, longitude)); }
         private void SetBackgroundFlag(BitmapImage img)
         { this._Flag_Image.Source = img; }
         private async Task LoadCurrentLocationAsync()
         {
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
-            var locator = new Geolocator();
-            locator.DesiredAccuracy = PositionAccuracy.Default;
-            locator.DesiredAccuracyInMeters = 30;
+            if (!_searchingLocation)
+            {
+                _searchingLocation = true;
+                var locator = new Geolocator();
+                locator.DesiredAccuracy = PositionAccuracy.Default;
+                locator.DesiredAccuracyInMeters = 30;
 
-            var position = await locator.GetGeopositionAsync(new TimeSpan(10000), new TimeSpan(0, 0, 5));
-
-            watch.Stop();
-            Debug.WriteLine(watch.Elapsed + ", " + watch.ElapsedMilliseconds + ", " + watch.ElapsedTicks);
-            Debug.WriteLine("Geo Location Stopwatch: " + watch.ToString());
-
-            var latitude = position.Coordinate.Point.Position.Latitude;
-            var longitude = position.Coordinate.Point.Position.Longitude;
-            SetCorrospondingFlag(latitude, longitude);
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+                var position = await locator.GetGeopositionAsync();
+                watch.Stop();
+                Debug.WriteLine("Time: " + watch.Elapsed);
+                string country = await GetCurrentCountry(position);
+                SetBackgroundFlag(Flags.Get.FindFlag(country));
+            }
+        }
+        public async Task<string> GetCurrentCountry(Geoposition position)
+        {
+            string country = Settings.Countries.Unknown;
+            if (position != null)
+            {
+                Geopoint point = GeopositionToPoint(position);
+                Debug.WriteLine("Searching for country");
+                country = await FindCorrospondingCountry(point);
+                Debug.WriteLine("Country found: " + country);
+            }
+            else
+            { Debug.WriteLine("GetFlag: Position == null"); }
+            _searchingLocation = false;
+            return country;
+        }
+        private Geopoint GeopositionToPoint(Geoposition position)
+        { return new Geopoint(new BasicGeoposition { Longitude = position.Coordinate.Longitude, Latitude = position.Coordinate.Latitude }); }
+        public async Task<string> FindCorrospondingCountry(Geopoint geopoint)
+        {
+            var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
+            string country = result.Locations[0].Address.Country;
+            Debug.WriteLine("Country: " + country);
+            return country;
         }
         internal override Button[] GetButtons()
         { return new Button[] { _Exit_p1_bn, _Exit_p2_bn, _Rematch_p1_bn, _Rematch_p2_bn, Start_bn }; }
