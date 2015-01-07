@@ -18,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Flags.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CB_Model.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Cock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\ShieldCannon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\CB_ViewModel.cs" />

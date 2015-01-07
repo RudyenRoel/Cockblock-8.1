@@ -25,7 +25,7 @@ namespace CockBlock8._1
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
         private const int TIMEPERTURNPHONE = 6 * 60; // TODO magic cookie: 6 seconds * 60 frames per second
         private const int TIMEFORSHOOTINGPHONE = 2 * 60; // TODO magic cookie: 2 seconds * 60 frames per second
-        private const int TIMEPERTURNTABLET = 5 * 60; // TODO magic cookie: 3 seconds * 60 frames per second
+        private const int TIMEPERTURNTABLET = 6 * 60; // TODO magic cookie: 3 seconds * 60 frames per second
         private const int TIMEFORSHOOTINGTABLET = 2 * 60; // TODO magic cookie: 1 seconds * 60 frames per second
         private const int NEWROUNDENERGY = 5;
         private const int STARTINGHEALTH = 100;
@@ -137,11 +137,6 @@ namespace CockBlock8._1
                     _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
                 }
             }
-            else
-            {
-                Debug.WriteLine("ShieldCannonPressed! else");
-                //TODO: Image fade
-            }
         }
 
         public void ShieldCannonReleased(int playerIndex, int shieldCannonIndex)
@@ -181,20 +176,12 @@ namespace CockBlock8._1
 
         public void EnergyChanged(Player p, int cannon, int energy)
         {
-            // TODO Make neat, make events handle properly
             ((SingleGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, cannon, energy);
             if (energy <= 0)
             {
                 int playerIndex = Array.IndexOf(_players, p);
                 _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + (cannon - 1)], _players[playerIndex].GetShieldCannons()[cannon - 1].GetSprite());
             }
-        }
-
-        internal void ShootCock(Player p, int cannon)
-        {
-            int x = Array.IndexOf(_players, p) + 1;
-            int y = cannon + 1;
-            //new Cock(x, y); // TODO Remove Cock
         }
 
         public void CheckHits(int shieldCannonIndex)
@@ -222,7 +209,8 @@ namespace CockBlock8._1
 
         internal void ILost(Player player)
         {
-            ((SingleGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1);
+            int winnerIndex = _players.Length - Array.IndexOf(_players, player) - 1;
+            ((SingleGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1, CalculateScore(winnerIndex));
             StopTimer();
         }
 
@@ -234,5 +222,59 @@ namespace CockBlock8._1
             }
         }
         internal virtual Button[] GetAllButtons() { return null; }
+
+        private int CalculateScore(int winnerIndex)
+        {
+            int score = 0;
+            int energyTotalPlayer0 = 0;
+            int energyTotalPlayer1 = 0;
+            bool noShields = false;
+
+            foreach(ShieldCannon sc in _players[0].GetShieldCannons())
+            {
+                energyTotalPlayer0 += (int)sc.Energy;
+            }
+            foreach (ShieldCannon sc in _players[1].GetShieldCannons())
+            {
+                energyTotalPlayer1 += (int)sc.Energy;
+            }
+            Debug.WriteLine("Player 1 has an energy total of: " + energyTotalPlayer0);
+            Debug.WriteLine("Player 2 has an energy total of: " + energyTotalPlayer1);
+
+            if(winnerIndex == 0)
+            {
+                score = energyTotalPlayer0 - energyTotalPlayer1;
+                Debug.WriteLine("Player 1 wins, energy difference is: " + score);
+                if(energyTotalPlayer1 == 0)
+                {
+                    noShields = true;
+                }
+            }
+            else
+            {
+                score = energyTotalPlayer1 - energyTotalPlayer0;
+                Debug.WriteLine("Player 2 wins, energy difference is: " + score); 
+                if (energyTotalPlayer0 == 0)
+                {
+                    noShields = true;
+                }
+            }
+            Debug.WriteLine("Score: " + score + " ----- Winner health left: " + _players[winnerIndex].GetHealth());
+            Debug.WriteLine("Score + " + _players[winnerIndex].GetHealth() * 5 + " (health * 5)");
+            score += _players[winnerIndex].GetHealth() * 10;
+            if (_players[winnerIndex].GetHealth() == 100)
+            {
+                Debug.WriteLine("Perfect win! (no health lost) BONUS POINTS: +200");
+                score += 200;
+            }
+            if (noShields)
+            {
+                Debug.WriteLine("DESTRUCTION! (no energy left for opponent) BONUS POINTS: +500");
+                score += 500;
+            }
+            Debug.WriteLine("Final Score = " + score);
+            // TODO: Save Score
+            return score;
+        }
     }
 }

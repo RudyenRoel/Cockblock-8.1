@@ -46,17 +46,33 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="350*"/>
+                <ColumnDefinition Width="700*"/>
                 <ColumnDefinition Width="15"/>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <Rectangle x:Name="_FullTime_Left_rect" Width="15" Height="1080" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle x:Name="_FullTime_Left_rect" Width="15" Height="1256" Fill="#FFF4F4F5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Rectangle x:Name="_CurrentTime_Left_rect" Width="15" Height="600" Fill="#FF00D1FF" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Grid>
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
-                <StackPanel Orientation="Horizontal" Height="600">
+                <StackPanel Orientation="Horizontal" Height="630">
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="720" Visibility="Visible" MinWidth="720" Margin="10,0,0,0">
+                        <Grid>
+                            <Grid.RenderTransform>
+                                <RotateTransform Angle="180"/>
+                            </Grid.RenderTransform>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Button x:Name="_Exit_p1_bn" Content="Exit" Margin="10,0,10,0" Click="_Exit_bn_p1_Click"/>
+                                <Button x:Name="_Rematch_p1_bn" Content="Rematch" Margin="10,0,10,0" Click="_Rematch_bn_p1_Click"/>
+                            </StackPanel>
+                            <TextBlock x:Name="_GameOver_p1_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,-80,0,0"/>
+                            <TextBlock x:Name="_Score_p1_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,0"/>
+                            <TextBox Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
+                            <Button x:Name="_Save_p1_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,160,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
+                            <Grid.Margin>700,440,-720,-200</Grid.Margin>
+                        </Grid>
+                    </FlyoutPresenter>
                     <Image x:Name="_ShieldCannon1" Width="100" Height="100" Margin="45,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon1_PointerPressed" PointerEntered="ShieldCannon1_PointerPressed" PointerReleased="ShieldCannon1_PointerReleased" PointerExited="ShieldCannon1_PointerReleased"/>
                     <Image x:Name="_ShieldCannon2" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon2_PointerPressed" PointerEntered="ShieldCannon2_PointerPressed" PointerReleased="ShieldCannon2_PointerReleased" PointerExited="ShieldCannon2_PointerReleased"/>
                     <Image x:Name="_ShieldCannon3" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon3_PointerPressed" PointerEntered="ShieldCannon3_PointerPressed" PointerReleased="ShieldCannon3_PointerReleased" PointerExited="ShieldCannon3_PointerReleased"/>
@@ -64,7 +80,19 @@
                     <Image x:Name="_ShieldCannon5" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Height="600">
+                <StackPanel Orientation="Horizontal" Height="630">
+                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="720" Visibility="Visible" MinWidth="720" Margin="10,0,0,0" >
+                        <Grid>
+                            <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,-80,0,0"/>
+                            <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,0"/>
+                            <TextBox Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
+                            <Button x:Name="_Save_p2_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,160,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                                <Button x:Name="_Exit_p2_bn" Content="Exit" Margin="10,0,10,0" Click="_Exit_bn_p2_Click"/>
+                                <Button x:Name="_Rematch_p2_bn" Content="Rematch" Margin="10,0,10,0" Click="_Rematch_bn_p2_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </FlyoutPresenter>
                     <Image x:Name="_ShieldCannon6" Width="100" Height="100" Margin="45,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon6_PointerPressed" PointerEntered="ShieldCannon6_PointerPressed" PointerReleased="ShieldCannon6_PointerReleased" PointerExited="ShieldCannon6_PointerReleased"/>
                     <Image x:Name="_ShieldCannon7" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon7_PointerPressed" PointerEntered="ShieldCannon7_PointerPressed" PointerReleased="ShieldCannon7_PointerReleased" PointerExited="ShieldCannon7_PointerReleased"/>
                     <Image x:Name="_ShieldCannon8" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon8_PointerPressed" PointerEntered="ShieldCannon8_PointerPressed" PointerReleased="ShieldCannon8_PointerReleased" PointerExited="ShieldCannon8_PointerReleased"/>
@@ -74,7 +102,7 @@
             </StackPanel>
 
             <Grid Grid.Column="2">
-                <Rectangle x:Name="_FullTime_Right_rect" Width="15" Height="1080" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                <Rectangle x:Name="_FullTime_Right_rect" Width="15" Height="1256" Fill="#FFF4F4F5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                 <Rectangle x:Name="_CurrentTime_Right_rect" Width="15" Height="600" Fill="#FF00D1FF" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </Grid>
 

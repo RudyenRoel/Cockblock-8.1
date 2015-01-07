@@ -56,7 +56,8 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370" Visibility="Collapsed">
+                    
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370" Visibility="Visible">
                         <Grid>
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="180"/>
@@ -65,7 +66,10 @@
                                 <Button x:Name="_Exit_p1_bn" Content="Exit" Margin="10,0,10,0" Click="_Exit_bn_p1_Click"/>
                                 <Button x:Name="_Rematch_p1_bn" Content="Rematch" Margin="10,0,10,0" Click="_Rematch_bn_p1_Click"/>
                             </StackPanel>
-                            <TextBlock x:Name="_GameOver_p1_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+                            <TextBox x:Name="_p1_Name_tx" Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="_GameOver_p1_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,160"/>
+                            <TextBlock x:Name="_Score_p1_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,80"/>
+                            <Button x:Name="_Save_p1_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <Grid.Margin>370,220,-370,-200</Grid.Margin>
                         </Grid>
                     </FlyoutPresenter>
@@ -75,9 +79,12 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370" Visibility="Collapsed">
+                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370" Visibility="Visible">
                         <Grid>
-                            <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+                            <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,160"/>
+                            <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,80"/>
+                            <TextBox x:Name="_p2_Name_tx" Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10"/>
+                            <Button x:Name="_Save_p2_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                 <Button x:Name="_Exit_p2_bn" Content="Exit" Margin="10,0,10,0" Click="_Exit_bn_p2_Click"/>
                                 <Button x:Name="_Rematch_p2_bn" Content="Rematch" Margin="10,0,10,0" Click="_Rematch_bn_p2_Click"/>

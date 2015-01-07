@@ -89,10 +89,22 @@ namespace CockBlock8._1.Game
             _Rematch_p1_bn.Background = background;
             _Exit_p1_bn.Foreground = foreground;
             _Exit_p1_bn.Background = background;
+            _Save_p1_bn.Foreground = foreground;
+            _Save_p1_bn.Background = background;
+            _p1_Name_tx.Foreground = foreground;
+            _p1_Name_tx.Background = background;
+            _p1_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             _Rematch_p2_bn.Foreground = foreground;
             _Rematch_p2_bn.Background = background;
             _Exit_p2_bn.Foreground = foreground;
             _Exit_p2_bn.Background = background;
+            _Save_p2_bn.Foreground = foreground;
+            _Save_p2_bn.Background = background;
+            _p2_Name_tx.Foreground = foreground;
+            _p2_Name_tx.Background = background;
+            _p2_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             SetFlyoutVisible(false);
         }
         private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
@@ -270,7 +282,7 @@ namespace CockBlock8._1.Game
             _CurrentTime_Right_rect.Height = currentLength;
         }
 
-        internal void GameOver(int player)
+        internal void GameOver(int player, int score)
         {
             Debug.WriteLine("Player" + player + " lost!");
             // if player = 1, player1 lost
@@ -281,11 +293,19 @@ namespace CockBlock8._1.Game
             {
                 _GameOver_p1_tx.Text = lose;
                 _GameOver_p2_tx.Text = win;
+                _Score_p1_tx.Text = "No score for losers!";
+                _Score_p2_tx.Text = "Score: " + score;
+                _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                _p2_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
             {
                 _GameOver_p1_tx.Text = win;
                 _GameOver_p2_tx.Text = lose;
+                _Score_p1_tx.Text = "Score: " + score;
+                _Score_p2_tx.Text = "No score for losers!";
+                _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                _p1_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             SetFlyoutVisible(true);
         }
@@ -308,6 +328,35 @@ namespace CockBlock8._1.Game
                 vis = Windows.UI.Xaml.Visibility.Visible;
             this._Flyout_Player_1.Visibility = vis;
             this._Flyout_Player_2.Visibility = vis;
+        }
+        private void _Save_bn_Click(object sender, RoutedEventArgs e)
+        {
+            int score = 0;
+            if(sender.Equals(_Save_p1_bn))
+            {
+                if (_p1_Name_tx.Text == "Enter Name")
+                {
+                    _p1_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    score = Int16.Parse(_Score_p1_tx.Text.Remove(0, 7));
+                    Debug.WriteLine("Saving score: " + score + " by Player: " + _p1_Name_tx.Text);
+                }
+                
+            }
+            else
+            {
+                if (_p2_Name_tx.Text == "Enter Name")
+                {
+                    _p2_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    score = Int16.Parse(_Score_p2_tx.Text.Remove(0, 7));
+                    Debug.WriteLine("Saving score: " + score + " by Player: " + _p2_Name_tx.Text);
+                }
+            }
         }
 
         private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)

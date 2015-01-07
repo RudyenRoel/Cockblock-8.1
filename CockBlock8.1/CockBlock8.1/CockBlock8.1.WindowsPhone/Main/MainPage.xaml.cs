@@ -98,13 +98,6 @@ namespace CockBlock8._1
         {
             base.OnNavigatedTo(e);
             Frame.BackStack.Clear();
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
         }
 
         private void Single_Game_bn_Click(object sender, RoutedEventArgs e)

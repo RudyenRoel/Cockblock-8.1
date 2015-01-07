@@ -68,11 +68,6 @@ namespace CockBlock8._1.Model
             _vm.EnergyChanged(this, Array.IndexOf(_shieldCannons, s) + 1, energy);
         }
 
-        public void Shoot(ShieldCannon s)
-        {
-            _vm.ShootCock(this, Array.IndexOf(_shieldCannons, s) + 1);
-        }
-
         public void CheckHits(int shieldCannonIndex)
         {
             _shieldCannons[shieldCannonIndex].Hit();
@@ -91,6 +86,11 @@ namespace CockBlock8._1.Model
                 }
             }
             _vm.HealthChanged(this, _health);
+        }
+
+        public int GetHealth()
+        {
+            return _health;
         }
     }
 }

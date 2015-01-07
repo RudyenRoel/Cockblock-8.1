@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -26,6 +28,8 @@ namespace CockBlock8._1.Game
     /// </summary>
     public sealed partial class SingleGame : CB_Page
     {
+        private int _playerWantToReplay; // if 1 : 1 player wants to restart
+        private int _playerIndexFirstChoice; // if 1: player 1, if 2: player 2
         private int _totalLengthHealthRect = 700; // TODO: magic cookie
         private int _totalLengthTimerRect = 1080; // TODO: magic cookie
         private BitmapImage _CockUp = new BitmapImage();
@@ -50,12 +54,87 @@ namespace CockBlock8._1.Game
             SwitchGoingUp();
             //setHealthPlayer1(80);
             //setHealthPlayer2(90);
-            _xCoords = new int[] { -560, -290, -20, 250, 520 };
+            _xCoords = new int[] { -550, -280, -10, 260, 530 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             _CockList = new List<Image>();
+            DefaultShieldCannonImageProparties(_ShieldCannon1, _ShieldCannon2, _ShieldCannon3, _ShieldCannon4, _ShieldCannon5, _ShieldCannon6, _ShieldCannon7, _ShieldCannon8, _ShieldCannon9, _ShieldCannon10);
+            DefaultHealthBarProparties(Colors.White, _TotalHealth1_rect, _TotalHealth2_rect);
+            DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
+            DefaultTimerBarProparties(Colors.White, _totalLengthTimerRect, _FullTime_Left_rect, _FullTime_Right_rect);
+            DefaultTimerBarProparties(Colors.Blue, _CurrentTime_Left_rect, _CurrentTime_Right_rect);
+            DefaultEnergyProparties(Colors.White, 16, "100", _p1_energy1, _p1_energy2, _p1_energy3, _p2_energy1, _p2_energy2, _p2_energy3);
+            DefaultEnergyProparties(Colors.DarkRed, 24, "100", _CurrentHealth1_tx, _CurrentHealth2_tx);
+            FlyoutSettings();
         }
 
+        private void FlyoutSettings()
+        {
+            SolidColorBrush foreground = Settings._DefaultButtonForeground;
+            SolidColorBrush background = Settings._DefaultButtonBackground;
+            _Rematch_p1_bn.Foreground = foreground;
+            _Rematch_p1_bn.Background = background;
+            _Exit_p1_bn.Foreground = foreground;
+            _Exit_p1_bn.Background = background;
+            _Save_p1_bn.Foreground = foreground;
+            _Save_p1_bn.Background = background;
+            _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _Rematch_p2_bn.Foreground = foreground;
+            _Rematch_p2_bn.Background = background;
+            _Exit_p2_bn.Foreground = foreground;
+            _Exit_p2_bn.Background = background;
+            _Save_p2_bn.Foreground = foreground;
+            _Save_p2_bn.Background = background;
+            _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            SetFlyoutVisible(false);
+        }
+        private void DefaultEnergyProparties(Color color, int fontSize, params TextBlock[] textblocks)
+        { DefaultEnergyProparties(color, fontSize, "", textblocks); }
+        private void DefaultEnergyProparties(Color color, int fontSize, string text, params TextBlock[] textblocks)
+        {
+            foreach (TextBlock tb in textblocks)
+            {
+                tb.Text = text;
+                tb.FontSize = fontSize;
+                SetTextboxColor(color, tb);
+            }
+        }
+        private void DefaultHealthBarProparties(Color color, params Rectangle[] rects)
+        {
+            foreach (Rectangle rect in rects)
+            {
+                SetRectangleColor(color, rect);
+                rect.Height = 25;
+                rect.Stroke = new SolidColorBrush(Colors.Black);
+                rect.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+            }
+        }
+        private void DefaultTimerBarProparties(Color color, params Rectangle[] rects)
+        { this.DefaultTimerBarProparties(color, -1, rects); }
+        private void DefaultTimerBarProparties(Color color, int height, params Rectangle[] rects)
+        {
+            foreach (Rectangle rect in rects)
+            {
+                SetRectangleColor(color, rect);
+                rect.Width = 15;
+                if (height != -1)
+                    rect.Height = height;
+            }
+        }
+        private void SetRectangleColor(Color color, Rectangle rect) { rect.Fill = new SolidColorBrush(color); }
+        private void SetTextboxColor(Color color, TextBlock tb) { tb.Foreground = new SolidColorBrush(color); }
+        private void DefaultShieldCannonImageProparties(params Image[] images)
+        {
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].Width = 100;
+                images[i].Height = 100;
+                if (i < images.Length / 2)
+                    images[i].VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
+                else
+                    images[i].VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Bottom;
+            }
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -130,8 +209,8 @@ namespace CockBlock8._1.Game
             Image CockImage = new Image();
             CockImage.Source = _Cock;
             CockImage.Margin = new Thickness(_xCoords[posX], _startYCoord, 0, 0);
-            CockImage.Width = 20;
-            CockImage.Height = 20;
+            CockImage.Width = 40;
+            CockImage.Height = 40;
             _CockList.Add(CockImage);
             GameGrid.Children.Add(CockImage);
         }
@@ -175,18 +254,18 @@ namespace CockBlock8._1.Game
             _goingUp = !_goingUp;
             if (_goingUp)
             {
-                _maxYCoord = -2210;
-                _marginChange = 20;
+                _maxYCoord = -2310;
+                _marginChange = 10;
                 _startYCoord = -130;
-                _distanceToHealth = 170;
+                _distanceToHealth = 160;
                 _Cock = _CockUp;
             }
             else
             {
                 _maxYCoord = -200;
-                _marginChange = -20;
-                _startYCoord = -2160;
-                _distanceToHealth = -170;
+                _marginChange = -10;
+                _startYCoord = -2380;
+                _distanceToHealth = -160;
                 _Cock = _CockDown;
             }
         }
@@ -198,10 +277,99 @@ namespace CockBlock8._1.Game
             _CurrentTime_Right_rect.Height = currentLength;
         }
 
-        internal void GameOver(int player)
+        internal void GameOver(int player, int score)
         {
             // if player = 1, player1 lost
             // if player = 2, player2 lost
+            string win = "You win!";
+            string lose = "You lose!";
+            if (player == 1)
+            {
+                _GameOver_p1_tx.Text = lose;
+                _GameOver_p2_tx.Text = win;
+                _Score_p1_tx.Text = "No score for losers!";
+                _Score_p2_tx.Text = "Score: " + score;
+                _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            else
+            {
+                _GameOver_p1_tx.Text = win;
+                _GameOver_p2_tx.Text = lose;
+                _Score_p1_tx.Text = "Score: " + score;
+                _Score_p2_tx.Text = "No score for losers!";
+                _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            SetFlyoutVisible(true);
         }
+
+        private void Restart()
+        {
+            foreach (Image cock in _CockList)
+            {
+                GameGrid.Children.Remove(cock);
+            }
+            init();
+            _vm.StartSingleGame();
+            // Reset Timer + timer Bars
+        }
+
+        private void SetFlyoutVisible(bool result)
+        {
+            Visibility vis = Windows.UI.Xaml.Visibility.Collapsed;
+            if (result)
+                vis = Windows.UI.Xaml.Visibility.Visible;
+            this._Flyout_Player_1.Visibility = vis;
+            this._Flyout_Player_2.Visibility = vis;
+        }
+
+        private void _Save_bn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(2, false))
+            { _Exit_p2_bn.Foreground = Settings._PressedButtonForeground; _Exit_p2_bn.Background = Settings._PressedButtonBackground; }
+        }
+        private void _Rematch_bn_p2_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(2, true))
+            { _Rematch_p2_bn.Foreground = Settings._PressedButtonForeground; _Rematch_p2_bn.Background = Settings._PressedButtonBackground; }
+        }
+        private void _Exit_bn_p1_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(1, false))
+            { _Exit_p1_bn.Foreground = Settings._PressedButtonForeground; _Exit_p1_bn.Background = Settings._PressedButtonBackground; }
+        }
+        private void _Rematch_bn_p1_Click(object sender, RoutedEventArgs e)
+        {
+            if (ExitRematchButtonPressed(1, true))
+            { _Rematch_p1_bn.Foreground = Settings._PressedButtonForeground; _Rematch_p1_bn.Background = Settings._PressedButtonBackground; }
+        }
+        private bool ExitRematchButtonPressed(int playerIndex, bool rematch)
+        {
+            if (playerIndex != _playerIndexFirstChoice)
+            {
+                if (_playerWantToReplay == 0)
+                {
+                    if (rematch)
+                    { _playerWantToReplay = 1; }
+                    else
+                    { Exit(); }
+                    _playerIndexFirstChoice = playerIndex;
+                    return true;
+                }
+                else if (_playerWantToReplay == 1)
+                {
+                    if (rematch)
+                    { Restart(); }
+                    else
+                    { Exit(); }
+                }
+            }
+            return false;
+        }
+        private void Exit()
+        { this.Frame.Navigate(typeof(MainPage)); }
     }
 }
