@@ -108,14 +108,6 @@ namespace CockBlock8._1
         { this.Frame.Navigate(typeof(AboutPage), await Settings.About()); }
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
         { Application.Current.Exit(); }
-        private void RemoveButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (RectangleItems_IC.Items.Count > 0)
-            {
-                RectangleItems_IC.Items.RemoveAt(0);
-                InitRectangles();
-            }
-        }
         private void Settings_img_PointerPressed(object sender, PointerRoutedEventArgs e)
         { this.Frame.Navigate(typeof(SettingsPage), e); }
         private void Location_img_PointerPressed(object sender, PointerRoutedEventArgs e)
