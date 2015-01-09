@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Cock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Flags.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\CB_Model.cs" />
@@ -65,12 +66,16 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\Ukraine.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Flags\United Kingdom.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Settings.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\SG 1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\SG 2.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldActiveUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDown.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUpInactive.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\test.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Text\about.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Text\multi device instructions.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\Text\single device instructinos.txt" />
   </ItemGroup>
 </Project>

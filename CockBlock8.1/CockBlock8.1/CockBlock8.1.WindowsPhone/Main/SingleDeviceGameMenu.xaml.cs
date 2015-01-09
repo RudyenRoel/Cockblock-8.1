@@ -24,9 +24,9 @@ namespace CockBlock8._1
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SingleGameMenu : CB_Page
+    public sealed partial class SingleDeviceGameMenu : CB_Page
     {
-        public SingleGameMenu()
+        public SingleDeviceGameMenu()
         {
             this.InitializeComponent();
             this.Init();
@@ -51,15 +51,15 @@ namespace CockBlock8._1
         }
 
         private void StartGame_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(SingleGame), e); }
+        { this.Frame.Navigate(typeof(SingleDeviceGame), e); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
 
-        private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions), Settings.InstructionPageInformationSingleGame()); }
+        private async void Instructions_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(InstructionPage), await Settings.InstructionPageInformationSingleGame()); }
         internal override Button[] GetButtons()
-        { return new Button[] { this.StartGame_bn, this.Back_bn}; }
+        { return new Button[] { this.StartGame_bn, this.Back_bn }; }
         internal override TextBlock[] GetTextBlocks()
-        { return new TextBlock[] { this.Title_tx}; }
+        { return new TextBlock[] { this.Title_tx }; }
     }
 }

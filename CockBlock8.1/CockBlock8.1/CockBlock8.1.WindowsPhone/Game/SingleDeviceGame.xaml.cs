@@ -31,7 +31,7 @@ namespace CockBlock8._1.Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SingleGame : CB_Page
+    public sealed partial class SingleDeviceGame : CB_Page
     {
         private int _playerWantToReplay; // if 1 : 1 player wants to restart
         private int _playerIndexFirstChoice; // if 1: player 1, if 2: player 2
@@ -47,7 +47,7 @@ namespace CockBlock8._1.Game
         private int _startYCoord;
         private int _marginChange;
         private int _distanceToHealth;
-        public SingleGame()
+        public SingleDeviceGame()
         {
             this.InitializeComponent();
             Flags.Get.ToString();

@@ -1,5 +1,5 @@
 ﻿<src:CB_Page
-    x:Class="CockBlock8._1.MultiGameMenu"
+    x:Class="CockBlock8._1.MultiDeviceGameMenu"
     xmlns:src="using:CockBlock8._1.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

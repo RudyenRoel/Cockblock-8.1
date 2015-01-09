@@ -20,9 +20,11 @@
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
             <StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Width="350">
                     <Button x:Name="_Refresh_bn" Content="Refresh" Click="_Refresh_bn_Click" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="20" MinHeight="20"/>
-                    <TextBlock x:Name="_Refresh_Feedback_tx" Text="[feedback]" FontSize="12" Foreground="Aqua" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="_Refresh_Feedback_tx" Text="[feedback]" FontSize="12" Foreground="Aqua" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="130"/>
+                    <Button x:Name="_Zoom_In_bn" Content="Zoom_In" Click="_Zoom_In_bn_Click" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="20" MinHeight="20"/>
+                    <Button x:Name="_Zoom_Out_bn" Content="Zoom_Out" Click="_Zoom_Out_bn_Click" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="20" MinHeight="20"/>
                 </StackPanel>
                 <Maps:MapControl x:Name="MyMap" HorizontalAlignment="Left" VerticalAlignment="Top" Width="350" Height="350" CenterChanged="MyMap_CenterChanged"/>
                 <TextBlock x:Name="_Country_tx" Text="[Country]" FontSize="24"/>

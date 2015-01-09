@@ -32,12 +32,13 @@ namespace CockBlock8._1.Main
             this.Title_tx.FontSize = TitleFontSize;
             this.About_tx.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
             this.Title_tx.Text = "About";
-            this.About_tx.Text = Settings.About();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            string aboutText = e.Parameter as string;
+            this.About_tx.Text = aboutText;
         }
         internal override Button[] GetButtons()
         { return null; }

@@ -1,6 +1,6 @@
 ﻿<src:CB_Page
     xmlns:src="using:CockBlock8._1.View"
-    x:Class="CockBlock8._1.Game.SingleGame"
+    x:Class="CockBlock8._1.Game.SingleDeviceGame"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CockBlock8._1.Game"
