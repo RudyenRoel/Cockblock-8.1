@@ -11,11 +11,9 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="125*"/>
-            <RowDefinition Height="125"/>
-            <RowDefinition Height="125"/>
-            <RowDefinition Height="125"/>
-            <RowDefinition Height="125"/>
-            <RowDefinition Height="125"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition Height="170"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="Title_tx" Text="CockBlock 8.1" FontSize="72"/>
@@ -28,35 +26,6 @@
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="About_bn" Content="About" FontSize="48" Click="About_bn_Click"/>
-        </Grid>
-        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="Exit_bn" Content="Exit" FontSize="48" Click="Exit_bn_Click" />
-        </Grid>
-
-        <!-- TODO: Remove onderstanding lines -->
-        <Grid Grid.Row="5" >
-            <Button x:Name="RectangleItems_bn" Content="Remove Rectangle" FontSize="24" BorderThickness="0" Click="RectangleItems_bn_Click" HorizontalAlignment="Center"/>
-
-            <ItemsControl x:Name="RectangleItems_IC" Grid.Row="1">
-                <ItemsControl.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <!-- Without this, there would be no animation when items 
-                 are removed. -->
-                        <RepositionThemeTransition/>
-                    </TransitionCollection>
-                </ItemsControl.ItemContainerTransitions>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapGrid Height="100"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <!-- All these rectangles are just to demonstrate how the items
-         in the grid re-flow into position when one of the child items
-         are removed. -->
-                <ItemsControl.Items>
-                </ItemsControl.Items>
-            </ItemsControl>
         </Grid>
     </Grid>
 </src:CB_Page>

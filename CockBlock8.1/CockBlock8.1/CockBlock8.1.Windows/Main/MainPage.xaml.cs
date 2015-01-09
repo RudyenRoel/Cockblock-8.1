@@ -34,26 +34,6 @@ namespace CockBlock8._1
         }
         private void Init()
         {
-            InitRectangles();
-        }
-        private void InitRectangles()
-        {
-            Random random = new Random();
-            for (int i = this.RectangleItems_IC.Items.Count; i < AmountOfRectangles; i++)
-            {
-                AddRectangle(200, (byte)random.Next(100, 255), (byte)random.Next(100, 255), (byte)random.Next(100, 255));
-            }
-        }
-        private void AddRectangle(byte a, byte r, byte g, byte b)
-        {
-            Shape rect = new Windows.UI.Xaml.Shapes.Rectangle();
-            rect.Height = 10;
-            rect.Width = 10;
-            rect.Margin = new Thickness(2, 2, 2, 2);
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Color.FromArgb(a, r, g, b);
-            rect.Fill = brush;
-            RectangleItems_IC.Items.Add(rect);
         }
         private void SingleGame_bn_Click(object sender, RoutedEventArgs e)
         {
@@ -71,15 +51,5 @@ namespace CockBlock8._1
         {
             Application.Current.Exit();
         }
-
-        private void RectangleItems_bn_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.RectangleItems_IC.Items.Count > 0)
-            {
-                this.RectangleItems_IC.Items.RemoveAt(0);
-                InitRectangles();
-            }
-        }
-
     }
 }
