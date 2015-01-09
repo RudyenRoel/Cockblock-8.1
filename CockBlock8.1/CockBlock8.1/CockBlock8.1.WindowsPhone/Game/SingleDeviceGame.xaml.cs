@@ -204,7 +204,7 @@ namespace CockBlock8._1.Game
         private void ShieldCannon6_PointerReleased(object sender, PointerRoutedEventArgs e)
         { _vm.ShieldCannonReleased(1, 2); }
 
-        private async void Start_bn_Click(object sender, RoutedEventArgs e)
+        private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
             Restart();
         }

@@ -56,7 +56,7 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="270">
-                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370" Visibility="Collapsed">
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="370" Visibility="Visible">
                         <Grid>
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="180"/>
@@ -66,8 +66,8 @@
                                 <Button x:Name="_Rematch_p1_bn" Content="Rematch" Margin="10,0,10,0" Click="_Rematch_bn_p1_Click"/>
                             </StackPanel>
                             <TextBox x:Name="_p1_Name_tx" Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10"/>
-                            <TextBlock x:Name="_GameOver_p1_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,160"/>
-                            <TextBlock x:Name="_Score_p1_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,80"/>
+                            <TextBlock x:Name="_GameOver_p1_tx" TextWrapping="Wrap" TextAlignment="Center" Text="[You succesfully blocked the cock!]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" Margin="0,0,0,160"/>
+                            <TextBlock x:Name="_Score_p1_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="0,0,0,80"/>
                             <Button x:Name="_Save_p1_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <Grid.Margin>370,220,-370,-200</Grid.Margin>
                         </Grid>
@@ -78,7 +78,7 @@
                 </StackPanel>
                 
                 <Grid Width="360" Height="0" Margin="0,0,0,0">
-                    <TextBlock x:Name="_stopShootingText1" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="240,-100,-320,60" Visibility="Visible">
+                    <TextBlock x:Name="_stopShootingText1" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="240,-100,-320,60" Visibility="Collapsed">
                         <TextBlock.RenderTransform>
                             <RotateTransform Angle="180"/>
                         </TextBlock.RenderTransform>
@@ -88,8 +88,8 @@
                 <StackPanel Orientation="Horizontal" Height="270">
                     <FlyoutPresenter x:Name="_Flyout_Player_2" Width="370" Visibility="Collapsed">
                         <Grid>
-                            <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,160"/>
-                            <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,80"/>
+                            <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontSize="28" Margin="0,0,0,160"/>
+                            <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Margin="0,0,0,80"/>
                             <TextBox x:Name="_p2_Name_tx" Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10"/>
                             <Button x:Name="_Save_p2_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -104,7 +104,7 @@
                 </StackPanel>
 
                 <Grid Width="360" Margin="0,0,0,0">
-                    <TextBlock x:Name="_stopShootingText2" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="40,-300,40,0" Visibility="Visible"/>
+                    <TextBlock x:Name="_stopShootingText2" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="40,-300,40,0" Visibility="Collapsed"/>
                 </Grid>
             </StackPanel>
 
