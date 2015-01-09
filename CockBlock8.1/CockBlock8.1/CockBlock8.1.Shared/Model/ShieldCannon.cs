@@ -10,11 +10,15 @@ namespace CockBlock8._1
 {
     public class ShieldCannon
     {
-        private const int INITIALENERGY = 100;
-        private const int SHIELDCOSTPERSECOND = 10;
+        private const double INITIALENERGY = 100;
+        private const double SHIELDCOSTPERSECOND = 15;
+        private const double SHIELDACTIVATIONCOST = 0.5f;
+        private const double SHOOTCOST = 7;
+        private const int TIMEUP = 10;
+        private int _timer;
         private double _energy;
         private bool _isCannon;
-        private const int DAMAGE = 15; // TODO: Magic cookie
+        private const double DAMAGE = 15; // TODO: Magic cookie
         private Player _player;
         private bool _shielded { get; set; }
         private bool _activated;
@@ -54,11 +58,13 @@ namespace CockBlock8._1
             _shielded = false;
             _energy = INITIALENERGY;
             _isCannon = false;
+            _timer = 0;
         }
 
         public void Update()
         {
-            if (_shielded && Energy > 0)
+            _timer++;
+            if (_shielded && Energy > 0 && _timer > TIMEUP)
             {
                 UseEnergy((double)SHIELDCOSTPERSECOND / 60);
             }
@@ -129,7 +135,7 @@ namespace CockBlock8._1
 
         public void Activate()
         {
-            if (Energy < 3)
+            if (Energy < SHOOTCOST)
             {
                 _shootAllowed = false;
             }
@@ -138,13 +144,14 @@ namespace CockBlock8._1
             {
                 if (_shootAllowed)
                 {
-                    Energy-=3;
+                    Energy -= SHOOTCOST;
                 }
             }
             else
             {
+                _timer = 0;
                 _shielded = true;
-                Energy--;
+                Energy -= SHIELDACTIVATIONCOST;
             }
         }
         public void Deactivate()

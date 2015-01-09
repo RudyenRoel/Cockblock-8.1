@@ -71,5 +71,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUpInactive.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Res\test.txt" />
   </ItemGroup>
 </Project>

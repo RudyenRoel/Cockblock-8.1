@@ -57,7 +57,7 @@
 
             <StackPanel Grid.Row="2" Grid.Column="1" x:Name="GameGrid">
                 <StackPanel Orientation="Horizontal" Height="630">
-                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="720" Visibility="Visible" MinWidth="720" Margin="10,0,0,0">
+                    <FlyoutPresenter x:Name="_Flyout_Player_1" Width="720" Visibility="Collapsed" MinWidth="720" Margin="10,0,0,0">
                         <Grid>
                             <Grid.RenderTransform>
                                 <RotateTransform Angle="180"/>
@@ -80,8 +80,16 @@
                     <Image x:Name="_ShieldCannon5" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Top" PointerPressed="ShieldCannon5_PointerPressed" PointerEntered="ShieldCannon5_PointerPressed" PointerReleased="ShieldCannon5_PointerReleased" PointerExited="ShieldCannon5_PointerReleased"/>
                 </StackPanel>
 
+                <Grid Width="640" Height="0" Margin="0,0,0,0">
+                    <TextBlock x:Name="_stopShootingText1" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="560" Margin="580,-280,-510,200" Visibility="Visible">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="180"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
+                
                 <StackPanel Orientation="Horizontal" Height="630">
-                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="720" Visibility="Visible" MinWidth="720" Margin="10,0,0,0" >
+                    <FlyoutPresenter x:Name="_Flyout_Player_2" Width="720" Visibility="Collapsed" MinWidth="720" Margin="10,0,0,0" >
                         <Grid>
                             <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,-80,0,0"/>
                             <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,0"/>
@@ -99,6 +107,10 @@
                     <Image x:Name="_ShieldCannon9" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon9_PointerPressed" PointerEntered="ShieldCannon9_PointerPressed" PointerReleased="ShieldCannon9_PointerReleased" PointerExited="ShieldCannon9_PointerReleased"/>
                     <Image x:Name="_ShieldCannon10" Width="100" Height="100" Margin="35,0,0,0" VerticalAlignment="Bottom" PointerPressed="ShieldCannon10_PointerPressed" PointerEntered="ShieldCannon10_PointerPressed" PointerReleased="ShieldCannon10_PointerReleased" PointerExited="ShieldCannon10_PointerReleased"/>
                 </StackPanel>
+
+                <Grid Width="640" Height="0" Margin="0,0,0,0">
+                    <TextBlock x:Name="_stopShootingText2" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Center" Width="560" Margin="30,-344,50,267" Visibility="Visible"/>
+                </Grid>
             </StackPanel>
 
             <Grid Grid.Column="2">

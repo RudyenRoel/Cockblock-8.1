@@ -8,6 +8,8 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace CockBlock8._1
 {
@@ -21,6 +23,7 @@ namespace CockBlock8._1
         private const int AMOUNTOFCANNONSPHONE = 6; // TODO Settings file
         private const int AMOUNTOFCANNONSTABLET = 10; // TODO Settings file
         private int _amountOfCannons;
+        private string _currentCountry = null;
         private DispatcherTimer myDispatcherTimer;
         private const int FRAMERATE = 16; // TODO: magic cookie : 16 milliseconds, 60 frames per second
         private const int TIMEPERTURNPHONE = 6 * 60; // TODO magic cookie: 6 seconds * 60 frames per second
@@ -29,19 +32,23 @@ namespace CockBlock8._1
         private const int TIMEFORSHOOTINGTABLET = 2 * 60; // TODO magic cookie: 1 seconds * 60 frames per second
         private const int NEWROUNDENERGY = 5;
         private const int STARTINGHEALTH = 100;
+        private const int TIMEBETWEENSHOTS = 5;
+        private int _shotTimer;
         private int _turnTimer;
         private int _shootTimer;
+        private bool _flagSet;
 
         public CB_ViewModel(CB_Page page)
         {
             Debug.WriteLine(page.GetType().ToString());
             _currentPage = page;
+            _flagSet = false;
             _turnTimer = TIMEPERTURNTABLET;
             _shootTimer = TIMEFORSHOOTINGTABLET;
 #if WINDOWS_PHONE_APP
             _turnTimer = TIMEPERTURNPHONE;
             _shootTimer = TIMEFORSHOOTINGPHONE;
-#endif 
+#endif
         }
 
         public void StartSingleGame()
@@ -81,7 +88,18 @@ namespace CockBlock8._1
         {
             _turnTimer--;
             _shootTimer--;
-
+            _shotTimer++;
+#if WINDOWS_PHONE_APP
+            if(_currentCountry == null)
+            {
+                _currentCountry = MainPage._currentCountry;
+            }
+            else if(_currentPage.GetType() == typeof(SingleGame) && !_flagSet)
+            {
+                _flagSet = true;
+                SetFlag();
+            }
+#endif
             foreach (Player p in _players)
             {
                 p.Update();
@@ -111,7 +129,18 @@ namespace CockBlock8._1
                 ((SingleGame)_currentPage).SetTime(percentage);
             }
         }
-
+        
+#if WINDOWS_PHONE_APP
+        public void SetFlag()
+        {
+            Debug.WriteLine("Setting background flag, flag found: " + _currentCountry); 
+            if(_currentCountry == null)
+            {
+                _currentCountry = MainPage._currentCountry;
+            }
+            ((SingleGame)_currentPage).SetBackgroundFlag(Flags.Get.FindFlag(_currentCountry));
+        }
+#endif
         private void SetImages(Player player, int playerNumber)
         {
             for (int i = 0; i < (_amountOfCannons / 2); i++)
@@ -127,14 +156,19 @@ namespace CockBlock8._1
             ShieldCannon cannon = _players[playerIndex].GetShieldCannons()[shieldCannonIndex];
             if (cannon.Energy > 0 && !cannon.Active())
             {
-                cannon.Activate();
-                if (cannon.IsCannon() && cannon.ShootingAllowed())
+                if(!cannon.IsCannon() || _shotTimer > TIMEBETWEENSHOTS)
                 {
-                    ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
-                }
-                else
-                {
-                    _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
+                    cannon.Activate();
+
+                    if (cannon.IsCannon() && cannon.ShootingAllowed())
+                    {
+                        _shotTimer = 0;
+                        ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
+                    }
+                    else
+                    {
+                        _currentPage.SetImageSource(_shieldCannonNames[(_amountOfCannons / 2) * playerIndex + shieldCannonIndex], cannon.GetSprite());
+                    }
                 }
             }
         }
@@ -172,6 +206,23 @@ namespace CockBlock8._1
             _currentDefender = _currentShooter;
             _currentShooter = temp;
             ((SingleGame)_currentPage).SwitchGoingUp();
+        }
+        
+#if WINDOWS_PHONE_APP
+        public async Task BackgroundCheck()
+        {
+            Debug.WriteLine("Background check");
+            GPSModel model = new GPSModel();
+            Geoposition position = await model.GetCurrentLocation();
+            Geopoint point = model.GeopositionToPoint(position);
+            string country = await model.GetCurrentCountry(point);
+            Debug.WriteLine("done");
+            _currentCountry = country;
+        }
+#endif
+        public string GetCountry()
+        {
+            return _currentCountry;
         }
 
         public void EnergyChanged(Player p, int cannon, int energy)

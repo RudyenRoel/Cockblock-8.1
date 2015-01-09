@@ -37,7 +37,6 @@ namespace CockBlock8._1.Main
         public MapPage()
         {
             this.InitializeComponent();
-
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
@@ -47,6 +46,7 @@ namespace CockBlock8._1.Main
         #region Initialisation
         private void Init()
         {
+            MyMap.MapServiceToken = "asdasdasdas";
             this._Title_tx.Text = "Your Current Location";
             this._Country_tx.Text = "Country:";
             this._Coordinates_tx.Text = "Coordinates:";
