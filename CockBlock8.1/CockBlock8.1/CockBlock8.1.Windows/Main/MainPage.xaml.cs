@@ -27,6 +27,7 @@ namespace CockBlock8._1
     public sealed partial class MainPage : CB_Page
     {
         private int AmountOfRectangles = 7 * 91;
+        public static string _currentCountry;
         public MainPage()
         {
             this.InitializeComponent();

@@ -37,6 +37,7 @@ namespace CockBlock8._1
         private BitmapImage _MapImage = new BitmapImage();
         private int _TitleFontSize = 48;
         private int _AmountOfRectangles = 7 * 28;
+        public static string _currentCountry = null;
         public MainPage()
         {
             this.InitializeComponent();
@@ -64,6 +65,13 @@ namespace CockBlock8._1
             this.MultiGame_bn.Content = "Multi Game";
             this.About_bn.Content = "About";
             this.Exit_bn.Content = "Exit";
+            CheckCountry();
+        }
+
+        private async void CheckCountry()
+        {
+            await _vm.BackgroundCheck();
+            _currentCountry = _vm.GetCountry();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {

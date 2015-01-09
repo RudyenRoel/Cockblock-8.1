@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+*.db
 
 # Build results
 [Dd]ebug/
@@ -186,3 +187,4 @@ FakesAssemblies/
 
 *.png
 *.jpg
+*.txt

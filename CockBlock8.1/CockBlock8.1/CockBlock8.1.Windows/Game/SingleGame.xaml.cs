@@ -45,7 +45,6 @@ namespace CockBlock8._1.Game
         public SingleGame()
         {
             this.InitializeComponent();
-            _vm.StartSingleGame();
             init();
         }
         private void init()
@@ -58,6 +57,9 @@ namespace CockBlock8._1.Game
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             _CockList = new List<Image>();
+            _stopShootingText1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            
             DefaultShieldCannonImageProparties(_ShieldCannon1, _ShieldCannon2, _ShieldCannon3, _ShieldCannon4, _ShieldCannon5, _ShieldCannon6, _ShieldCannon7, _ShieldCannon8, _ShieldCannon9, _ShieldCannon10);
             DefaultHealthBarProparties(Colors.White, _TotalHealth1_rect, _TotalHealth2_rect);
             DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
@@ -201,7 +203,8 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            _vm.NextTurn();
+            _vm.StartSingleGame();
+            Start_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         public void AddShot(int posX)
@@ -252,6 +255,8 @@ namespace CockBlock8._1.Game
         {
             // TODO Magic cookie mystery paradise
             _goingUp = !_goingUp;
+            _stopShootingText1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             if (_goingUp)
             {
                 _maxYCoord = -2310;
@@ -275,14 +280,25 @@ namespace CockBlock8._1.Game
             int currentLength = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
             _CurrentTime_Left_rect.Height = currentLength;
             _CurrentTime_Right_rect.Height = currentLength;
+            if (timePercentage <= 0)
+            {
+                if (_goingUp)
+                {
+                    _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+                else
+                {
+                    _stopShootingText1.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                }
+            }
         }
 
         internal void GameOver(int player, int score)
         {
             // if player = 1, player1 lost
             // if player = 2, player2 lost
-            string win = "You win!";
-            string lose = "You lose!";
+            string win = "You succesfully blocked the cock!";
+            string lose = "You have been COCKBLOCKED!";
             if (player == 1)
             {
                 _GameOver_p1_tx.Text = lose;
@@ -315,6 +331,8 @@ namespace CockBlock8._1.Game
 
         private void SetFlyoutVisible(bool result)
         {
+            _stopShootingText1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             Visibility vis = Windows.UI.Xaml.Visibility.Collapsed;
             if (result)
                 vis = Windows.UI.Xaml.Visibility.Visible;
