@@ -34,13 +34,13 @@ namespace CockBlock8._1.Main
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MultiGame), e); }
+        { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
         { this._SearchGame_tx.Text = "To Search for an existing game"; }
         private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
         { this._SearchGame_tx.Text = ""; }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MultiGame), e); }
+        { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
         private void CreateGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
         { this._CreateGame_tx.Text = "To Create a new game"; }
         private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)

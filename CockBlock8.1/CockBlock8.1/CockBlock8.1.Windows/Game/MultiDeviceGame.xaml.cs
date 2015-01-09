@@ -20,9 +20,9 @@ namespace CockBlock8._1.Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MultiGame : Page
+    public sealed partial class MultiDeviceGame : Page
     {
-        public MultiGame()
+        public MultiDeviceGame()
         {
             this.InitializeComponent();
         }
