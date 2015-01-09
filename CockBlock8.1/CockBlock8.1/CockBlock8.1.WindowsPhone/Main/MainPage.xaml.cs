@@ -64,7 +64,6 @@ namespace CockBlock8._1
             this.MultiGame_bn.Content = "Multi Game";
             this.About_bn.Content = "About";
             this.Exit_bn.Content = "Exit";
-            InitRectangles();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
         {
@@ -74,26 +73,6 @@ namespace CockBlock8._1
             }
             e.Handled = true;
         }
-        private void InitRectangles()
-        {
-            Random random = new Random();
-            for (int i = this.RectangleItems_IC.Items.Count; i < _AmountOfRectangles; i++)
-            {
-                AddRectangle(200, (byte)random.Next(100, 255), (byte)random.Next(100, 255), (byte)random.Next(100, 255));
-            }
-        }
-        private void AddRectangle(byte a, byte r, byte g, byte b)
-        {
-            Shape rect = new Windows.UI.Xaml.Shapes.Rectangle();
-            rect.Height = 10;
-            rect.Width = 10;
-            rect.Margin = new Thickness(2, 2, 2, 2);
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Color.FromArgb(a, r, g, b);
-            rect.Fill = brush;
-            RectangleItems_IC.Items.Add(rect);
-        }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);

@@ -1,2 +1,34 @@
 Here are the instructions for the single game
-You play it with Two teams, one on the top, and one on the bottem of the screen
+
+	Introduction
+You play the game with two teams, one on the top, and one on the bottem of the screen.
+The purpose of this game is to defeat your enemy and get the highest score.
+This by breaking through the Shields you can attack your enemy. Every hit will do your enemy permanent damage. When his health reached 0, you win the match.
+Both teams have 3 'Shield-Cannon's. When you attack, they will be cannons and when you defende they will be shields.
+Every ShieldCannon has at the start of the game 100 energy (You can't have more then 100).
+
+The Health of you and your enemy is displayed in the red bar on top and the bottom of the screen.
+On the sides of the schreen you find 2 blue colored bars. These represent the remaining time to shoot.
+The energy of the ShieldCannon will be displayed below the ShieldCannon.
+For an example of the energy bars press button SG 1.
+
+To get an idea how the game play looks like press button SG 2.
+
+	Game logic
+- Costs Cannon = 7
+- Costs Shield Tap = 0.5
+- Costs Shield hold 1 sec = 15
+- Damage Cock = 15
+- Shooting Time = 5 seconds
+
+	Game play
+Press Start to start the game.
+Press and hold a Shield to block the cocks when the are near the shield.
+You can also Tap on a Shield to block the cocks, but this is slidly harder.
+Tap on a Cannon to shoot a cock.
+
+	Feature
+The application will recognize in which country you are at the moment.
+This by showing the flag of your country
+
+Have Fun! :)

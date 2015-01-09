@@ -33,6 +33,7 @@ namespace CockBlock8._1.Main
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private Geopoint _LastValidPosition = null;
         private Geopoint c;
+        private bool loadingMapLocation = false;
 
         public MapPage()
         {
@@ -54,23 +55,34 @@ namespace CockBlock8._1.Main
         }
         private async Task UpdateCurrentLocation()
         {
-            GPSModel model = new GPSModel();
-            var position = await model.GetCurrentLocation();
-            Geopoint point = model.GeopositionToPoint(position);
-            string country = await model.GetCurrentCountry(point);
-            Debugging(point, country);
-            country = (country == null ? "Unknown" : country);
-            SetCountry(country);
-            point = (point == null ? new Geopoint(new BasicGeoposition { Longitude = 0, Latitude = 0 }) : point);
-            SetCoordinates(point.Position.Longitude, point.Position.Latitude);
-            if (point.Position.Latitude != 0 && point.Position.Longitude != 0)
+            if (!loadingMapLocation)
             {
-                c = null;
-                _LastValidPosition = point;
-                await CenterView();
-                await SetCenterLocation(point);
+                loadingMapLocation = true;
+                GPSModel model = new GPSModel();
+                SetRefreshFeedback("Loading Location...");
+                var position = await model.GetCurrentLocation();
+                SetRefreshFeedback("Loading Location....");
+                Geopoint point = model.GeopositionToPoint(position);
+                string country = await model.GetCurrentCountry(point);
+                Debugging(point, country);
+                country = (country == null ? "Unknown" : country);
+                SetCountry(country);
+                point = (point == null ? new Geopoint(new BasicGeoposition { Longitude = 0, Latitude = 0 }) : point);
+                SetRefreshFeedback("Going to Location");
+                SetCoordinates(point.Position.Longitude, point.Position.Latitude);
+                if (point.Position.Latitude != 0 && point.Position.Longitude != 0)
+                {
+                    c = null;
+                    _LastValidPosition = point;
+                    await CenterView();
+                    await SetCenterLocation(point);
+                }
+                _Refresh_Feedback_tx.Text = "";
+                loadingMapLocation = false;
             }
         }
+        private void SetRefreshFeedback(string text)
+        { _Refresh_Feedback_tx.Text = text; }
         private async Task SetCenterLocation(Geopoint point)
         {
             MyMap.Center = point;
@@ -113,9 +125,11 @@ namespace CockBlock8._1.Main
         #endregion
         #region Buttons
         private void _Refresh_bn_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateCurrentLocation();
-        }
+        { UpdateCurrentLocation(); }
+        private void _Zoom_In_bn_Click(object sender, RoutedEventArgs e)
+        { ZoomIn(); }
+        private void _Zoom_Out_bn_Click(object sender, RoutedEventArgs e)
+        { ZoomOut(); }
         #endregion
 
         private async Task CenterView()
@@ -124,6 +138,18 @@ namespace CockBlock8._1.Main
             if (_LastValidPosition != null)
             { await MyMap.TrySetViewAsync(_LastValidPosition, 10D); }
             else { Debug.WriteLine("Center view position = null"); }
+        }
+        private async void ZoomIn()
+        {
+            SetRefreshFeedback("Zooming in...");
+            await MyMap.TrySetViewAsync(_LastValidPosition, 17D);
+            SetRefreshFeedback("");
+        }
+        private async void ZoomOut()
+        {
+            SetRefreshFeedback("Zooming out...");
+            await MyMap.TrySetViewAsync(_LastValidPosition, 10D);
+            SetRefreshFeedback("");
         }
         private void MyMap_CenterChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
@@ -134,6 +160,5 @@ namespace CockBlock8._1.Main
                 MyMap.Center = c;
             }
         }
-
     }
 }

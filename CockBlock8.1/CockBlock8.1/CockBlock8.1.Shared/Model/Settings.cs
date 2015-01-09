@@ -37,8 +37,8 @@ namespace CockBlock8._1
         private static string _AboutText = null;
         private static List<string[]> _SingleGameTopics = null;
         private static List<string[]> _MultiGameTopics = null;
-        private static Tuple<string[], List<string[]>> _InformationSinglePage = null;
-        private static Tuple<string[], List<string[]>> _InformationMultiPage = null;
+        private static Tuple<Tuple<string[], string[]>, List<string[]>> _InformationSinglePage = null;
+        private static Tuple<Tuple<string[], string[]>, List<string[]>> _InformationMultiPage = null;
 
         // public methods
         public async static Task<string> About()
@@ -47,13 +47,13 @@ namespace CockBlock8._1
             { await CreateAbout(); }
             return _AboutText;
         }
-        public async static Task<Tuple<string[], List<string[]>>> InstructionPageInformationSingleGame()
+        public async static Task<Tuple<Tuple<string[], string[]>, List<string[]>>> InstructionPageInformationSingleGame()
         {
             if (_InformationSinglePage == null)
             { await CreateInformationSingleGame(); }
             return _InformationSinglePage;
         }
-        public async static Task<Tuple<string[], List<string[]>>> InstructionPageInformationMultiGame()
+        public async static Task<Tuple<Tuple<string[], string[]>, List<string[]>>> InstructionPageInformationMultiGame()
         {
             if (_InformationMultiPage == null)
             { await CreateInformationMultiGame(); }
@@ -144,20 +144,24 @@ namespace CockBlock8._1
         }
         private async static Task CreateInformationSingleGame()
         {
-            string[] item1 = new string[] { _Instructions, "Single Game", await SingleGame() };
+            string[] instructions1 = new string[] { _Instructions, "Single Game", await SingleGame() };
+            string[] instructions2 = new string[] { "SG 1.png", "SG 2.png" }; // Add here your Images
+            Tuple<string[], string[]> item1 = new Tuple<string[], string[]>(instructions1, instructions2);
             List<string[]> item2 = new List<string[]>(SingleGameTopics());
             _InformationSinglePage = CreateInformation(item1, item2);
         }
         private async static Task CreateInformationMultiGame()
         {
-            string[] item1 = new string[] { _Instructions, "Multi Game", await MultiGame() };
+            string[] instructions1 = new string[] { _Instructions, "Multi Game", await MultiGame() };
+            string[] instructions2 = new string[] { "SG1 .png", "SG2.png" }; // Add here your Images
+            Tuple<string[], string[]> item1 = new Tuple<string[], string[]>(instructions1, instructions2);
             List<string[]> item2 = new List<string[]>(MultiGameTopics());
             _InformationMultiPage = CreateInformation(item1, item2);
         }
 
         // Help private methods
-        private static Tuple<string[], List<string[]>> CreateInformation(string[] item1, List<string[]> item2)
-        { return new Tuple<string[], List<string[]>>(item1, item2); }
+        private static Tuple<Tuple<string[], string[]>, List<string[]>> CreateInformation(Tuple<string[], string[]> item1, List<string[]> item2)
+        { return new Tuple<Tuple<string[], string[]>, List<string[]>>(item1, item2); }
         private static void SLine(string toAdd)
         { _SingleGameInstructions += toAdd + "\n"; }
         private static void MLine(string toAdd)
