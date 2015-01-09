@@ -101,11 +101,11 @@ namespace CockBlock8._1
         }
 
         private void Single_Game_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(SingleGameMenu), e); }
+        { this.Frame.Navigate(typeof(SingleDeviceGameMenu), e); }
         private void Multi_Game_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MultiGameMenu), e); }
-        private void About_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(AboutPage), e); }
+        { this.Frame.Navigate(typeof(MultiDeviceGameMenu), e); }
+        private async void About_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(AboutPage), await Settings.About()); }
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
         { Application.Current.Exit(); }
         private void RemoveButton_Click(object sender, RoutedEventArgs e)

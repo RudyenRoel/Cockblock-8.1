@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -9,6 +13,7 @@ namespace CockBlock8._1
 {
     public class Settings
     {
+        private static readonly string _ApplicationVersion = "0.4.0";
         public static SolidColorBrush _DefaultButtonForeground = new SolidColorBrush(Colors.Gray);
         public static SolidColorBrush _DefaultButtonBackground = new SolidColorBrush(Colors.Black);
         public static SolidColorBrush _DefaultTextForeground = new SolidColorBrush(Colors.Gray);
@@ -36,36 +41,36 @@ namespace CockBlock8._1
         private static Tuple<string[], List<string[]>> _InformationMultiPage = null;
 
         // public methods
-        public static string About()
+        public async static Task<string> About()
         {
             if (_AboutText == null)
-            { CreateAbout(); }
+            { await CreateAbout(); }
             return _AboutText;
         }
-        public static Tuple<string[], List<string[]>> InstructionPageInformationSingleGame()
+        public async static Task<Tuple<string[], List<string[]>>> InstructionPageInformationSingleGame()
         {
             if (_InformationSinglePage == null)
-            { CreateInformationSingleGame(); }
+            { await CreateInformationSingleGame(); }
             return _InformationSinglePage;
         }
-        public static Tuple<string[], List<string[]>> InstructionPageInformationMultiGame()
+        public async static Task<Tuple<string[], List<string[]>>> InstructionPageInformationMultiGame()
         {
             if (_InformationMultiPage == null)
-            { CreateInformationMultiGame(); }
+            { await CreateInformationMultiGame(); }
             return _InformationMultiPage;
         }
 
         // private methods
-        private static string SingleGame()
+        private async static Task<string> SingleGame()
         {
             if (_SingleGameInstructions == null)
-            { CreateSingleGameInstructions(); }
+            { await CreateSingleGameInstructions(); }
             return _SingleGameInstructions;
         }
-        private static string MultiGame()
+        private async static Task<string> MultiGame()
         {
             if (_MultiGameInstructions == null)
-            { CreateMultiGameInstructions(); }
+            { await CreateMultiGameInstructions(); }
             return _MultiGameInstructions;
         }
         private static List<string[]> SingleGameTopics()
@@ -82,16 +87,15 @@ namespace CockBlock8._1
         }
 
         // private Creating methods
-        private static void CreateSingleGameInstructions()
+        private async static Task CreateSingleGameInstructions()
         {
-            _SingleGameInstructions = "";
-            SLine("Here are the instructions for the single game");
-            SLine("You play it with Two teams, one on the top, and one on the bottem of the screen");
+            _SingleGameInstructions = "Loading...";
+            _SingleGameInstructions = await LoadFromTextFile("single device instructinos.txt");
         }
-        private static void CreateMultiGameInstructions()
+        private async static Task CreateMultiGameInstructions()
         {
-            _MultiGameInstructions = "";
-            MLine("Here are the instructions for the multi game");
+            _MultiGameInstructions = "Loading...";
+            _MultiGameInstructions = await LoadFromTextFile("multi device instructions.txt");
         }
         private static void CreateSingleGameTopics()
         {
@@ -119,28 +123,34 @@ namespace CockBlock8._1
             topics.Add(topic("Crep"));
             _MultiGameTopics = topics;
         }
-        private static void CreateAbout()
+        private async static Task CreateAbout()
         {
-            ALine("This project is called 'CockBlock8.1'");
-            ALine("");
-            ALine("Makers of this project are");
-            ALine(" - 'Rudy Tjin-Con-Coen'");
-            ALine("\tand");
-            ALine(" - 'Roel Suntjens'.");
-            ALine("This project is made to prove that we can build a Xaml project with the following specifications:");
-            ALine(" - ");
-            ALine(" - ");
-            ALine("We are greatfull to give you te oppartunity to play our game.");
+            _AboutText = "Loading...";
+            _AboutText = await LoadFromTextFile("about.txt");
         }
-        private static void CreateInformationSingleGame()
+        private static async Task<string> LoadFromTextFile(string filename)
         {
-            string[] item1 = new string[] { _Instructions, "Single Game", SingleGame() };
+            string text = "";
+            Debug.WriteLine("Load From Text File: " + filename);
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Res/Text/" + filename));
+
+            using (StreamReader reader = new StreamReader(await file.OpenStreamForReadAsync()))
+            {
+                text = reader.ReadToEnd();
+            }
+            Debug.WriteLine("Line: " + text);
+
+            return text;
+        }
+        private async static Task CreateInformationSingleGame()
+        {
+            string[] item1 = new string[] { _Instructions, "Single Game", await SingleGame() };
             List<string[]> item2 = new List<string[]>(SingleGameTopics());
             _InformationSinglePage = CreateInformation(item1, item2);
         }
-        private static void CreateInformationMultiGame()
+        private async static Task CreateInformationMultiGame()
         {
-            string[] item1 = new string[] { _Instructions, "Multi Game", MultiGame() };
+            string[] item1 = new string[] { _Instructions, "Multi Game", await MultiGame() };
             List<string[]> item2 = new List<string[]>(MultiGameTopics());
             _InformationMultiPage = CreateInformation(item1, item2);
         }
@@ -226,6 +236,10 @@ namespace CockBlock8._1
             public static string Engeland = "United Kingdom";
             public static string Duitsland = "Germany";
             public static string Amerika = "USA";
+            public static string[] Europe()
+            {
+                return new string[] { Nederland, Belgie, Luxemburg, Frankrijk, Spanje, Portugal, Italie, Engeland, Duitsland };
+            }
         }
     }
 }

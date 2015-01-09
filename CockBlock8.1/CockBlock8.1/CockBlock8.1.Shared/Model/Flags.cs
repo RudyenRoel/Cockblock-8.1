@@ -23,10 +23,9 @@ namespace CockBlock8._1
             Debug.WriteLine("Init Flags");
             _Flag_Names = new List<string>();
             AddFlagNames(Settings.Countries.Unknown);
-            AddFlagNames(Settings.Countries.Nederland, Settings.Countries.Belgie, Settings.Countries.Luxemburg);
-            AddFlagNames(Settings.Countries.Frankrijk, Settings.Countries.Spanje, Settings.Countries.Portugal);
-            AddFlagNames(Settings.Countries.Italie, Settings.Countries.Engeland);
-            AddFlagNames(Settings.Countries.Duitsland, Settings.Countries.Amerika);
+            foreach (string country in Settings.Countries.Europe())
+            { AddFlagNames(country); }
+            AddFlagNames(Settings.Countries.Amerika);
             _FlagImages = new Dictionary<string, BitmapImage>();
             LoadAllFlags();
         }

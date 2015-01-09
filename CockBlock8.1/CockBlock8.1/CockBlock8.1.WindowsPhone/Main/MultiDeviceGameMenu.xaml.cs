@@ -23,9 +23,9 @@ namespace CockBlock8._1
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MultiGameMenu : CB_Page
+    public sealed partial class MultiDeviceGameMenu : CB_Page
     {
-        public MultiGameMenu()
+        public MultiDeviceGameMenu()
         {
             this.InitializeComponent();
             Init();
@@ -54,11 +54,11 @@ namespace CockBlock8._1
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
         { }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MultiGame), e); }
+        { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
-        private void Instruction_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions), Settings.InstructionPageInformationMultiGame()); }
+        private async void Instruction_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(InstructionPage), await Settings.InstructionPageInformationMultiGame()); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)
         { this.SearchGame_tx.Text = "Search for existing game"; }
         private void SearchGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
@@ -70,6 +70,6 @@ namespace CockBlock8._1
         internal override Button[] GetButtons()
         { return new Button[] { this.Back_bn, this.SearchGame_bn, this.CreateGame_bn }; }
         internal override TextBlock[] GetTextBlocks()
-        { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx}; }
+        { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx }; }
     }
 }

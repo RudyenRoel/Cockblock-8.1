@@ -1,0 +1,18 @@
+This project is called 'CockBlock8.1'
+
+This project is made by:
+'Rudy Tjin-Kon-Koen' and 'Roel Suntjens'
+
+This project is made to prove that we can build a Xaml project with the following specifications:
+ - Xaml
+ - DataBinding in combinatie met MVVM (Model View ViewModel
+ - Local/roaming storage
+ - LinQ
+ - GPS en GeoFencing
+ - MapControl (Windows Phone 8.1) en/of Bing maps (Windows 8.1)
+
+The beginning of the project was at Friday 12 December 2014.
+Every Tuesday and Friday we workt on this project.
+The project has ends Friday 9 Januari 2015.
+
+We are greatfull to give you te oppartunity to play our game.

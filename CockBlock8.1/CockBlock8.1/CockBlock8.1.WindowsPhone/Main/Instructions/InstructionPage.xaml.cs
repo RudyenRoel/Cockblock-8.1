@@ -25,13 +25,13 @@ namespace CockBlock8._1.Main.Instructions
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Instructions : CB_Page
+    public sealed partial class InstructionPage : CB_Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private List<string[]> _HelpPageInformation = null;
 
-        public Instructions()
+        public InstructionPage()
         {
             this.InitializeComponent();
 
@@ -49,6 +49,8 @@ namespace CockBlock8._1.Main.Instructions
             this._SubTitle.FontSize = Settings._DefaultSubHeaderFontSize;
         }
 
+
+        #region NavigationHelper registration
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
@@ -66,19 +68,17 @@ namespace CockBlock8._1.Main.Instructions
         {
         }
 
-        #region NavigationHelper registration
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             Tuple<string[], List<string[]>> information = (e.Parameter as Tuple<string[], List<string[]>>);
             string[] instructions = information.Item1;
+            Init();
             this._SubTitle.Text = instructions[0];
             this._Title.Text = instructions[1];
             this._Information_tx.Text = instructions[2];
             this._HelpPageInformation = information.Item2;
             Debug.WriteLine("Instructions: " + instructions[2]);
-            Init();
         }
 
         #endregion

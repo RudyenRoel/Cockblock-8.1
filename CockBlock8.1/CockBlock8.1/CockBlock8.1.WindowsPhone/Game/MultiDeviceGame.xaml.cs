@@ -23,10 +23,10 @@ namespace CockBlock8._1.Game
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MultiGame : CB_Page
+    public sealed partial class MultiDeviceGame : CB_Page
     {
         private int _totalHealthBarWidth = 350;
-        public MultiGame()
+        public MultiDeviceGame()
         {
             this.InitializeComponent();
             Init();

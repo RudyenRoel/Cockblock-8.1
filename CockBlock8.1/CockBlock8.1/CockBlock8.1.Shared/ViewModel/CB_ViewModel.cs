@@ -73,8 +73,8 @@ namespace CockBlock8._1
             SetImages(_players[1], 1);
             _currentDefender = 0;
             _currentShooter = 1;
-            ((SingleGame)_currentPage).setHealthPlayer1(STARTINGHEALTH);
-            ((SingleGame)_currentPage).setHealthPlayer2(STARTINGHEALTH);
+            ((SingleDeviceGame)_currentPage).setHealthPlayer1(STARTINGHEALTH);
+            ((SingleDeviceGame)_currentPage).setHealthPlayer2(STARTINGHEALTH);
         }
 
         private void Update(object sender, object e)
@@ -86,7 +86,7 @@ namespace CockBlock8._1
             {
                 p.Update();
             }
-            ((SingleGame)_currentPage).NextFrame();
+            ((SingleDeviceGame)_currentPage).NextFrame();
             if (_shootTimer <= 0)
             {
                 foreach (ShieldCannon sc in _players[_currentShooter].GetShieldCannons())
@@ -108,7 +108,7 @@ namespace CockBlock8._1
 #if WINDOWS_PHONE_APP
                 percentage = (int)(((float)_shootTimer / TIMEFORSHOOTINGPHONE) * 100);
 #endif
-                ((SingleGame)_currentPage).SetTime(percentage);
+                ((SingleDeviceGame)_currentPage).SetTime(percentage);
             }
         }
 
@@ -130,7 +130,7 @@ namespace CockBlock8._1
                 cannon.Activate();
                 if (cannon.IsCannon() && cannon.ShootingAllowed())
                 {
-                    ((SingleGame)_currentPage).AddShot(shieldCannonIndex);
+                    ((SingleDeviceGame)_currentPage).AddShot(shieldCannonIndex);
                 }
                 else
                 {
@@ -171,12 +171,12 @@ namespace CockBlock8._1
             int temp = _currentDefender;
             _currentDefender = _currentShooter;
             _currentShooter = temp;
-            ((SingleGame)_currentPage).SwitchGoingUp();
+            ((SingleDeviceGame)_currentPage).SwitchGoingUp();
         }
 
         public void EnergyChanged(Player p, int cannon, int energy)
         {
-            ((SingleGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, cannon, energy);
+            ((SingleDeviceGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, cannon, energy);
             if (energy <= 0)
             {
                 int playerIndex = Array.IndexOf(_players, p);
@@ -194,11 +194,11 @@ namespace CockBlock8._1
         {
             if (Array.IndexOf(_players, p) == 0)
             {
-                ((SingleGame)_currentPage).setHealthPlayer1(health);
+                ((SingleDeviceGame)_currentPage).setHealthPlayer1(health);
             }
             else
             {
-                ((SingleGame)_currentPage).setHealthPlayer2(health);
+                ((SingleDeviceGame)_currentPage).setHealthPlayer2(health);
             }
         }
 
@@ -210,7 +210,7 @@ namespace CockBlock8._1
         internal void ILost(Player player)
         {
             int winnerIndex = _players.Length - Array.IndexOf(_players, player) - 1;
-            ((SingleGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1, CalculateScore(winnerIndex));
+            ((SingleDeviceGame)_currentPage).GameOver(Array.IndexOf(_players, player) + 1, CalculateScore(winnerIndex));
             StopTimer();
         }
 
