@@ -70,7 +70,7 @@ namespace CockBlock8._1
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
-
+                SetUpHighscores();
                 if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Settings._ButtonBackgroundColorKey))
                     Settings._DefaultButtonBackground = ConvertToColorBrush((int[])ApplicationData.Current.LocalSettings.Values[Settings._ButtonBackgroundColorKey]);
                 if (ApplicationData.Current.LocalSettings.Values.ContainsKey(Settings._ButtonForegroundColorKey))
@@ -111,6 +111,15 @@ namespace CockBlock8._1
         private SolidColorBrush ConvertToColorBrush(int[] array)
         {
             return new SolidColorBrush(Color.FromArgb((byte)array[0], (byte)array[1], (byte)array[2], (byte)array[3]));
+        }
+        private void SetUpHighscores()
+        {
+            string[] keys = new string[] { Settings._HighscoresSingleKey, Settings._HighscoresMultiKey };
+            int maxAmount = Settings._MaxAmountOfHighscores;
+            for (int k = 0; k < keys.Length; k++)
+                for (int i = 0; i < maxAmount; i++)
+                    if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(keys[k] + i))
+                    { ApplicationData.Current.LocalSettings.Values[keys[k] + i] = new string[] { "Unknown", "0" }; }
         }
 
 

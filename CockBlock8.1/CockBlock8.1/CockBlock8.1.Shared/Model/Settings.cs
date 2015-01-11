@@ -25,6 +25,9 @@ namespace CockBlock8._1
         public readonly static int _DefaultHeaderFontSize = 48;
         public readonly static int _DefaultButtonFontSize = 20;
         public readonly static int _DefaultRadioButtonFontSize = 18;
+        public readonly static int _MaxAmountOfHighscores = 10;
+        public readonly static string _HighscoresSingleKey = "_Highscores_Single_";
+        public readonly static string _HighscoresMultiKey = "_Highscores_Multi_";
         public readonly static string _ButtonBackgroundColorKey = "_ButtonBackground";
         public readonly static string _ButtonForegroundColorKey = "_ButtonForeground";
         public readonly static string _TextBlockForegroundColorKey = "_TextBlockForeground";
@@ -59,6 +62,10 @@ namespace CockBlock8._1
             { await CreateInformationMultiGame(); }
             return _InformationMultiPage;
         }
+        public async static Task<List<string[]>> SingleDeviceHighscores()
+        { return await GetSingleDeviceHighscores(); }
+        public async static Task<List<string[]>> MultiDeviceHighscores()
+        { return await GetMultiDeviceHighscores(); }
 
         // private methods
         private async static Task<string> SingleGame()
@@ -85,8 +92,18 @@ namespace CockBlock8._1
             { CreateMultiGameTopics(); }
             return _MultiGameTopics;
         }
-
+        private async static Task<List<string[]>> GetSingleDeviceHighscores()
+        { return LoadHighscores(_HighscoresSingleKey); }
+        private async static Task<List<string[]>> GetMultiDeviceHighscores()
+        { return LoadHighscores(_HighscoresMultiKey); }
         // private Creating methods
+        private static List<string[]> LoadHighscores(string key)
+        {
+            List<string[]> list = new List<string[]>();
+            for (int i = 0; i < _MaxAmountOfHighscores; i++)
+            { list.Add((string[])(ApplicationData.Current.LocalSettings.Values[key + i])); }
+            return list;
+        }
         private async static Task CreateSingleGameInstructions()
         {
             _SingleGameInstructions = "Loading...";

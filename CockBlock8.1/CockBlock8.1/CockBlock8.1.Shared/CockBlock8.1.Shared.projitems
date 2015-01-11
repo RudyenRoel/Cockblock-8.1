@@ -74,8 +74,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldDownInactive.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUp.png" />
     <Content Include="$(MSBuildThisFileDirectory)Res\ShieldUpInactive.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\SplashScreen.scale-180.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Res\SplashScreenImage.jpg" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Text\about.txt" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Text\multi device instructions.txt" />
     <Content Include="$(MSBuildThisFileDirectory)Res\Text\single device instructinos.txt" />

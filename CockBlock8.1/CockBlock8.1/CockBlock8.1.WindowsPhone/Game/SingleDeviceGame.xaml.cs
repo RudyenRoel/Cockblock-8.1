@@ -13,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Phone.UI.Input;
 using Windows.Services.Maps;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -282,9 +283,9 @@ namespace CockBlock8._1.Game
             int currentLength = (int)((double)_totalLengthTimerRect / 100 * timePercentage);
             _CurrentTime_Left_rect.Height = currentLength;
             _CurrentTime_Right_rect.Height = currentLength;
-            if(timePercentage <= 0)
+            if (timePercentage <= 0)
             {
-                if(_goingUp)
+                if (_goingUp)
                 {
                     _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Visible;
                 }
@@ -346,10 +347,11 @@ namespace CockBlock8._1.Game
         }
         private void _Save_bn_Click(object sender, RoutedEventArgs e)
         {
+            string player_name = null;
             int score = 0;
-            if(sender.Equals(_Save_p1_bn))
+            if (sender.Equals(_Save_p1_bn))
             {
-                if (_p1_Name_tx.Text == "Enter Name")
+                if (_p1_Name_tx.Text == "Enter Name" || _p1_Name_tx.Text == "") // TODO: Merge both if statements
                 {
                     _p1_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
                 }
@@ -357,12 +359,13 @@ namespace CockBlock8._1.Game
                 {
                     score = Int16.Parse(_Score_p1_tx.Text.Remove(0, 7));
                     Debug.WriteLine("Saving score: " + score + " by Player: " + _p1_Name_tx.Text);
+                    player_name = _p1_Name_tx.Text;
                 }
-                
+
             }
             else
             {
-                if (_p2_Name_tx.Text == "Enter Name")
+                if (_p2_Name_tx.Text == "Enter Name" || _p2_Name_tx.Text == "")
                 {
                     _p2_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
                 }
@@ -370,6 +373,69 @@ namespace CockBlock8._1.Game
                 {
                     score = Int16.Parse(_Score_p2_tx.Text.Remove(0, 7));
                     Debug.WriteLine("Saving score: " + score + " by Player: " + _p2_Name_tx.Text);
+                    player_name = _p2_Name_tx.Text;
+                }
+            }
+            if (player_name != null)
+            {
+                HandleHighscore(player_name, score);
+            }
+        }
+        private void HandleHighscore(string player_name, int score)
+        {
+            List<Tuple<string, int>> scores = LoadScores();
+            Tuple<string, int> your_score = new Tuple<string, int>(player_name, score);
+
+            for (int i = 0; i < scores.Count; i++)
+            { if (your_score.Item2 > scores[i].Item2) { scores.Insert(i, your_score); break; } }
+
+            OrdenScoresOnHighestScore(scores);
+
+            // TODO: Below easier fix?
+            List<Tuple<string, int>> maxAmountList = new List<Tuple<string, int>>();
+            for (int i = 0; i < Settings._MaxAmountOfHighscores; i++)
+                maxAmountList.Add(scores[i]);
+
+            List<string[]> highscores = new List<string[]>();
+            foreach (Tuple<string, int> highscore in maxAmountList)
+            { highscores.Add(new string[] { highscore.Item1, highscore.Item2.ToString() }); }
+
+            SaveScores(highscores);
+        }
+        private List<Tuple<string, int>> LoadScores()
+        {
+            Debug.WriteLine("Loading Highscores");
+            List<Tuple<string, int>> scores = new List<Tuple<string, int>>();
+            for (int i = 0; i < Settings._MaxAmountOfHighscores; i++)
+            {
+                string[] data = (string[])(ApplicationData.Current.LocalSettings.Values[Settings._HighscoresSingleKey + i]);
+                string name = data[0];
+                int score = Int16.Parse(data[1]);
+                scores.Add(new Tuple<string, int>(name, score));
+            }
+            return scores;
+        }
+        private void SaveScores(List<string[]> scores)
+        {
+            Debug.WriteLine("Saving Highscores");
+            for (int i = 0; i < scores.Count; i++)
+            { ApplicationData.Current.LocalSettings.Values[Settings._HighscoresSingleKey + i] = scores[i]; }
+        }
+        private void OrdenScoresOnHighestScore(List<Tuple<string, int>> scores)
+        {
+            int corrections = 1;
+            while (corrections > 0)
+            {
+                corrections = 0;
+                for (int i = 1; i < scores.Count; i++)
+                {
+                    if (scores[i - 1].Item2 < scores[i].Item2)
+                    {
+                        corrections++;
+                        Tuple<string, int> higherScore = scores[i];
+                        scores[i] = scores[i - 1];
+                        scores[i - 1] = higherScore;
+                    }
                 }
             }
         }

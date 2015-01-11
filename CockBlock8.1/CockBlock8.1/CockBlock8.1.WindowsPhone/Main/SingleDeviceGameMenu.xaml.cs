@@ -1,4 +1,5 @@
 ﻿using CockBlock8._1.Game;
+using CockBlock8._1.Main;
 using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.View;
 using System;
@@ -34,10 +35,11 @@ namespace CockBlock8._1
         private void Init()
         {
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.StartGame_bn, this.Instructions_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.StartGame_bn, this._Highscore_bn, this.Instructions_bn, this.Back_bn);
             this.Title_tx.Text = "Single Game";
             this.StartGame_bn.Content = "Start Game";
             this.Instructions_bn.Content = Settings._Instructions;
+            this._Highscore_bn.Content = "Highscores";
             this.Back_bn.Content = "Back";
         }
         /// <summary>
@@ -52,14 +54,16 @@ namespace CockBlock8._1
 
         private void StartGame_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(SingleDeviceGame), e); }
+        private async void _Highscore_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(HighscorePage), await Settings.SingleDeviceHighscores()); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
-
         private async void Instructions_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(InstructionPage), await Settings.InstructionPageInformationSingleGame()); }
         internal override Button[] GetButtons()
         { return new Button[] { this.StartGame_bn, this.Back_bn }; }
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { this.Title_tx }; }
+
     }
 }

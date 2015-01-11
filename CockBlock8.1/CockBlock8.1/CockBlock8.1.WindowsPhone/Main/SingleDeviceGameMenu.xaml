@@ -12,10 +12,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock x:Name="Title_tx" Text="[Title]"/>
@@ -30,7 +31,10 @@
             <Button x:Name="Instructions_bn" Content="[Button2]" Click="Instructions_bn_Click"/>
         </Grid>
         <Grid Grid.Row="4">
-            <Button x:Name="Back_bn" Content="[Button3]" Click="Back_bn_Click"/>
+            <Button x:Name="_Highscore_bn" Content="[Button3]" Click="_Highscore_bn_Click"/>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Button x:Name="Back_bn" Content="[Button4]" Click="Back_bn_Click"/>
         </Grid>
     </Grid>
 </src:CB_Page>

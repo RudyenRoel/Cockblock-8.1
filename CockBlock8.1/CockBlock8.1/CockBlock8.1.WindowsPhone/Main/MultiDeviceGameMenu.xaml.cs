@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using CockBlock8._1.Main.Instructions;
 using CockBlock8._1.Game;
 using CockBlock8._1.View;
+using CockBlock8._1.Main;
 namespace CockBlock8._1
 
 
@@ -33,13 +34,14 @@ namespace CockBlock8._1
 
         private void Init()
         {
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn,this.Highscore_bn, this.Back_bn);
             Settings.DefaultTextBlockProperties(Settings._DefaultSmallFontSize, this.Title_tx, this.SearchGame_tx, this.CreateGame_tx);
             this.Title_tx.Text = "Multi Game";
             this.Title_tx.FontSize = Settings._DefaultHeaderFontSize;
             this.SearchGame_bn.Content = "Search Game";
             this.CreateGame_bn.Content = "Create Game";
-            this.Instructions_bn.Content = "Instructions";
+            this.Instructions_bn.Content = Settings._Instructions;
+            this.Highscore_bn.Content = "Highscores";
             this.Back_bn.Content = "Back";
         }
         /// <summary>
@@ -55,6 +57,8 @@ namespace CockBlock8._1
         { }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
+        private async void Highscore_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(HighscorePage), await Settings.MultiDeviceHighscores()); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
         private async void Instruction_bn_Click(object sender, RoutedEventArgs e)
@@ -68,8 +72,9 @@ namespace CockBlock8._1
         private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
         { this.CreateGame_tx.Text = ""; }
         internal override Button[] GetButtons()
-        { return new Button[] { this.Back_bn, this.SearchGame_bn, this.CreateGame_bn }; }
+        { return new Button[] { this.Back_bn, this.Highscore_bn, this.SearchGame_bn, this.CreateGame_bn }; }
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx }; }
+
     }
 }
