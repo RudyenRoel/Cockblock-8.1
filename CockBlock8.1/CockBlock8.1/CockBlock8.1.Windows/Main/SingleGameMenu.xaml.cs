@@ -38,5 +38,9 @@ namespace CockBlock8._1.Main
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
     }
 }

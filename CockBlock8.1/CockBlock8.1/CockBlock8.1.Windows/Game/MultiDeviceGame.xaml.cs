@@ -26,6 +26,10 @@ namespace CockBlock8._1.Game
         {
             this.InitializeComponent();
         }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
 
     }
 }

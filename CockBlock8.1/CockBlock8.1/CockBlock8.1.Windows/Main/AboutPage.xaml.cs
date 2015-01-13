@@ -35,5 +35,9 @@ namespace CockBlock8._1.Main
             if (this.Frame.CanGoBack)
                 this.Frame.GoBack();
         }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
     }
 }

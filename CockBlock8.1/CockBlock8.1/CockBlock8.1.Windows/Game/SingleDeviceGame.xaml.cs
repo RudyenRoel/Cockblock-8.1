@@ -74,7 +74,7 @@ namespace CockBlock8._1.Game
             _CockList = new List<Image>();
             _stopShootingText1.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             _stopShootingText2.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
-            
+
             DefaultShieldCannonImageProparties(_ShieldCannon1, _ShieldCannon2, _ShieldCannon3, _ShieldCannon4, _ShieldCannon5, _ShieldCannon6, _ShieldCannon7, _ShieldCannon8, _ShieldCannon9, _ShieldCannon10);
             DefaultHealthBarProparties(Colors.White, _TotalHealth1_rect, _TotalHealth2_rect);
             DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
@@ -241,7 +241,7 @@ namespace CockBlock8._1.Game
 
         private void ChangeColorStopShooting()
         {
-            if(_isBlue)
+            if (_isBlue)
             {
                 _stopShootingText1.Foreground = new SolidColorBrush(Colors.Red);
                 _stopShootingText2.Foreground = new SolidColorBrush(Colors.Red);
@@ -257,7 +257,7 @@ namespace CockBlock8._1.Game
         public void NextFrame()
         {
             _frame++;
-            if(_frame > 30)
+            if (_frame > 30)
             {
                 _frame = 0;
                 ChangeColorStopShooting();
@@ -443,5 +443,9 @@ namespace CockBlock8._1.Game
         }
         private void Exit()
         { this.Frame.Navigate(typeof(MainPage)); }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
     }
 }
