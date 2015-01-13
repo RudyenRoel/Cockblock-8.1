@@ -81,6 +81,7 @@ namespace CockBlock8._1
             _currentDefender = 0;
             _currentShooter = 1;
             ((SingleDeviceGame)_currentPage).setHealthPlayer1(STARTINGHEALTH);
+
             ((SingleDeviceGame)_currentPage).setHealthPlayer2(STARTINGHEALTH);
         }
 

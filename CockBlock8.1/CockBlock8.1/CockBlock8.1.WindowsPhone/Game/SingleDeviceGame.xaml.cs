@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Services.Maps;
 using Windows.Storage;
@@ -68,7 +69,7 @@ namespace CockBlock8._1.Game
             SwitchGoingUp();
             //setHealthPlayer1(80);
             //setHealthPlayer2(90);
-            _xCoords = new int[] { -240, -20, 200 };
+            _xCoords = new int[] { -230, 10, 250 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             _CockList = new List<Image>();
@@ -262,9 +263,9 @@ namespace CockBlock8._1.Game
             _goingUp = !_goingUp;
             if (_goingUp)
             {
-                _maxYCoord = -880;
+                _maxYCoord = -1000;
                 _marginChange = 5;
-                _startYCoord = -130;
+                _startYCoord = -140;
                 _distanceToHealth = 170;
                 _Cock = _CockUp;
             }
@@ -272,7 +273,7 @@ namespace CockBlock8._1.Game
             {
                 _maxYCoord = -200;
                 _marginChange = -5;
-                _startYCoord = -950;
+                _startYCoord = -1060;
                 _distanceToHealth = -170;
                 _Cock = _CockDown;
             }

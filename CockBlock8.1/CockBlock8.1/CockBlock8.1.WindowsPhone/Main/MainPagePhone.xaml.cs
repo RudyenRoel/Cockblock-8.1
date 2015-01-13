@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -85,6 +86,7 @@ namespace CockBlock8._1
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.PortraitFlipped | DisplayOrientations.Portrait;
             base.OnNavigatedTo(e);
             Frame.BackStack.Clear();
         }

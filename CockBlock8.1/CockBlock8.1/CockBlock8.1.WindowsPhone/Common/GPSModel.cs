@@ -16,6 +16,7 @@ namespace CockBlock8._1.Model
         private static bool _searchingLocation = false;
         private static bool _searchingCountry = false;
         private static bool _done = true; // hot fix
+        private bool _locationOff = false;
         private GPSModel()
         { }
         public static GPSModel Get
@@ -56,7 +57,7 @@ namespace CockBlock8._1.Model
                 return country;
             }
             else { Debug.WriteLine("Allready loading Current Country"); }
-            return null;
+            return "WTF";
         }
         private bool LastGPSPositionIsValid()
         {
@@ -77,22 +78,38 @@ namespace CockBlock8._1.Model
         private async Task<Geoposition> LoadCurrentLocationAsync()
         {
             var locator = new Geolocator();
-            locator.DesiredAccuracy = PositionAccuracy.Default;
-            locator.DesiredAccuracyInMeters = 30;
-
-            Stopwatch watch = new Stopwatch();
-            watch.Start();
-            var position = await locator.GetGeopositionAsync();
-            watch.Stop();
-            Debug.WriteLine("Load current location Time: " + watch.Elapsed);
-            return position;
+            if (locator.LocationStatus == PositionStatus.Disabled)
+            {
+                Debug.WriteLine("LOCATOR IS OFF");
+                _locationOff = true;
+                return null;
+            }
+            else
+            {
+                locator.DesiredAccuracy = PositionAccuracy.Default;
+                locator.DesiredAccuracyInMeters = 30;
+                Stopwatch watch = new Stopwatch();
+                watch.Start();
+                var position = await locator.GetGeopositionAsync();
+                watch.Stop();
+                Debug.WriteLine("Load current location Time: " + watch.Elapsed);
+                return position;
+            }
         }
         private async Task<string> FindCorrospondingCountry(Geopoint geopoint)
         {
-            var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
-            string country = result.Locations[0].Address.Country;
-            Debug.WriteLine("Country: " + country);
-            return country;
+            if(geopoint != null)
+            {
+                var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
+                string country = result.Locations[0].Address.Country;
+                _searchingCountry = false;
+                Debug.WriteLine("Country: " + country);
+                return country;
+            }
+            else
+            {
+                return "Country not found!";
+            }
         }
         public static bool IsDone() { return _done; }
         public void SetDone(bool result) { _done = result; }
