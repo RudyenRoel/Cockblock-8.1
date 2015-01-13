@@ -13,12 +13,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="500*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock x:Name="Title_tx" Text="[Title]" />
+            <TextBlock x:Name="Title_tx" Text="[Title]"/>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBlock x:Name="About_tx" Text="[text]" />
+            <ScrollViewer Height="470" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
+                <TextBlock x:Name="About_tx" Text="[text]"/>
+            </ScrollViewer>
+            <FlyoutPresenter x:Name="Close_Flyout" Visibility="Collapsed">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="Close_Feedback_Flyout" Text="[Close]" TextWrapping="Wrap" FontSize="48"/>
+                    <Button x:Name="Close_bn_Flyout" Content="Close" Click="Close_bn_Flyout_Click"/>
+                </StackPanel>
+            </FlyoutPresenter>
+        </Grid>
+        <Grid Grid.Row="2">
+            <TextBlock x:Name="_EasterEgg_tx" Text="[egg]" Width="350" Height="40" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center"/>
+            <Rectangle x:Name="_EasterEgg_rect" Fill="Black" Width="350" Height="40" PointerPressed="_EasterEgg_rect_PointerPressed"/>
         </Grid>
     </Grid>
 </src:CB_Page>
