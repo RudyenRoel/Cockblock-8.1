@@ -8,11 +8,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,8 +36,8 @@ namespace CockBlock8._1
     /// 
     public sealed partial class MainPagePhone : CB_Page
     {
-        public bool firstLocationDone = false;
-        private int scoreBonus = 0;
+        public static bool firstLocationDone = false;
+        private static int scoreBonus = 0;
         private string _ApplicationName = "CockBlock 8.1";
         private BitmapImage _SettingsImage = new BitmapImage();
         private BitmapImage _MapImage = new BitmapImage();
@@ -45,10 +48,11 @@ namespace CockBlock8._1
         {
             this.InitializeComponent();
             Init();
-            SetMapPageFeedback("");
+            SetMapPageFeedback(""); 
         }
         private void Init()
         {
+            ShowMessage("wees gegroet");
             this.NavigationCacheMode = NavigationCacheMode.Required;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
@@ -116,13 +120,21 @@ namespace CockBlock8._1
             else
             { SetMapPageFeedback("Wait a moment please, searching current location"); }
         }
-        private void SetScoreBonus(int bonus)
-        { if (firstLocationDone) { this.scoreBonus = bonus; } }
-        public int GetScoreBonus()
+        public static void SetScoreBonus(int bonus)
+        { if (firstLocationDone) { scoreBonus = bonus; } }
+        public static int GetScoreBonus()
         { return scoreBonus; }
         internal override Button[] GetButtons()
         { return new Button[] { this.SingleGame_bn, this.MultiGame_bn, this.About_bn, this.Exit_bn }; }
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { this.Title_tx }; }
+
+        public async static Task ShowMessage(string message)
+        {
+            MessageDialog dialog = new MessageDialog(message);
+            await dialog.ShowAsync();
+        }
+
+        delegate void ChangeOpponentNameDel(string name);
     }
 }

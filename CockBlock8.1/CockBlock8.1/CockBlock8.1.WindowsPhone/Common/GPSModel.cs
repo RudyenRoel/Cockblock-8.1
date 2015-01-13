@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.Services.Maps;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 
 namespace CockBlock8._1.Model
 {
@@ -18,7 +22,12 @@ namespace CockBlock8._1.Model
         private static bool _done = true; // hot fix
         private bool _locationOff = false;
         private GPSModel()
-        { }
+        {
+            GeofenceMonitor.Current.Geofences.Clear();
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            CreateGeofence(51.5879, 4.7763, 10000, "Breda");
+            CreateGeofence(51.5669, 5.0699, 10000, "Tilburg");
+        }
         public static GPSModel Get
         {
             get
@@ -113,5 +122,62 @@ namespace CockBlock8._1.Model
         }
         public static bool IsDone() { return _done; }
         public void SetDone(bool result) { _done = result; }
+
+        private void CreateGeofence(double latitude, double longitude, double radius, string name)
+        {
+            var id = string.Format(name);
+            // Sets the center of the Geofence.
+            var position = new BasicGeoposition
+            {
+                Latitude = latitude,
+                Longitude = longitude
+            };
+
+            // The Geofence is a circular area centered at (latitude, longitude) point, with the
+            // radius in meter.
+            var geocircle = new Geocircle(position, radius);
+
+            // Sets the events that we want to handle: in this case, the entrace and the exit
+            // from an area of intereset.
+            var mask = MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited;
+
+            // Specifies for how much time the user must have entered/exited the area before 
+            // receiving the notification.
+            var dwellTime = TimeSpan.FromSeconds(1);
+
+            // Creates the Geofence and adds it to the GeofenceMonitor.
+            var geofence = new Geofence(id, geocircle, mask, false, dwellTime);
+            //GeofenceMonitor.Current.Geofences.Clear();
+            GeofenceMonitor.Current.Geofences.Add(geofence);
+        }
+
+        private async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
+        {
+            var reports = sender.ReadReports();
+            Debug.WriteLine("IK BEN IN DE METHODE");
+
+            foreach (var report in reports)
+            {
+                var state = report.NewState;
+                var geofence = report.Geofence;
+
+                GeofenceMonitor.Current.Geofences.Remove(geofence);
+
+                if (state == GeofenceState.Entered)
+                {
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                        async () =>
+                        {
+                            await MainPagePhone.ShowMessage("You're in " + geofence.Id + "!! The winner will get a bonus of 500 points!");
+                        });
+                    MainPagePhone.SetScoreBonus(500);
+                    // User has entered the area.
+                }
+                else if (state == GeofenceState.Exited)
+                {
+                    // User has exited from the area.
+                }
+            }
+        }
     }
 }

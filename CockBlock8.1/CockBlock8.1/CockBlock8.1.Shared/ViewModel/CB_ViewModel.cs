@@ -336,6 +336,7 @@ namespace CockBlock8._1
                 Debug.WriteLine("DESTRUCTION! (no energy left for opponent) BONUS POINTS: +500");
                 score += 500;
             }
+            score += MainPagePhone.GetScoreBonus();
             Debug.WriteLine("Final Score = " + score);
             // TODO: Save Score
             return score;

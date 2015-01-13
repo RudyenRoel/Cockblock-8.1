@@ -57,8 +57,8 @@ namespace CockBlock8._1.Game
             this.InitializeComponent();
             Start_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
             Flags.Get.ToString();
-            InitBackground();
             init();
+            InitBackground();
         }
         private async Task InitBackground()
         {
@@ -80,12 +80,14 @@ namespace CockBlock8._1.Game
             _playerWantToReplay = 0;
             _goingUp = false;
             SwitchGoingUp();
-            //setHealthPlayer1(80);
-            //setHealthPlayer2(90);
-            _p1_Name_tx.PlaceholderText = "Enter Name";
+            setHealthPlayer1(100);
+            setHealthPlayer2(100);
             _p1_Name_tx.IsEnabled = true;
-            _p2_Name_tx.PlaceholderText = "Enter Name";
             _p2_Name_tx.IsEnabled = true;
+            _p1_Name_tx.Text = "";
+            _p2_Name_tx.Text = "";
+            _p1_Name_tx.PlaceholderText = "Enter Name";
+            _p2_Name_tx.PlaceholderText = "Enter Name";
             _xCoords = new int[] { -230, 10, 250 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
@@ -395,7 +397,7 @@ namespace CockBlock8._1.Game
             {
                 if (_p1_Name_tx.Text == "Enter Name" || _p1_Name_tx.Text == "") // TODO: Merge both if statements
                 {
-                    _p1_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
+                    _p1_Name_tx.Background = new SolidColorBrush(Colors.Red);
                 }
                 else
                 {
@@ -412,7 +414,7 @@ namespace CockBlock8._1.Game
             {
                 if (_p2_Name_tx.Text == "Enter Name" || _p2_Name_tx.Text == "")
                 {
-                    _p2_Name_tx.Foreground = new SolidColorBrush(Colors.Red);
+                    _p2_Name_tx.Background = new SolidColorBrush(Colors.Red);
                 }
                 else
                 {
@@ -541,6 +543,6 @@ namespace CockBlock8._1.Game
         internal override Button[] GetButtons()
         { return new Button[] { _Exit_p1_bn, _Exit_p2_bn, _Rematch_p1_bn, _Rematch_p2_bn, Start_bn }; }
         internal override TextBlock[] GetTextBlocks()
-        { return new TextBlock[] { _CurrentHealth1_tx, _CurrentHealth2_tx, _GameOver_p1_tx, _GameOver_p2_tx, _p1_energy1_tx, _p1_energy2_tx, _p1_energy3_tx, _p2_energy1_tx, _p2_energy2_tx, _p2_energy3_tx }; }
+        { return new TextBlock[] { _GameOver_p1_tx, _GameOver_p2_tx}; }
     }
 }
