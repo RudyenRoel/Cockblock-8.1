@@ -111,5 +111,9 @@ namespace CockBlock8._1.Main.Instructions
 
         private void _Back_bn_Click(object sender, RoutedEventArgs e)
         { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
     }
 }

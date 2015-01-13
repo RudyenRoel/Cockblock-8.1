@@ -33,8 +33,9 @@ namespace CockBlock8._1
     /// 
     public sealed partial class MainPagePhone : CB_Page
     {
-        private string _ApplicationName = "CockBlock 8.1";
         public bool firstLocationDone = false;
+        private int scoreBonus = 0;
+        private string _ApplicationName = "CockBlock 8.1";
         private BitmapImage _SettingsImage = new BitmapImage();
         private BitmapImage _MapImage = new BitmapImage();
         private int _TitleFontSize = 48;
@@ -115,6 +116,10 @@ namespace CockBlock8._1
             else
             { SetMapPageFeedback("Wait a moment please, searching current location"); }
         }
+        private void SetScoreBonus(int bonus)
+        { if (firstLocationDone) { this.scoreBonus = bonus; } }
+        public int GetScoreBonus()
+        { return scoreBonus; }
         internal override Button[] GetButtons()
         { return new Button[] { this.SingleGame_bn, this.MultiGame_bn, this.About_bn, this.Exit_bn }; }
         internal override TextBlock[] GetTextBlocks()

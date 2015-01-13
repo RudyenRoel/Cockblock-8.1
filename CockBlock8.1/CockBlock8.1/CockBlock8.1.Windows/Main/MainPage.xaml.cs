@@ -52,5 +52,9 @@ namespace CockBlock8._1
         {
             Application.Current.Exit();
         }
+        internal override Button[] GetButtons()
+        { return new Button[] { }; }
+        internal override TextBlock[] GetTextBlocks()
+        { return new TextBlock[] { }; }
     }
 }
