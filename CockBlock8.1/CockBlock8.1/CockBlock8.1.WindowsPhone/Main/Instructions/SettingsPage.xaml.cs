@@ -216,7 +216,7 @@ namespace CockBlock8._1.Main.Instructions
 
         private SolidColorBrush SliderToBrush(Slider[] sliders)
         {
-            byte A = (byte)(((double)255 / 100) * sliders[0].Value);
+            byte A = (byte)((((double)200 / 100) * sliders[0].Value) + 15);
             byte R = (byte)(((double)255 / 100) * sliders[1].Value);
             byte G = (byte)(((double)255 / 100) * sliders[2].Value);
             byte B = (byte)(((double)255 / 100) * sliders[3].Value);
@@ -252,7 +252,7 @@ namespace CockBlock8._1.Main.Instructions
         private void SettingsSliders(Slider[] sliders, Color color)
         {
             if (color.A != 0)
-                sliders[0].Value = (int)(((double)color.A / 255) * 100);
+                sliders[0].Value = (int)(((double)(color.A-15) / 200) * 100);
             if (color.R != 0)
                 sliders[1].Value = (int)(((double)color.R / 255) * 100);
             if (color.G != 0)
