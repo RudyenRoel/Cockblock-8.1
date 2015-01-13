@@ -57,7 +57,7 @@ namespace CockBlock8._1.Model
                 return country;
             }
             else { Debug.WriteLine("Allready loading Current Country"); }
-            return "WTF";
+            return null;
         }
         private bool LastGPSPositionIsValid()
         {
@@ -98,7 +98,7 @@ namespace CockBlock8._1.Model
         }
         private async Task<string> FindCorrospondingCountry(Geopoint geopoint)
         {
-            if(geopoint != null)
+            if (geopoint != null)
             {
                 var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
                 string country = result.Locations[0].Address.Country;

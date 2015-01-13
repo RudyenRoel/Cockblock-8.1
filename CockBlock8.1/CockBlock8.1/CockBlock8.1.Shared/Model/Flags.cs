@@ -25,7 +25,9 @@ namespace CockBlock8._1
             AddFlagNames(Settings.Countries.Unknown);
             foreach (string country in Settings.Countries.Europe())
             { AddFlagNames(country); }
-            AddFlagNames(Settings.Countries.Amerika);
+            foreach (string country in Settings.Countries.America())
+                AddFlagNames(country);
+
             _FlagImages = new Dictionary<string, BitmapImage>();
             LoadAllFlags();
         }
@@ -44,7 +46,11 @@ namespace CockBlock8._1
         {
             foreach (string name in _Flag_Names)
             {
-                _FlagImages.Add(name, LoadImage(name));
+                try
+                {
+                    _FlagImages.Add(name, LoadImage(name));
+                }
+                catch (ArgumentException) { Debug.WriteLine("Flags, LoadAllFlags(): Key allready added: " + name); }
             }
         }
         private BitmapImage LoadImage(string name)

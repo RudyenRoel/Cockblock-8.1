@@ -74,7 +74,7 @@ namespace CockBlock8._1
         { this.CreateGame_tx.Text = ""; }
         #endregion
         internal override Button[] GetButtons()
-        { return new Button[] { this.Back_bn, this.Highscore_bn, this.SearchGame_bn, this.CreateGame_bn }; }
+        { return new Button[] { this.Highscore_bn, this.SearchGame_bn, this.CreateGame_bn }; }
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx, this._Input_Flyout1_tx, this._Input_Flyout2_tx, this._Input_Flyout3_tx, this._Input_Flyout4_tx }; }
 
@@ -103,8 +103,6 @@ namespace CockBlock8._1
         }
         #endregion
 
-        private void Back_bn_Click(object sender, RoutedEventArgs e)
-        { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
 
     }
 }

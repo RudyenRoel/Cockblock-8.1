@@ -68,6 +68,7 @@ namespace CockBlock8._1
             this.About_bn.Content = "About";
             this.Exit_bn.Content = "Exit";
             CheckCountry();
+            Settings.Countries.All();
         }
 
         private async void CheckCountry()

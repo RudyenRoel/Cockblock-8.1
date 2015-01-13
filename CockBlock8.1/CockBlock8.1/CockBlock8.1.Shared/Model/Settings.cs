@@ -248,19 +248,109 @@ namespace CockBlock8._1
         public class Countries
         {
             public static string Unknown = "Loading";
-            public static string Nederland = "Netherlands";
+            public static string Argentinie = "Argentina";
+            public static string Oosterijk = "Austria";
             public static string Belgie = "Belgium";
-            public static string Luxemburg = "Luxembourg";
+            public static string Bolivie = "Bolivia";
+            public static string Brazilie = "Brazil";
+            public static string Canada = "Canada";
+            public static string Chicilie = "Chile";
+            public static string Columbia = "Colombia";
+            public static string Cuba = "Cuba";
+            public static string Tsjechie = "Czech Republic";
+            public static string Denemarken = "Denmark";
+            public static string Ecuador = "Ecuador";
+            public static string Estonia = "Estonia";
+            public static string Finland = "Finland";
             public static string Frankrijk = "France";
-            public static string Spanje = "Spain";
-            public static string Portugal = "Portugal";
-            public static string Italie = "Italy";
-            public static string Engeland = "United Kingdom";
+            public static string Frans_Guiana = "Frensh Guiana";
             public static string Duitsland = "Germany";
+            public static string Griekeland = "Greece";
+            public static string Groenland = "Greenland";
+            public static string Guyana = "Guyana";
+            public static string Hongarije = "Hungary";
+            public static string Ijsland = "Iceland";
+            public static string Ierland = "Ireland";
+            public static string Italie = "Italy";
+            public static string Latvia = "Latvia";
+            public static string Lithuania = "Lithuania";
+            public static string Luxemburg = "Luxembourg";
+            public static string Mexico = "Mexico";
+            public static string Nederland = "Netherlands";
+            public static string Noorwegen = "Norway";
+            public static string Paraguay = "Paraguay";
+            public static string Peru = "Peru";
+            public static string Polen = "Poland";
+            public static string Portugal = "Portugal";
+            public static string Romenie = "Romania";
+            public static string Rusland = "Russia";
+            public static string Slowakije = "Slovakia";
+            public static string Slovenie = "Slovania";
+            public static string Spanje = "Spain";
+            public static string Suriname = "Suriname";
+            public static string Zweden = "Sweden";
+            public static string Zwitserland = "Switzerland";
+            public static string Oekraine = "Ukraine";
+            public static string Engeland = "United Kingdom";
             public static string Amerika = "USA";
+            public static string Venezuela = "Venezuela";
+            public static string[] WestEurope()
+            {
+                return new string[] { Nederland, Belgie, Luxemburg, Frankrijk, Spanje, Portugal, Italie, Engeland, Ierland, Ijsland };
+            }
+            public static string[] CenterEurope()
+            {
+                return new string[] { Duitsland, Denemarken, Oosterijk, Zwitserland, Italie, Tsjechie, Hongarije, Slowakije, Romenie };
+            }
+            public static string[] EastEurope()
+            {
+                return new string[] { Romenie, Polen, Griekeland, Lithuania, Latvia, Estonia, Noorwegen, Zweden, Finland };
+            }
+            public static string[] NorthAmerica()
+            {
+                return new string[] { Canada, Amerika, Mexico, Groenland };
+            }
+            public static string[] CenterAmerica()
+            {
+                return new string[] { };
+            }
+            public static string[] SouthAmerica()
+            {
+                return new string[] { Brazilie, Chicilie, Argentinie, Paraguay, Bolivie, Peru, Ecuador, Columbia, Venezuela, Guyana, Suriname, Frans_Guiana };
+            }
             public static string[] Europe()
             {
-                return new string[] { Nederland, Belgie, Luxemburg, Frankrijk, Spanje, Portugal, Italie, Engeland, Duitsland };
+                string[][] array = new string[][] { WestEurope(), CenterEurope(), EastEurope() };
+                string[] europe = dubbleArrayToArray(array);
+                return europe;
+            }
+            public static string[] America()
+            {
+                string[][] array = new string[][] { NorthAmerica(), CenterAmerica(), SouthAmerica() };
+                string[] america = dubbleArrayToArray(array);
+                return america;
+            }
+            public static string[] All()
+            {
+                string[][] countries = new string[][] { Europe(), America() };
+                string[] totalArray = dubbleArrayToArray(countries);
+
+                #region Debug
+                foreach (string country in totalArray)
+                { Debug.WriteLine("All Countries: " + country); }
+                #endregion
+
+                return totalArray;
+            }
+            private static string[] dubbleArrayToArray(string[][] countries)
+            {
+                List<string> list = new List<String>(); foreach (string[] array in countries)
+                { foreach (string name in array) { list.Add(name); } }
+
+                string[] totalArray = new string[list.Count];
+                for (int i = 0; i < list.Count; i++)
+                { totalArray[i] = list[i]; }
+                return totalArray;
             }
         }
     }
