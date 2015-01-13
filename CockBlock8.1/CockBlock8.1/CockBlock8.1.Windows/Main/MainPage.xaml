@@ -11,9 +11,10 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="125*"/>
-            <RowDefinition Height="170"/>
-            <RowDefinition Height="170"/>
-            <RowDefinition Height="170"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="Title_tx" Text="CockBlock 8.1" FontSize="72"/>
@@ -26,6 +27,9 @@
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="About_bn" Content="About" FontSize="48" Click="About_bn_Click"/>
+        </Grid>
+        <Grid Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="Exit_bn" Content="Exit" FontSize="48" Click="Exit_bn_Click"/>
         </Grid>
     </Grid>
 </src:CB_Page>

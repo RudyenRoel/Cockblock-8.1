@@ -27,6 +27,13 @@ namespace CockBlock8._1.Main
             this.InitializeComponent();
             this.About_tx.TextWrapping = TextWrapping.Wrap;
             this.About_tx.Text = Settings.About().Result;
+            this._Back_bn.FontSize = Settings._DefaultButtonFontSizePhone;
+        }
+
+        private void _Back_bn_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Frame.CanGoBack)
+                this.Frame.GoBack();
         }
     }
 }

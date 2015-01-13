@@ -34,7 +34,7 @@ namespace CockBlock8._1
 
         private void Init()
         {
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSize, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn,this.Highscore_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn,this.Highscore_bn, this.Back_bn);
             Settings.DefaultTextBlockProperties(Settings._DefaultSmallFontSize, this.Title_tx, this.SearchGame_tx, this.CreateGame_tx);
             this.Title_tx.Text = "Multi Game";
             this.Title_tx.FontSize = Settings._DefaultHeaderFontSize;
@@ -42,7 +42,6 @@ namespace CockBlock8._1
             this.CreateGame_bn.Content = "Create Game";
             this.Instructions_bn.Content = Settings._Instructions;
             this.Highscore_bn.Content = "Highscores";
-            this.Back_bn.Content = "Back";
         }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
@@ -59,8 +58,6 @@ namespace CockBlock8._1
         { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
         private async void Highscore_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(HighscorePage), await Settings.MultiDeviceHighscores()); }
-        private void Back_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MainPage), e); }
         private async void Instruction_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(InstructionPage), await Settings.InstructionPageInformationMultiGame()); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)

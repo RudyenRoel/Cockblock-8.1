@@ -29,10 +29,10 @@ namespace CockBlock8._1.Main
         {
             this.InitializeComponent();
         }
-        private void Instructions_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions.Instructions), Settings.InstructionPageInformationMultiGame()); }
+        private async void Instructions_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(Instructions.InstructionPage), await Settings.InstructionPageInformationMultiGame()); }
         private void Back_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MainPage), e); }
+        { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
         private void SearchGame_bn_PointerEntered(object sender, PointerRoutedEventArgs e)

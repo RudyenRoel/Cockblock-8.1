@@ -23,7 +23,8 @@ namespace CockBlock8._1
         public readonly static int _DefaultTextBlockFontSize = 18;
         public readonly static int _DefaultSubHeaderFontSize = 32;
         public readonly static int _DefaultHeaderFontSize = 48;
-        public readonly static int _DefaultButtonFontSize = 20;
+        public readonly static int _DefaultButtonFontSizePhone = 20;
+        public readonly static int _DefaultButtonFontSizeTablet = 32;
         public readonly static int _DefaultRadioButtonFontSize = 18;
         public readonly static int _MaxAmountOfHighscores = 10;
         public readonly static string _HighscoresSingleKey = "_Highscores_Single_";
@@ -155,7 +156,6 @@ namespace CockBlock8._1
             {
                 text = reader.ReadToEnd();
             }
-            Debug.WriteLine("Line: " + text);
 
             return text;
         }
@@ -169,6 +169,7 @@ namespace CockBlock8._1
         }
         private async static Task CreateInformationMultiGame()
         {
+            Debug.WriteLine("Creating Information Multi Game");
             string[] instructions1 = new string[] { _Instructions, "Multi Game", await MultiGame() };
             string[] instructions2 = new string[] { "SG1 .png", "SG2.png" }; // Add here your Images
             Tuple<string[], string[]> item1 = new Tuple<string[], string[]>(instructions1, instructions2);
@@ -213,7 +214,7 @@ namespace CockBlock8._1
         public static void DefaultButtonProperties(int fontSize, params Button[] buttons)
         { DefaultButtonProperties("", fontSize, buttons); }
         public static void DefaultButtonProperties(string text, params Button[] buttons)
-        { DefaultButtonProperties(text, _DefaultButtonFontSize, buttons); }
+        { DefaultButtonProperties(text, _DefaultButtonFontSizePhone, buttons); }
         public static void DefaultButtonProperties(string text, int fontSize, params Button[] buttons)
         {
             foreach (Button button in buttons)

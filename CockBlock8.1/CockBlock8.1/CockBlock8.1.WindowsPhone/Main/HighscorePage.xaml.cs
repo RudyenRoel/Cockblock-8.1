@@ -69,8 +69,8 @@ namespace CockBlock8._1.Main
         {
             try
             {
-            if (Int16.Parse(score) <= 0)
-                return;
+                if (Int16.Parse(score) <= 0)
+                    return;
             }
             catch (FormatException) { Debug.WriteLine("Format Exception: " + score); }
             amountOfHighscores++;

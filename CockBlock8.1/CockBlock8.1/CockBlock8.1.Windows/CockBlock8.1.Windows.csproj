@@ -122,8 +122,8 @@
     <Compile Include="Main\Instructions\HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\Instructions\Instructions.xaml.cs">
-      <DependentUpon>Instructions.xaml</DependentUpon>
+    <Compile Include="Main\Instructions\InstructionPage.xaml.cs">
+      <DependentUpon>InstructionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -164,7 +164,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Main\Instructions\Instructions.xaml">
+    <Page Include="Main\Instructions\InstructionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

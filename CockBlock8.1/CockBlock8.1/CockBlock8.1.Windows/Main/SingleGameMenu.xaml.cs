@@ -33,8 +33,8 @@ namespace CockBlock8._1.Main
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(SingleDeviceGame), e); }
 
-        private void Instruction_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(Instructions.Instructions), Settings.InstructionPageInformationSingleGame()); }
+        private async void Instruction_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(Instructions.InstructionPage), await Settings.InstructionPageInformationSingleGame()); }
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(MainPage), e); }

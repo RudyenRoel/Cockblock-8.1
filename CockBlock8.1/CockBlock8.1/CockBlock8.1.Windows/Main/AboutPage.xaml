@@ -11,12 +11,18 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="500*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="About" FontSize="72"/>
         </Grid>
         <Grid Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBlock x:Name="About_tx" Text="About...." FontSize="24"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto">
+                <TextBlock x:Name="About_tx" Text="About...." FontSize="24"/>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="_Back_bn" Content="Back" Click="_Back_bn_Click"/>
         </Grid>
     </Grid>
 </Page>

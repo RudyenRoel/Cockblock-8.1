@@ -46,7 +46,9 @@ namespace CockBlock8._1.Main.Instructions
             _Title_tx.FontSize = _TitleFontSize;
             _F_A_Q_tx.FontSize = _SubTitleFontSize;
             _Title_tx.Text = "Help";
+            _Back_bn.Content = "Back";
             _F_A_Q_tx.Text = "Frequently Asked Questions";
+            _Back_bn.FontSize = Settings._DefaultButtonFontSizeTablet;
             _F_A_Q_tx.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
         }
         private void DefaultTextBlockProparties(params TextBlock[] textblocks)
@@ -106,5 +108,8 @@ namespace CockBlock8._1.Main.Instructions
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         { throw new NotImplementedException(); }
+
+        private void _Back_bn_Click(object sender, RoutedEventArgs e)
+        { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
     }
 }
