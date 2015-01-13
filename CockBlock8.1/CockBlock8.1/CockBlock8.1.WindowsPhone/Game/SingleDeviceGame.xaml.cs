@@ -49,9 +49,13 @@ namespace CockBlock8._1.Game
         private int _startYCoord;
         private int _marginChange;
         private int _distanceToHealth;
+        private int _loser = 5;
+        private int _frame;
+        private bool _isBlue;
         public SingleDeviceGame()
         {
             this.InitializeComponent();
+            Start_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
             Flags.Get.ToString();
             InitBackground();
             init();
@@ -63,12 +67,25 @@ namespace CockBlock8._1.Game
         }
         private void init()
         {
+            if (_loser == 5)
+            {
+                Random random = new Random();
+                int rand = random.Next(0, 100);
+                rand /= 50;
+                _loser = rand;
+            }
+            _frame = 0;
+            _isBlue = false;
             _playerIndexFirstChoice = 0;
             _playerWantToReplay = 0;
             _goingUp = false;
             SwitchGoingUp();
             //setHealthPlayer1(80);
             //setHealthPlayer2(90);
+            _p1_Name_tx.PlaceholderText = "Enter Name";
+            _p1_Name_tx.IsEnabled = true;
+            _p2_Name_tx.PlaceholderText = "Enter Name";
+            _p2_Name_tx.IsEnabled = true;
             _xCoords = new int[] { -230, 10, 250 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
@@ -208,7 +225,8 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            Restart();
+            Restart(_loser);
+            Start_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         public void AddShot(int posX)
@@ -222,8 +240,29 @@ namespace CockBlock8._1.Game
             GameGrid.Children.Add(CockImage);
         }
 
+        private void ChangeColorStopShooting()
+        {
+            if (_isBlue)
+            {
+                _stopShootingText1.Foreground = new SolidColorBrush(Colors.Red);
+                _stopShootingText2.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                _stopShootingText1.Foreground = new SolidColorBrush(Colors.Blue);
+                _stopShootingText2.Foreground = new SolidColorBrush(Colors.Blue);
+            }
+            _isBlue = !_isBlue;
+        }
+
         public void NextFrame()
         {
+            _frame++;
+            if (_frame > 30)
+            {
+                _frame = 0;
+                ChangeColorStopShooting();
+            }
             for (int i = 0; i < _CockList.Count; i++)
             {
                 int index = Array.IndexOf(_xCoords, ((int)_CockList[i].Margin.Left));
@@ -306,6 +345,7 @@ namespace CockBlock8._1.Game
             string lose = "You have been COCKBLOCKED!";
             if (player == 1)
             {
+                _loser = 0;
                 _GameOver_p1_tx.Text = lose;
                 _GameOver_p2_tx.Text = win;
                 _Score_p1_tx.Text = "No score for losers!";
@@ -315,6 +355,7 @@ namespace CockBlock8._1.Game
             }
             else
             {
+                _loser = 1;
                 _GameOver_p1_tx.Text = win;
                 _GameOver_p2_tx.Text = lose;
                 _Score_p1_tx.Text = "Score: " + score;
@@ -325,14 +366,14 @@ namespace CockBlock8._1.Game
             SetFlyoutVisible(true);
         }
 
-        private void Restart()
+        private void Restart(int player)
         {
             foreach (Image cock in _CockList)
             {
                 GameGrid.Children.Remove(cock);
             }
             init();
-            _vm.StartSingleGame();
+            _vm.StartSingleGame(player);
             // Reset Timer + timer Bars
         }
 
@@ -361,6 +402,9 @@ namespace CockBlock8._1.Game
                     score = Int16.Parse(_Score_p1_tx.Text.Remove(0, 7));
                     Debug.WriteLine("Saving score: " + score + " by Player: " + _p1_Name_tx.Text);
                     player_name = _p1_Name_tx.Text;
+                    _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    _p1_Name_tx.Text = "Score Saved!";
+                    _p1_Name_tx.IsEnabled = false;
                 }
 
             }
@@ -375,6 +419,9 @@ namespace CockBlock8._1.Game
                     score = Int16.Parse(_Score_p2_tx.Text.Remove(0, 7));
                     Debug.WriteLine("Saving score: " + score + " by Player: " + _p2_Name_tx.Text);
                     player_name = _p2_Name_tx.Text;
+                    _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    _p2_Name_tx.Text = "Score Saved!";
+                    _p2_Name_tx.IsEnabled = false;
                 }
             }
             if (player_name != null)
@@ -477,7 +524,10 @@ namespace CockBlock8._1.Game
                 else if (_playerWantToReplay == 1)
                 {
                     if (rematch)
-                    { Restart(); }
+                    {
+                        SetFlyoutVisible(false);
+                        Start_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
                     else
                     { Exit(); }
                 }

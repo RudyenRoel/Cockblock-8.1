@@ -78,7 +78,7 @@
                 </StackPanel>
                 
                 <Grid Width="360" Height="0" Margin="0,0,0,0">
-                    <TextBlock x:Name="_stopShootingText1" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="240,-100,-320,60" Visibility="Collapsed">
+                    <TextBlock x:Name="_stopShootingText1" FontWeight="ExtraBold" TextWrapping="Wrap" Foreground="Red" Text="STOP SHOOTING!" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" Margin="240,-100,-320,60" Visibility="Visible">
                         <TextBlock.RenderTransform>
                             <RotateTransform Angle="180"/>
                         </TextBlock.RenderTransform>

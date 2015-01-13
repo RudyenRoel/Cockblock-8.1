@@ -31,6 +31,7 @@ namespace CockBlock8._1.Main.Instructions
         private Slider[] _textSliders = new Slider[] { new Slider(), new Slider(), new Slider(), new Slider() };
         private Button _buttonColor_bn, _textColor_bn, _buttonSave_bn, _textSave_bn, _example_bn, _reset_bn;
         private TextBlock _example_tx = new TextBlock();
+        private byte[] _ARGB = new byte[4];
         public SettingsPage()
         {
             this.InitializeComponent();
@@ -42,6 +43,12 @@ namespace CockBlock8._1.Main.Instructions
             _Settings_panel.Orientation = Orientation.Vertical;
             _Settings_panel.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
             _Settings_panel.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+
+            //Set to previous settings
+            _ARGB[0] = Settings._DefaultButtonForeground.Color.A;
+            _ARGB[1] = Settings._DefaultButtonForeground.Color.R;
+            _ARGB[2] = Settings._DefaultButtonForeground.Color.G;
+            _ARGB[3] = Settings._DefaultButtonForeground.Color.B;
 
             // Button
             this._buttonColor_bn = new Button();
@@ -108,6 +115,7 @@ namespace CockBlock8._1.Main.Instructions
                 sliders[i].HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                 sliders[i].Width = 300;
                 sliders[i].ValueChanged += button_ValueChanged;
+                sliders[i].UpdateLayout();
             }
         }
         private void TextColorSelection(params Slider[] sliders)
@@ -244,13 +252,13 @@ namespace CockBlock8._1.Main.Instructions
         private void SettingsSliders(Slider[] sliders, Color color)
         {
             if (color.A != 0)
-                sliders[0].Value = (255 / color.A) * 100;
+                sliders[0].Value = (int)(((double)color.A / 255) * 100);
             if (color.R != 0)
-                sliders[1].Value = (255 / color.R) * 100;
+                sliders[1].Value = (int)(((double)color.R / 255) * 100);
             if (color.G != 0)
-                sliders[2].Value = (255 / color.G) * 100;
+                sliders[2].Value = (int)(((double)color.G / 255) * 100);
             if (color.B != 0)
-                sliders[3].Value = (255 / color.B) * 100;
+                sliders[3].Value = (int)(((double)color.B / 255) * 100);
         }
         internal override Button[] GetButtons()
         { return new Button[] { this._buttonColor_bn, this._buttonSave_bn, this._textColor_bn, this._textSave_bn, this._example_bn, this._reset_bn }; }

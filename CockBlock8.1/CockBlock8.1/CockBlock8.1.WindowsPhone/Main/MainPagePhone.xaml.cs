@@ -44,6 +44,7 @@ namespace CockBlock8._1
         {
             this.InitializeComponent();
             Init();
+            SetMapPageFeedback("");
         }
         private void Init()
         {

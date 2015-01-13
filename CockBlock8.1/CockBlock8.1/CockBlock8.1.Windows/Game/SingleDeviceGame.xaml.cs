@@ -43,6 +43,9 @@ namespace CockBlock8._1.Game
         private int _startYCoord;
         private int _marginChange;
         private int _distanceToHealth;
+        private int _loser = 5;
+        private int _frame;
+        private bool _isBlue;
         public SingleDeviceGame()
         {
             this.InitializeComponent();
@@ -50,6 +53,17 @@ namespace CockBlock8._1.Game
         }
         private void init()
         {
+            if (_loser == 5)
+            {
+                Random random = new Random();
+                int rand = random.Next(0, 1);
+                Debug.WriteLine("Random: " + rand);
+                _loser = rand;
+            }
+            _frame = 0;
+            _isBlue = false;
+            _playerIndexFirstChoice = 0;
+            _playerWantToReplay = 0;
             _goingUp = false;
             SwitchGoingUp();
             //setHealthPlayer1(80);
@@ -210,7 +224,7 @@ namespace CockBlock8._1.Game
 
         private void Start_bn_Click(object sender, RoutedEventArgs e)
         {
-            _vm.StartSingleGame();
+            Restart(_loser);
             Start_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
@@ -225,8 +239,29 @@ namespace CockBlock8._1.Game
             GameGrid.Children.Add(CockImage);
         }
 
+        private void ChangeColorStopShooting()
+        {
+            if(_isBlue)
+            {
+                _stopShootingText1.Foreground = new SolidColorBrush(Colors.Red);
+                _stopShootingText2.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                _stopShootingText1.Foreground = new SolidColorBrush(Colors.Blue);
+                _stopShootingText2.Foreground = new SolidColorBrush(Colors.Blue);
+            }
+            _isBlue = !_isBlue;
+        }
+
         public void NextFrame()
         {
+            _frame++;
+            if(_frame > 30)
+            {
+                _frame = 0;
+                ChangeColorStopShooting();
+            }
             for (int i = 0; i < _CockList.Count; i++)
             {
                 int index = Array.IndexOf(_xCoords, ((int)_CockList[i].Margin.Left));
@@ -308,6 +343,7 @@ namespace CockBlock8._1.Game
             string lose = "You have been COCKBLOCKED!";
             if (player == 1)
             {
+                _loser = 0;
                 _GameOver_p1_tx.Text = lose;
                 _GameOver_p2_tx.Text = win;
                 _Score_p1_tx.Text = "No score for losers!";
@@ -317,6 +353,7 @@ namespace CockBlock8._1.Game
             }
             else
             {
+                _loser = 1;
                 Debug.WriteLine("Rotating everything");
                 MainGridRotation.Angle = 180;
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.PortraitFlipped;
@@ -330,14 +367,14 @@ namespace CockBlock8._1.Game
             SetFlyoutVisible(true);
         }
 
-        private void Restart()
+        private void Restart(int player)
         {
             foreach (Image cock in _CockList)
             {
                 GameGrid.Children.Remove(cock);
             }
             init();
-            _vm.StartSingleGame();
+            _vm.StartSingleGame(player);
             MainGridRotation.Angle = 0;
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             // Reset Timer + timer Bars
@@ -394,7 +431,10 @@ namespace CockBlock8._1.Game
                 else if (_playerWantToReplay == 1)
                 {
                     if (rematch)
-                    { Restart(); }
+                    {
+                        SetFlyoutVisible(false);
+                        Start_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                    }
                     else
                     { Exit(); }
                 }

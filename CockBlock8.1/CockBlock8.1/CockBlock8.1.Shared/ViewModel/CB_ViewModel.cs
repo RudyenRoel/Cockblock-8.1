@@ -51,7 +51,7 @@ namespace CockBlock8._1
 #endif
         }
 
-        public void StartSingleGame()
+        public void StartSingleGame(int player)
         {
             _turnTimer = TIMEPERTURNTABLET;
             _shootTimer = TIMEFORSHOOTINGTABLET;
@@ -80,6 +80,10 @@ namespace CockBlock8._1
             SetImages(_players[1], 1);
             _currentDefender = 0;
             _currentShooter = 1;
+            if(player == 0)
+            {
+                NextTurn();
+            }
             ((SingleDeviceGame)_currentPage).setHealthPlayer1(STARTINGHEALTH);
 
             ((SingleDeviceGame)_currentPage).setHealthPlayer2(STARTINGHEALTH);
