@@ -62,5 +62,8 @@ namespace CockBlock8._1
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { this.Title_tx }; }
 
+        private void Back_bn_Click(object sender, RoutedEventArgs e)
+        { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
+
     }
 }

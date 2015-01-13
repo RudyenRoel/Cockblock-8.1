@@ -38,5 +38,25 @@
         <Grid Grid.Row="5" >
             <Button x:Name="Back_bn" Content="[Button5]" Click="Back_bn_Click"/>
         </Grid>
+        <FlyoutPresenter Grid.Row="1" x:Name="_Flyout1" Visibility="Visible">
+            <StackPanel>
+                <TextBlock x:Name="_Input_Flyout1_tx" Text="[test]" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </FlyoutPresenter>
+        <FlyoutPresenter Grid.Row="2" x:Name="_Flyout2" Visibility="Visible">
+            <StackPanel>
+                <TextBlock x:Name="_Input_Flyout2_tx" Text="[test]" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </FlyoutPresenter>
+        <FlyoutPresenter Grid.Row="3" x:Name="_Flyout3" Visibility="Visible">
+            <StackPanel>
+                <TextBlock x:Name="_Input_Flyout3_tx" Text="[test]" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </FlyoutPresenter>
+        <FlyoutPresenter Grid.Row="4" x:Name="_Flyout4" Visibility="Visible">
+            <StackPanel>
+                <TextBlock x:Name="_Input_Flyout4_tx" Text="[test]" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </FlyoutPresenter>
     </Grid>
 </src:CB_Page>

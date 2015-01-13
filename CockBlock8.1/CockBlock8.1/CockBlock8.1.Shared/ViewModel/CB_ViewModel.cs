@@ -90,11 +90,11 @@ namespace CockBlock8._1
             _shootTimer--;
             _shotTimer++;
 #if WINDOWS_PHONE_APP
-            if(_currentCountry == null)
+            if (_currentCountry == null)
             {
                 _currentCountry = MainPage._currentCountry;
             }
-            else if(_currentPage.GetType() == typeof(SingleDeviceGame) && !_flagSet)
+            else if (_currentPage.GetType() == typeof(SingleDeviceGame) && !_flagSet)
             {
                 _flagSet = true;
                 SetFlag();
@@ -129,12 +129,12 @@ namespace CockBlock8._1
                 ((SingleDeviceGame)_currentPage).SetTime(percentage);
             }
         }
-        
+
 #if WINDOWS_PHONE_APP
         public void SetFlag()
         {
-            Debug.WriteLine("Setting background flag, flag found: " + _currentCountry); 
-            if(_currentCountry == null)
+            Debug.WriteLine("Setting background flag, flag found: " + _currentCountry);
+            if (_currentCountry == null)
             {
                 _currentCountry = MainPage._currentCountry;
             }
@@ -212,16 +212,20 @@ namespace CockBlock8._1
             _currentShooter = temp;
             ((SingleDeviceGame)_currentPage).SwitchGoingUp();
         }
-        
+
 #if WINDOWS_PHONE_APP
         public async Task BackgroundCheck()
         {
-            Debug.WriteLine("Background check");
+            string country = "Loading";
             GPSModel model = new GPSModel();
             Geoposition position = await model.GetCurrentLocation();
             Geopoint point = model.GeopositionToPoint(position);
-            string country = await model.GetCurrentCountry(point);
-            Debug.WriteLine("done");
+            try
+            {
+                country = await model.GetCurrentCountry(point);
+            }
+            catch (ArgumentOutOfRangeException) {/* Some Posible function */ }
+            Debug.WriteLine("Country: " + country);
             _currentCountry = country;
         }
 #endif
@@ -286,7 +290,7 @@ namespace CockBlock8._1
             int energyTotalPlayer1 = 0;
             bool noShields = false;
 
-            foreach(ShieldCannon sc in _players[0].GetShieldCannons())
+            foreach (ShieldCannon sc in _players[0].GetShieldCannons())
             {
                 energyTotalPlayer0 += (int)sc.Energy;
             }
@@ -297,11 +301,11 @@ namespace CockBlock8._1
             Debug.WriteLine("Player 1 has an energy total of: " + energyTotalPlayer0);
             Debug.WriteLine("Player 2 has an energy total of: " + energyTotalPlayer1);
 
-            if(winnerIndex == 0)
+            if (winnerIndex == 0)
             {
                 score = energyTotalPlayer0 - energyTotalPlayer1;
                 Debug.WriteLine("Player 1 wins, energy difference is: " + score);
-                if(energyTotalPlayer1 == 0)
+                if (energyTotalPlayer1 == 0)
                 {
                     noShields = true;
                 }
@@ -309,7 +313,7 @@ namespace CockBlock8._1
             else
             {
                 score = energyTotalPlayer1 - energyTotalPlayer0;
-                Debug.WriteLine("Player 2 wins, energy difference is: " + score); 
+                Debug.WriteLine("Player 2 wins, energy difference is: " + score);
                 if (energyTotalPlayer0 == 0)
                 {
                     noShields = true;

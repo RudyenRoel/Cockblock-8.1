@@ -34,7 +34,7 @@ namespace CockBlock8._1
 
         private void Init()
         {
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn,this.Highscore_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn, this.Highscore_bn, this.Back_bn);
             Settings.DefaultTextBlockProperties(Settings._DefaultSmallFontSize, this.Title_tx, this.SearchGame_tx, this.CreateGame_tx);
             this.Title_tx.Text = "Multi Game";
             this.Title_tx.FontSize = Settings._DefaultHeaderFontSize;
@@ -42,6 +42,9 @@ namespace CockBlock8._1
             this.CreateGame_bn.Content = "Create Game";
             this.Instructions_bn.Content = Settings._Instructions;
             this.Highscore_bn.Content = "Highscores";
+            this.Back_bn.Content = "Back";
+            SetFlyoutText("Not Yet Available", Settings._DefaultTextBlockFontSize);
+            HideFlyout();
         }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
@@ -52,10 +55,11 @@ namespace CockBlock8._1
         {
             base.OnNavigatedTo(e);
         }
+        #region Buttons
         private void SearchGame_bn_Click(object sender, RoutedEventArgs e)
-        { }
+        { ShowFlyout(); }
         private void CreateGame_bn_Click(object sender, RoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MultiDeviceGame), e); }
+        { ShowFlyout(); }
         private async void Highscore_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(HighscorePage), await Settings.MultiDeviceHighscores()); }
         private async void Instruction_bn_Click(object sender, RoutedEventArgs e)
@@ -68,10 +72,39 @@ namespace CockBlock8._1
         { this.CreateGame_tx.Text = "Create a new game"; }
         private void CreateGame_bn_PointerExited(object sender, PointerRoutedEventArgs e)
         { this.CreateGame_tx.Text = ""; }
+        #endregion
         internal override Button[] GetButtons()
         { return new Button[] { this.Back_bn, this.Highscore_bn, this.SearchGame_bn, this.CreateGame_bn }; }
         internal override TextBlock[] GetTextBlocks()
-        { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx }; }
+        { return new TextBlock[] { this.CreateGame_tx, this.SearchGame_tx, this.Title_tx, this._Input_Flyout1_tx, this._Input_Flyout2_tx, this._Input_Flyout3_tx, this._Input_Flyout4_tx }; }
+
+        #region Functions
+        private void ShowFlyout()
+        { SetVisible(Visibility.Visible); }
+        private void HideFlyout()
+        { SetVisible(Visibility.Collapsed); }
+        private void SetVisible(Visibility vis)
+        {
+            _Flyout1.Visibility = vis;
+            _Flyout2.Visibility = vis;
+            _Flyout3.Visibility = vis;
+            _Flyout4.Visibility = vis;
+        }
+        private void SetFlyoutText(string text, int fontsize)
+        {
+            this._Input_Flyout1_tx.Text = text;
+            this._Input_Flyout1_tx.FontSize = fontsize;
+            this._Input_Flyout2_tx.Text = text;
+            this._Input_Flyout2_tx.FontSize = fontsize;
+            this._Input_Flyout3_tx.Text = text;
+            this._Input_Flyout3_tx.FontSize = fontsize;
+            this._Input_Flyout4_tx.Text = text;
+            this._Input_Flyout4_tx.FontSize = fontsize;
+        }
+        #endregion
+
+        private void Back_bn_Click(object sender, RoutedEventArgs e)
+        { if (this.Frame.CanGoBack) { this.Frame.GoBack(); } }
 
     }
 }
