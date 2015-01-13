@@ -66,7 +66,7 @@ namespace CockBlock8._1
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
-                rootFrame.CacheSize = 1;
+                rootFrame.CacheSize = 10;
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
