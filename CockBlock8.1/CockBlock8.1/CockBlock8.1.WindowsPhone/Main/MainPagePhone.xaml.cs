@@ -52,7 +52,6 @@ namespace CockBlock8._1
         }
         private void Init()
         {
-            ShowMessage("wees gegroet");
             this.NavigationCacheMode = NavigationCacheMode.Required;
             HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);

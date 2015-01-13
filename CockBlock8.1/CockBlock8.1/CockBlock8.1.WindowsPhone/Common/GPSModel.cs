@@ -25,8 +25,8 @@ namespace CockBlock8._1.Model
         {
             GeofenceMonitor.Current.Geofences.Clear();
             GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
-            CreateGeofence(51.5879, 4.7763, 10000, "Breda");
-            CreateGeofence(51.5669, 5.0699, 10000, "Tilburg");
+            CreateGeofence(51.5879, 4.7763, 3700, "Breda");
+            CreateGeofence(51.5701, 5.0601, 4000, "Tilburg");
         }
         public static GPSModel Get
         {
