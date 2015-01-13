@@ -21,9 +21,10 @@ namespace CockBlock8._1.View
 
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             base.OnNavigatedTo(e);
             ColorChange();
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.PortraitFlipped | DisplayOrientations.Portrait;
         }
 
         public void ChangeText(string name, string text)

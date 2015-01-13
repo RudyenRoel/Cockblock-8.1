@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -80,6 +81,9 @@ namespace CockBlock8._1.Game
             _Exit_p1_bn.Background = background;
             _Save_p1_bn.Foreground = foreground;
             _Save_p1_bn.Background = background;
+            _p1_Name_tx.Foreground = foreground;
+            _p1_Name_tx.Background = background;
+            _p1_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             _Rematch_p2_bn.Foreground = foreground;
             _Rematch_p2_bn.Background = background;
@@ -87,6 +91,9 @@ namespace CockBlock8._1.Game
             _Exit_p2_bn.Background = background;
             _Save_p2_bn.Foreground = foreground;
             _Save_p2_bn.Background = background;
+            _p2_Name_tx.Foreground = foreground;
+            _p2_Name_tx.Background = background;
+            _p2_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             SetFlyoutVisible(false);
         }
@@ -306,14 +313,19 @@ namespace CockBlock8._1.Game
                 _Score_p1_tx.Text = "No score for losers!";
                 _Score_p2_tx.Text = "Score: " + score;
                 _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                _p2_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             else
             {
+                Debug.WriteLine("Rotating everything");
+                MainGridRotation.Angle = 180;
+                DisplayInformation.AutoRotationPreferences = DisplayOrientations.PortraitFlipped;
                 _GameOver_p1_tx.Text = win;
                 _GameOver_p2_tx.Text = lose;
                 _Score_p1_tx.Text = "Score: " + score;
                 _Score_p2_tx.Text = "No score for losers!";
                 _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                _p1_Name_tx.Visibility = Windows.UI.Xaml.Visibility.Visible;
             }
             SetFlyoutVisible(true);
         }
@@ -326,6 +338,8 @@ namespace CockBlock8._1.Game
             }
             init();
             _vm.StartSingleGame();
+            MainGridRotation.Angle = 0;
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
             // Reset Timer + timer Bars
         }
 

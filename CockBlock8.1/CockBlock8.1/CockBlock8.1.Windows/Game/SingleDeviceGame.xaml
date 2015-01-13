@@ -10,6 +10,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RenderTransform>
+            <RotateTransform x:Name="MainGridRotation" CenterX="380" CenterY="680"/>
+        </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
@@ -68,7 +71,7 @@
                             </StackPanel>
                             <TextBlock x:Name="_GameOver_p1_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,-80,0,0"/>
                             <TextBlock x:Name="_Score_p1_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,0"/>
-                            <TextBox Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
+                            <TextBox x:Name="_p1_Name_tx" PlaceholderText="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
                             <Button x:Name="_Save_p1_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,160,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <Grid.Margin>700,440,-720,-200</Grid.Margin>
                         </Grid>
@@ -93,7 +96,7 @@
                         <Grid>
                             <TextBlock x:Name="_GameOver_p2_tx" Text="[Game over]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,-80,0,0"/>
                             <TextBlock x:Name="_Score_p2_tx" Text="[Score]" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Margin="0,0,0,0"/>
-                            <TextBox Text="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
+                            <TextBox x:Name="_p2_Name_tx" PlaceholderText="Enter Name" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,-80"/>
                             <Button x:Name="_Save_p2_bn" Content="Save Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,160,0,0" Click="_Save_bn_Click" Visibility="Visible"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                                 <Button x:Name="_Exit_p2_bn" Content="Exit" Margin="10,0,10,0" Click="_Exit_bn_p2_Click"/>
