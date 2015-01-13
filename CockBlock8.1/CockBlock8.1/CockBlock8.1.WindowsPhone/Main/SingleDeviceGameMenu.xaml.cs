@@ -35,7 +35,7 @@ namespace CockBlock8._1
         private void Init()
         {
             Settings.DefaultTextBlockProperties(Settings._DefaultHeaderFontSize, this.Title_tx);
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.StartGame_bn, this._Highscore_bn, this.Instructions_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.StartGame_bn, this._Highscore_bn, this.Instructions_bn);
             this.Title_tx.Text = "Single Game";
             this.StartGame_bn.Content = "Start Game";
             this.Instructions_bn.Content = Settings._Instructions;

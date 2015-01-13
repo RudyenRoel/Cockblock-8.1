@@ -34,7 +34,7 @@ namespace CockBlock8._1
 
         private void Init()
         {
-            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn, this.Highscore_bn, this.Back_bn);
+            Settings.DefaultButtonProperties(Settings._DefaultButtonFontSizePhone, this.SearchGame_bn, this.CreateGame_bn, this.Instructions_bn, this.Highscore_bn);
             Settings.DefaultTextBlockProperties(Settings._DefaultSmallFontSize, this.Title_tx, this.SearchGame_tx, this.CreateGame_tx);
             this.Title_tx.Text = "Multi Game";
             this.Title_tx.FontSize = Settings._DefaultHeaderFontSize;
@@ -42,7 +42,6 @@ namespace CockBlock8._1
             this.CreateGame_bn.Content = "Create Game";
             this.Instructions_bn.Content = Settings._Instructions;
             this.Highscore_bn.Content = "Highscores";
-            this.Back_bn.Content = "Back";
             SetFlyoutText("Not Yet Available", Settings._DefaultTextBlockFontSize);
             HideFlyout();
         }
