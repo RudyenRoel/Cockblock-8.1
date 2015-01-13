@@ -10,18 +10,37 @@ namespace CockBlock8._1.Model
 {
     public class GPSModel
     {
+        private static GPSModel _Instace = null;
+        private static object pathlock = new object();
         private DateTime LastCheckPosition = new DateTime();
-        private bool _searchingLocation = false;
-        private bool _searchingCountry = false;
-        public GPSModel()
+        private static bool _searchingLocation = false;
+        private static bool _searchingCountry = false;
+        private static bool _done = true; // hot fix
+        private GPSModel()
+        { }
+        public static GPSModel Get
         {
+            get
+            {
+                lock (pathlock)
+                {
+                    if (_Instace == null)
+                        _Instace = new GPSModel();
+                    return _Instace;
+                }
+            }
         }
+
+
         public async Task<Geoposition> GetCurrentLocation()
         {
             if (!_searchingLocation)
             {
                 _searchingLocation = true;
+                Debug.WriteLine("GPSMODEL: loading current location");
                 Geoposition position = await LoadCurrentLocationAsync();
+                _searchingLocation = false;
+                Debug.WriteLine("GPSMODEL: done loading current location");
                 return position;
             }
             else { Debug.WriteLine("Allready loading Current Location"); }
@@ -33,6 +52,7 @@ namespace CockBlock8._1.Model
             {
                 _searchingCountry = true;
                 string country = await FindCorrospondingCountry(point);
+                _searchingCountry = false;
                 return country;
             }
             else { Debug.WriteLine("Allready loading Current Country"); }
@@ -64,7 +84,6 @@ namespace CockBlock8._1.Model
             watch.Start();
             var position = await locator.GetGeopositionAsync();
             watch.Stop();
-            _searchingLocation = false;
             Debug.WriteLine("Load current location Time: " + watch.Elapsed);
             return position;
         }
@@ -72,9 +91,10 @@ namespace CockBlock8._1.Model
         {
             var result = await MapLocationFinder.FindLocationsAtAsync(geopoint);
             string country = result.Locations[0].Address.Country;
-            _searchingCountry = false;
             Debug.WriteLine("Country: " + country);
             return country;
         }
+        public static bool IsDone() { return _done; }
+        public void SetDone(bool result) { _done = result; }
     }
 }

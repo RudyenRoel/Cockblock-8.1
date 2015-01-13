@@ -30,15 +30,16 @@ namespace CockBlock8._1
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     /// 
-    public sealed partial class MainPage : CB_Page
+    public sealed partial class MainPagePhone : CB_Page
     {
         private string _ApplicationName = "CockBlock 8.1";
+        public bool firstLocationDone = false;
         private BitmapImage _SettingsImage = new BitmapImage();
         private BitmapImage _MapImage = new BitmapImage();
         private int _TitleFontSize = 48;
         private int _AmountOfRectangles = 7 * 28;
         public static string _currentCountry = null;
-        public MainPage()
+        public MainPagePhone()
         {
             this.InitializeComponent();
             Init();
@@ -71,6 +72,7 @@ namespace CockBlock8._1
         private async void CheckCountry()
         {
             await _vm.BackgroundCheck();
+            firstLocationDone = true;
             _currentCountry = _vm.GetCountry();
         }
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -93,12 +95,22 @@ namespace CockBlock8._1
         { this.Frame.Navigate(typeof(MultiDeviceGameMenu), e); }
         private async void About_bn_Click(object sender, RoutedEventArgs e)
         { this.Frame.Navigate(typeof(AboutPage), await Settings.About()); }
+        private void SetMapPageFeedback(string text)
+        { this._MapPage_Feedback_tx.Text = text; }
         private void Exit_bn_Click(object sender, RoutedEventArgs e)
         { Application.Current.Exit(); }
         private void Settings_img_PointerPressed(object sender, PointerRoutedEventArgs e)
         { this.Frame.Navigate(typeof(SettingsPage), e); }
         private void Location_img_PointerPressed(object sender, PointerRoutedEventArgs e)
-        { this.Frame.Navigate(typeof(MapPage), e); }
+        {
+            if (firstLocationDone)
+            {
+                SetMapPageFeedback("");
+                this.Frame.Navigate(typeof(MapPage), e);
+            }
+            else
+            { SetMapPageFeedback("Wait a moment please, searching current location"); }
+        }
         internal override Button[] GetButtons()
         { return new Button[] { this.SingleGame_bn, this.MultiGame_bn, this.About_bn, this.Exit_bn }; }
         internal override TextBlock[] GetTextBlocks()

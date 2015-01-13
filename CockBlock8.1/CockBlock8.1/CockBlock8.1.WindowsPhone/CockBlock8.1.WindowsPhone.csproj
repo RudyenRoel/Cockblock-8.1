@@ -106,8 +106,8 @@
     <Compile Include="Main\Instructions\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Main\MainPagePhone.xaml.cs">
+      <DependentUpon>MainPagePhone.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
@@ -162,7 +162,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Main\MainPage.xaml">
+    <Page Include="Main\MainPagePhone.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

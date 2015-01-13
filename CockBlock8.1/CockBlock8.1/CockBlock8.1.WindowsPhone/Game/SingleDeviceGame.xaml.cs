@@ -484,7 +484,7 @@ namespace CockBlock8._1.Game
             return false;
         }
         private void Exit()
-        { this.Frame.Navigate(typeof(MainPage)); }
+        { this.Frame.Navigate(typeof(MainPagePhone)); }
         public void SetBackgroundFlag(BitmapImage img)
         { this._Flag_Image.Source = img; }
         internal override Button[] GetButtons()

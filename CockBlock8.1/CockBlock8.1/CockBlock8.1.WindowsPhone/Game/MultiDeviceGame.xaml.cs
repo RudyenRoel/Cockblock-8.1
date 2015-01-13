@@ -89,7 +89,7 @@ namespace CockBlock8._1.Game
 
         private void Back_bn_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage), e);
+            this.Frame.Navigate(typeof(MainPagePhone), e);
         }
     }
 }

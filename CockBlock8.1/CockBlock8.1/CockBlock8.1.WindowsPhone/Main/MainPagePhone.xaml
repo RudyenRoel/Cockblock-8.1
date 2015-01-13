@@ -1,6 +1,6 @@
 ﻿<src:CB_Page
     xmlns:src="using:CockBlock8._1.View"
-    x:Class="CockBlock8._1.MainPage"
+    x:Class="CockBlock8._1.MainPagePhone"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -34,6 +34,7 @@
             <Button x:Name="About_bn" Content="Button3" Click="About_bn_Click"/>
             <Image x:Name="Location_img" Width="50" Height="50" Margin="0,0,50,0" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" PointerPressed="Location_img_PointerPressed"/>
             <Image x:Name="Settings_img" Width="50" Height="50" Margin="50,0,0,0" Stretch="Fill" HorizontalAlignment="Right" VerticalAlignment="Top" PointerPressed="Settings_img_PointerPressed"/>
+            <TextBlock x:Name="_MapPage_Feedback_tx" Text="[feedback]" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="Salmon"/>
         </Grid>
         <Grid Grid.Row="4">
             <Button x:Name="Exit_bn" Content="Button4" Click="Exit_bn_Click"/>

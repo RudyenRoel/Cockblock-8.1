@@ -58,12 +58,11 @@ namespace CockBlock8._1.Main
             if (!loadingMapLocation)
             {
                 loadingMapLocation = true;
-                GPSModel model = new GPSModel();
                 SetRefreshFeedback("Loading Location...");
-                var position = await model.GetCurrentLocation();
+                var position = await GPSModel.Get.GetCurrentLocation();
                 SetRefreshFeedback("Loading Location....");
-                Geopoint point = model.GeopositionToPoint(position);
-                string country = await model.GetCurrentCountry(point);
+                Geopoint point = GPSModel.Get.GeopositionToPoint(position);
+                string country = await GPSModel.Get.GetCurrentCountry(point);
                 Debugging(point, country);
                 country = (country == null ? "Unknown" : country);
                 SetCountry(country);

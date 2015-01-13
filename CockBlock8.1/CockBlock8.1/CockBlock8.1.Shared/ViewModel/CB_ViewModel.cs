@@ -92,7 +92,7 @@ namespace CockBlock8._1
 #if WINDOWS_PHONE_APP
             if (_currentCountry == null)
             {
-                _currentCountry = MainPage._currentCountry;
+                _currentCountry = MainPagePhone._currentCountry;
             }
             else if (_currentPage.GetType() == typeof(SingleDeviceGame) && !_flagSet)
             {
@@ -136,7 +136,7 @@ namespace CockBlock8._1
             Debug.WriteLine("Setting background flag, flag found: " + _currentCountry);
             if (_currentCountry == null)
             {
-                _currentCountry = MainPage._currentCountry;
+                _currentCountry = MainPagePhone._currentCountry;
             }
             ((SingleDeviceGame)_currentPage).SetBackgroundFlag(Flags.Get.FindFlag(_currentCountry));
         }
@@ -217,12 +217,11 @@ namespace CockBlock8._1
         public async Task BackgroundCheck()
         {
             string country = "Loading";
-            GPSModel model = new GPSModel();
-            Geoposition position = await model.GetCurrentLocation();
-            Geopoint point = model.GeopositionToPoint(position);
+            Geoposition position = await GPSModel.Get.GetCurrentLocation();
+            Geopoint point = GPSModel.Get.GeopositionToPoint(position);
             try
             {
-                country = await model.GetCurrentCountry(point);
+                country = await GPSModel.Get.GetCurrentCountry(point);
             }
             catch (ArgumentOutOfRangeException) {/* Some Posible function */ }
             Debug.WriteLine("Country: " + country);
