@@ -293,6 +293,7 @@ namespace CockBlock8._1
             public static string Oekraine = "Ukraine";
             public static string Engeland = "United Kingdom";
             public static string Amerika = "USA";
+            public static string States = "United States";
             public static string Venezuela = "Venezuela";
             public static string[] WestEurope()
             {
@@ -308,7 +309,7 @@ namespace CockBlock8._1
             }
             public static string[] NorthAmerica()
             {
-                return new string[] { Canada, Amerika, Mexico, Groenland };
+                return new string[] { Canada, Amerika, States, Mexico, Groenland };
             }
             public static string[] CenterAmerica()
             {
