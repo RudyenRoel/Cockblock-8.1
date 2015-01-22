@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -102,7 +103,11 @@ namespace CockBlock8._1
         {
             List<string[]> list = new List<string[]>();
             for (int i = 0; i < _MaxAmountOfHighscores; i++)
+#if WINDOWS_PHONE_APP
             { list.Add((string[])(ApplicationData.Current.LocalSettings.Values[key + i])); }
+#else
+            { list.Add((string[])(Application.Current.Resources[key + i])); }
+#endif
             return list;
         }
         private async static Task CreateSingleGameInstructions()

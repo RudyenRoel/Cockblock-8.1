@@ -66,8 +66,14 @@ namespace CockBlock8._1.Game
             _playerWantToReplay = 0;
             _goingUp = false;
             SwitchGoingUp();
-            //setHealthPlayer1(80);
-            //setHealthPlayer2(90);
+            setHealthPlayer1(100);
+            setHealthPlayer2(100);
+            _p1_Name_tx.IsEnabled = true;
+            _p2_Name_tx.IsEnabled = true;
+            _p1_Name_tx.Text = "";
+            _p2_Name_tx.Text = "";
+            _p1_Name_tx.PlaceholderText = "Enter Name";
+            _p2_Name_tx.PlaceholderText = "Enter Name";
             _xCoords = new int[] { -550, -280, -10, 260, 530 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
@@ -80,7 +86,7 @@ namespace CockBlock8._1.Game
             DefaultHealthBarProparties(Colors.Red, _CurrentHealth1_rect, _CurrentHealth2_rect);
             DefaultTimerBarProparties(Colors.White, _totalLengthTimerRect, _FullTime_Left_rect, _FullTime_Right_rect);
             DefaultTimerBarProparties(Colors.Blue, _CurrentTime_Left_rect, _CurrentTime_Right_rect);
-            DefaultEnergyProparties(Colors.White, 16, "100", _p1_energy1, _p1_energy2, _p1_energy3, _p2_energy1, _p2_energy2, _p2_energy3);
+            DefaultEnergyProparties(Colors.White, 16, "100", _p1_energy1, _p1_energy2, _p1_energy3, _p1_energy4, _p1_energy5, _p2_energy1, _p2_energy2, _p2_energy3, _p2_energy4, _p2_energy5);
             DefaultEnergyProparties(Colors.DarkRed, 24, "100", _CurrentHealth1_tx, _CurrentHealth2_tx);
             FlyoutSettings();
         }
@@ -393,7 +399,104 @@ namespace CockBlock8._1.Game
 
         private void _Save_bn_Click(object sender, RoutedEventArgs e)
         {
+            string player_name = null;
+            int score = 0;
+            if (sender.Equals(_Save_p1_bn))
+            {
+                if (_p1_Name_tx.Text == "Enter Name" || _p1_Name_tx.Text == "") // TODO: Merge both if statements
+                {
+                    _p1_Name_tx.Background = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    score = Int16.Parse(_Score_p1_tx.Text.Remove(0, 7));
+                    Debug.WriteLine("Saving score: " + score + " by Player: " + _p1_Name_tx.Text);
+                    player_name = _p1_Name_tx.Text;
+                    _Save_p1_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    _p1_Name_tx.Text = "Score Saved!";
+                    _p1_Name_tx.IsEnabled = false;
+                }
 
+            }
+            else
+            {
+                if (_p2_Name_tx.Text == "Enter Name" || _p2_Name_tx.Text == "")
+                {
+                    _p2_Name_tx.Background = new SolidColorBrush(Colors.Red);
+                }
+                else
+                {
+                    score = Int16.Parse(_Score_p2_tx.Text.Remove(0, 7));
+                    Debug.WriteLine("Saving score: " + score + " by Player: " + _p2_Name_tx.Text);
+                    player_name = _p2_Name_tx.Text;
+                    _Save_p2_bn.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    _p2_Name_tx.Text = "Score Saved!";
+                    _p2_Name_tx.IsEnabled = false;
+                }
+            }
+            if (player_name != null)
+            {
+                HandleHighscore(player_name, score);
+            }
+        }
+
+        private void HandleHighscore(string player_name, int score)
+        {
+            List<Tuple<string, int>> scores = LoadScores();
+            Tuple<string, int> your_score = new Tuple<string, int>(player_name, score);
+
+            for (int i = 0; i < scores.Count; i++)
+            { if (your_score.Item2 > scores[i].Item2) { scores.Insert(i, your_score); break; } }
+
+            OrdenScoresOnHighestScore(scores);
+
+            // TODO: Below easier fix?
+            List<Tuple<string, int>> maxAmountList = new List<Tuple<string, int>>();
+            for (int i = 0; i < Settings._MaxAmountOfHighscores; i++)
+                maxAmountList.Add(scores[i]);
+
+            List<string[]> highscores = new List<string[]>();
+            foreach (Tuple<string, int> highscore in maxAmountList)
+            { highscores.Add(new string[] { highscore.Item1, highscore.Item2.ToString() }); }
+
+            SaveScores(highscores);
+        }
+        private List<Tuple<string, int>> LoadScores()
+        {
+            Debug.WriteLine("Loading Highscores");
+            List<Tuple<string, int>> scores = new List<Tuple<string, int>>();
+            for (int i = 0; i < Settings._MaxAmountOfHighscores; i++)
+            {
+                string[] data = (string[])(Application.Current.Resources[Settings._HighscoresSingleKey + i]);
+                string name = data[0];
+                int score = Int16.Parse(data[1]);
+                scores.Add(new Tuple<string, int>(name, score));
+            }
+            return scores;
+        }
+        private void SaveScores(List<string[]> scores)
+        {
+            Debug.WriteLine("Saving Highscores");
+            for (int i = 0; i < scores.Count; i++)
+            { Application.Current.Resources[Settings._HighscoresSingleKey + i] = scores[i]; }
+        }
+        private void OrdenScoresOnHighestScore(List<Tuple<string, int>> scores)
+        {
+            int corrections = 1;
+            while (corrections > 0)
+            {
+                corrections = 0;
+                for (int i = 1; i < scores.Count; i++)
+                {
+                    if (scores[i - 1].Item2 < scores[i].Item2)
+                    {
+                        corrections++;
+                        Tuple<string, int> higherScore = scores[i];
+                        scores[i] = scores[i - 1];
+                        scores[i - 1] = higherScore;
+                    }
+                }
+            }
         }
         private void _Exit_bn_p2_Click(object sender, RoutedEventArgs e)
         {

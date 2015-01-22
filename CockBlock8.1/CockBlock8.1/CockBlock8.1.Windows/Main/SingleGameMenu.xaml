@@ -24,6 +24,7 @@
             <Button x:Name="Start_bn" Content="Start New Game" FontSize="32" Click="Start_bn_Click"/>
         </Grid>
         <Grid Grid.Row="2">
+            <Button x:Name="Highscore_bn" Content="Highscores" FontSize="32" Click="Highscore_bn_Click" Margin="278,39,0,50"/>
 
         </Grid>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
