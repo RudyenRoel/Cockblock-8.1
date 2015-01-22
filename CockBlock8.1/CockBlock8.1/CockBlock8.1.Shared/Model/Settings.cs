@@ -118,27 +118,18 @@ namespace CockBlock8._1
         private static void CreateSingleGameTopics()
         {
             List<String[]> topics = new List<string[]>();
-            topics.Add(topic("12345678901234567890123456789012345678901234567890", "123456789012345678901234567890123456789012345678901234567890"));
             topics.Add(topic("Where can i find the 'Frequently Asked Questions'?", "You found it!"));
-            topics.Add(topic("Bullshit", "Bullshit, Bullshit, bla bla bla"));
+            topics.Add(topic("How do I shoot?", "By tapping on the cannon icon after pressing 'Start' to start the game."));
+            topics.Add(topic("How do I block the cock?", "By tapping on the shield icon after pressing 'Start' to start the game."));
+            topics.Add(topic("What is a cock?", "A 'cock' is an male chicken. This means that you are shooting birds in game."));
+            topics.Add(topic("Can I do more with this application besides shooting and blocking?", "You can customize the buttons and text color and if you press the 'earth' icon you can see where you are right now."));
             topics.Add(topic("How did this application come to be?", "The idea for the application started at school. You can find more about the application in the 'about'-page."));
-            topics.Add(topic("Random", "Did you know that the skin of a showbear is black?!"));
-            topics.Add(topic("Easter egg", "There are some easter eggs in this game. To find the easter eggs, search on the internet"));
-            topics.Add(topic("Easter egg", "Did you search on the Internet? If not, go do it now!"));
-            topics.Add(topic("Easter egg", "Did you look it up yet? Ow you did? Did you find any this? Of course not! 3:)"));
             _SingleGameTopics = topics;
         }
         private static void CreateMultiGameTopics()
         {
             List<String[]> topics = new List<string[]>();
             topics.Add(topic("Why can't I play a 'Multi Device Game'?", "This mode is not yet ready to play. It's in development"));
-            topics.Add(topic("Crep", "Here is some crap to test with"));
-            topics.Add(topic("Crep", "Here is some crap to test with"));
-            topics.Add(topic("Crep", "And there is more"));
-            topics.Add(topic("Crep", "And there is much and much more of it"));
-            topics.Add(topic("Some very very very long topic to test the length of the topics with"));
-            topics.Add(topic("An other very very very long topic to test. Or is this one even longer then the one above?"));
-            topics.Add(topic("Crep"));
             _MultiGameTopics = topics;
         }
         private async static Task CreateAbout()
