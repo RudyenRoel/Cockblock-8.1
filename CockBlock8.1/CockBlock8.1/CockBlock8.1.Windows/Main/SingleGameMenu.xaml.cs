@@ -42,5 +42,8 @@ namespace CockBlock8._1.Main
         { return new Button[] { }; }
         internal override TextBlock[] GetTextBlocks()
         { return new TextBlock[] { }; }
+
+        private async void Highscore_bn_Click(object sender, RoutedEventArgs e)
+        { this.Frame.Navigate(typeof(HighscorePage), await Settings.SingleDeviceHighscores()); }
     }
 }

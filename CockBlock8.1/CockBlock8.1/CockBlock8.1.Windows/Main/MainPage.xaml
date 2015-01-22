@@ -22,9 +22,7 @@
         <Grid  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="SingleGameMenu_bn" Content="Single Game" FontSize="48" Click="SingleGame_bn_Click" />
         </Grid>
-        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="MultiGameMenu_bn" Content="Multi Game" FontSize="48" Click="MultiGame_bn_Click" />
-        </Grid>
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="About_bn" Content="About" FontSize="48" Click="About_bn_Click"/>
         </Grid>

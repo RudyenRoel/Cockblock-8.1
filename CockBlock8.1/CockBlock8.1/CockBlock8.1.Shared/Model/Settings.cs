@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -102,7 +103,11 @@ namespace CockBlock8._1
         {
             List<string[]> list = new List<string[]>();
             for (int i = 0; i < _MaxAmountOfHighscores; i++)
+#if WINDOWS_PHONE_APP
             { list.Add((string[])(ApplicationData.Current.LocalSettings.Values[key + i])); }
+#else
+            { list.Add((string[])(Application.Current.Resources[key + i])); }
+#endif
             return list;
         }
         private async static Task CreateSingleGameInstructions()
@@ -118,9 +123,7 @@ namespace CockBlock8._1
         private static void CreateSingleGameTopics()
         {
             List<String[]> topics = new List<string[]>();
-            topics.Add(topic("12345678901234567890123456789012345678901234567890", "123456789012345678901234567890123456789012345678901234567890"));
             topics.Add(topic("Where can i find the 'Frequently Asked Questions'?", "You found it!"));
-            topics.Add(topic("Bullshit", "Bullshit, Bullshit, bla bla bla"));
             topics.Add(topic("How did this application come to be?", "The idea for the application started at school. You can find more about the application in the 'about'-page."));
             topics.Add(topic("Random", "Did you know that the skin of a showbear is black?!"));
             topics.Add(topic("Easter egg", "There are some easter eggs in this game. To find the easter eggs, search on the internet"));
@@ -132,13 +135,6 @@ namespace CockBlock8._1
         {
             List<String[]> topics = new List<string[]>();
             topics.Add(topic("Why can't I play a 'Multi Device Game'?", "This mode is not yet ready to play. It's in development"));
-            topics.Add(topic("Crep", "Here is some crap to test with"));
-            topics.Add(topic("Crep", "Here is some crap to test with"));
-            topics.Add(topic("Crep", "And there is more"));
-            topics.Add(topic("Crep", "And there is much and much more of it"));
-            topics.Add(topic("Some very very very long topic to test the length of the topics with"));
-            topics.Add(topic("An other very very very long topic to test. Or is this one even longer then the one above?"));
-            topics.Add(topic("Crep"));
             _MultiGameTopics = topics;
         }
         private async static Task CreateAbout()

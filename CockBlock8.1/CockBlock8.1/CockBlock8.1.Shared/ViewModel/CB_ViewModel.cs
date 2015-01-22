@@ -71,6 +71,13 @@ namespace CockBlock8._1
             myDispatcherTimer.Start();
             _players = new Player[] { new Player(this, 0, _amountOfCannons / 2), new Player(this, 1, _amountOfCannons / 2) };
 
+            foreach (Player p in _players)
+            {
+                for (int i = 0; i < p.GetShieldCannons().Length; i++)
+                {
+                    ((SingleDeviceGame)_currentPage).SetEnergy(Array.IndexOf(_players, p) + 1, i + 1, 100);
+                }
+            }
             _players[0].ChangeState();
             SetImages(_players[0], 0);
             _players[0].ChangeState();
@@ -336,7 +343,9 @@ namespace CockBlock8._1
                 Debug.WriteLine("DESTRUCTION! (no energy left for opponent) BONUS POINTS: +500");
                 score += 500;
             }
+#if WINDOWS_PHONE_APP
             score += MainPagePhone.GetScoreBonus();
+#endif
             Debug.WriteLine("Final Score = " + score);
             // TODO: Save Score
             return score;

@@ -99,10 +99,17 @@ namespace CockBlock8._1
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
+#if WINDOWS_PHONE_APP
                 if (!rootFrame.Navigate(typeof(MainPagePhone), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
+#else
+                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                {
+                    throw new Exception("Failed to create initial page");
+                }
+#endif
             }
 
             // Ensure the current window is active
@@ -118,8 +125,13 @@ namespace CockBlock8._1
             int maxAmount = Settings._MaxAmountOfHighscores;
             for (int k = 0; k < keys.Length; k++)
                 for (int i = 0; i < maxAmount; i++)
+#if WINDOWS_PHONE_APP
                     if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(keys[k] + i))
                     { ApplicationData.Current.LocalSettings.Values[keys[k] + i] = new string[] { "Unknown", "0" }; }
+#else
+                    if (!Application.Current.Resources.ContainsKey(keys[k] + i))
+                    { Application.Current.Resources[keys[k] + i] = new string[] { "Unknown", "0" }; }
+#endif
         }
 
 
