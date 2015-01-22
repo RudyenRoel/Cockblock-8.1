@@ -88,7 +88,7 @@ namespace CockBlock8._1.Game
             _p2_Name_tx.Text = "";
             _p1_Name_tx.PlaceholderText = "Enter Name";
             _p2_Name_tx.PlaceholderText = "Enter Name";
-            _xCoords = new int[] { -230, 10, 250 };
+            _xCoords = new int[] { -225, 15, 255 };
             _CockUp.UriSource = new Uri("ms-appx:Res/CockUp.png", UriKind.RelativeOrAbsolute);
             _CockDown.UriSource = new Uri("ms-appx:Res/CockDown.png", UriKind.RelativeOrAbsolute);
             _CockList = new List<Image>();
