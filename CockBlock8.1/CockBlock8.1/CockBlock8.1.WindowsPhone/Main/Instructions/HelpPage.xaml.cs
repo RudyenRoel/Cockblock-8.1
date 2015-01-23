@@ -97,9 +97,12 @@ namespace CockBlock8._1.Main.Instructions
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this._Instruction = (e.Parameter as List<string[]>);
-            foreach (string[] topic in _Instruction)
-            { AddTopic(topic[0], topic[1]); }
+            if (this._Instruction.Count <= 0)
+            {
+                this._Instruction = (e.Parameter as List<string[]>);
+                foreach (string[] topic in _Instruction)
+                { AddTopic(topic[0], topic[1]); }
+            }
         }
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         { throw new NotImplementedException(); }
