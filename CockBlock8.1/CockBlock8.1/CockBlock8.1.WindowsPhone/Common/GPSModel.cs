@@ -154,7 +154,6 @@ namespace CockBlock8._1.Model
         private async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             var reports = sender.ReadReports();
-            Debug.WriteLine("IK BEN IN DE METHODE");
 
             foreach (var report in reports)
             {

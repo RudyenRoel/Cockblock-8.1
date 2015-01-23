@@ -22,7 +22,7 @@
             <TextBlock x:Name="_F_A_Q_tx" Text="[text]"/>
         </Grid>
         <Grid Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,10,0">
-            <ScrollViewer Width="380" Height="450" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Width="380" Height="550" VerticalScrollBarVisibility="Auto">
                 <StackPanel x:Name="Help_panel">
 
                 </StackPanel>
