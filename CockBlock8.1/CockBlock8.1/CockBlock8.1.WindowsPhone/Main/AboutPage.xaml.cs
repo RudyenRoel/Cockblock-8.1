@@ -80,6 +80,7 @@ namespace CockBlock8._1.Main
             if (_EasterEgg_rect_Counter > 5)
             {
                 this._EasterEgg_rect.Visibility = Visibility.Collapsed;
+                if(_EasterEgg_tx.Text.Contains("Closing"))
                 await ShowCloseMessage();
             }
             else
